@@ -1,1 +1,55 @@
-<mxfile host="app.diagrams.net" modified="2022-02-19T10:11:38.916Z" agent="5.0 (Windows)" version="16.6.1" etag="arAPC8HF5VsGwds8rEc8" type="github"><diagram id="WZPSnhNBhCsICeyBbSXf">UzV2zq1wL0osyPDNT0nNUTV2VTV2LsrPL4GwciucU3NyVI0MMlNUjV1UjYwMgFjVyA2HrCFY1qAgsSg1rwSLBiADYTaQg2Y1AA==</diagram></mxfile>
+<mxfile host="app.diagrams.net" modified="2022-02-19T11:16:13.201Z" agent="5.0 (Windows)" etag="iUGpSYFR-ZvPNNKd7NoZ" version="16.6.1" type="github">
+  <diagram id="WZPSnhNBhCsICeyBbSXf" name="Page-1">
+    <mxGraphModel dx="1422" dy="791" grid="1" gridSize="10" guides="1" tooltips="1" connect="1" arrows="1" fold="1" page="1" pageScale="1" pageWidth="827" pageHeight="1169" math="0" shadow="0">
+      <root>
+        <mxCell id="0" />
+        <mxCell id="1" parent="0" />
+        <mxCell id="kspEkG2AYDm2vSh5nX-M-1" value="Actor" style="shape=umlActor;verticalLabelPosition=bottom;verticalAlign=top;html=1;" vertex="1" parent="1">
+          <mxGeometry x="140" y="320" width="30" height="60" as="geometry" />
+        </mxCell>
+        <mxCell id="kspEkG2AYDm2vSh5nX-M-2" value="模拟器启停管理" style="ellipse;whiteSpace=wrap;html=1;" vertex="1" parent="1">
+          <mxGeometry x="220" y="250" width="140" height="70" as="geometry" />
+        </mxCell>
+        <mxCell id="kspEkG2AYDm2vSh5nX-M-3" value="进入运行模式" style="ellipse;whiteSpace=wrap;html=1;" vertex="1" parent="1">
+          <mxGeometry x="460" y="490" width="140" height="70" as="geometry" />
+        </mxCell>
+        <mxCell id="kspEkG2AYDm2vSh5nX-M-4" value="切换至运行模式" style="ellipse;whiteSpace=wrap;html=1;" vertex="1" parent="1">
+          <mxGeometry x="400" y="380" width="140" height="70" as="geometry" />
+        </mxCell>
+        <mxCell id="kspEkG2AYDm2vSh5nX-M-5" value="模拟器运行状态切换" style="ellipse;whiteSpace=wrap;html=1;" vertex="1" parent="1">
+          <mxGeometry x="220" y="360" width="140" height="70" as="geometry" />
+        </mxCell>
+        <mxCell id="kspEkG2AYDm2vSh5nX-M-6" value="切换至调试模式" style="ellipse;whiteSpace=wrap;html=1;" vertex="1" parent="1">
+          <mxGeometry x="400" y="290" width="140" height="70" as="geometry" />
+        </mxCell>
+        <mxCell id="kspEkG2AYDm2vSh5nX-M-7" value="重启模拟器" style="ellipse;whiteSpace=wrap;html=1;" vertex="1" parent="1">
+          <mxGeometry x="440" y="180" width="140" height="70" as="geometry" />
+        </mxCell>
+        <mxCell id="kspEkG2AYDm2vSh5nX-M-8" value="&lt;p&gt;&lt;span&gt;&lt;font face=&quot;宋体&quot;&gt;模拟器配置并启动&lt;/font&gt;&lt;/span&gt;&lt;/p&gt;" style="ellipse;whiteSpace=wrap;html=1;" vertex="1" parent="1">
+          <mxGeometry x="400" y="100" width="140" height="70" as="geometry" />
+        </mxCell>
+        <mxCell id="kspEkG2AYDm2vSh5nX-M-9" value="调试" style="ellipse;whiteSpace=wrap;html=1;" vertex="1" parent="1">
+          <mxGeometry x="220" y="490" width="140" height="70" as="geometry" />
+        </mxCell>
+        <mxCell id="kspEkG2AYDm2vSh5nX-M-15" value="" style="endArrow=classic;html=1;rounded=0;dashed=1;entryX=0;entryY=1;entryDx=0;entryDy=0;" edge="1" parent="1" target="kspEkG2AYDm2vSh5nX-M-8">
+          <mxGeometry relative="1" as="geometry">
+            <mxPoint x="290" y="249" as="sourcePoint" />
+            <mxPoint x="450" y="249" as="targetPoint" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="kspEkG2AYDm2vSh5nX-M-16" value="&amp;lt;&amp;lt;include&amp;gt;&amp;gt;" style="edgeLabel;resizable=0;html=1;align=center;verticalAlign=middle;" connectable="0" vertex="1" parent="kspEkG2AYDm2vSh5nX-M-15">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="kspEkG2AYDm2vSh5nX-M-18" value="" style="endArrow=classic;html=1;rounded=0;dashed=1;entryX=0;entryY=1;entryDx=0;entryDy=0;exitX=0.9;exitY=0.171;exitDx=0;exitDy=0;exitPerimeter=0;" edge="1" parent="1" source="kspEkG2AYDm2vSh5nX-M-2" target="kspEkG2AYDm2vSh5nX-M-7">
+          <mxGeometry relative="1" as="geometry">
+            <mxPoint x="350" y="269.63" as="sourcePoint" />
+            <mxPoint x="480.5025253169417" y="180.37873734152913" as="targetPoint" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="kspEkG2AYDm2vSh5nX-M-19" value="&amp;lt;&amp;lt;include&amp;gt;&amp;gt;" style="edgeLabel;resizable=0;html=1;align=center;verticalAlign=middle;" connectable="0" vertex="1" parent="kspEkG2AYDm2vSh5nX-M-18">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+      </root>
+    </mxGraphModel>
+  </diagram>
+</mxfile>
