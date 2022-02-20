@@ -1,0 +1,269 @@
+<mxfile host="app.diagrams.net" modified="2022-02-19T14:37:42.992Z" agent="5.0 (Windows)" etag="2GXHQSsFiqcDmlUDNl35" version="16.6.1" type="github">
+  <diagram id="prtHgNgQTEPvFCAcTncT" name="Page-1">
+    <mxGraphModel dx="1778" dy="2158" grid="1" gridSize="10" guides="1" tooltips="1" connect="1" arrows="1" fold="1" page="1" pageScale="1" pageWidth="827" pageHeight="1169" math="0" shadow="0">
+      <root>
+        <mxCell id="0" />
+        <mxCell id="1" parent="0" />
+        <mxCell id="IOTIunx05AJiKDH4-Efz-1" value="模拟器" style="rounded=0;whiteSpace=wrap;html=1;fontSize=44;strokeWidth=2;" vertex="1" parent="1">
+          <mxGeometry x="690" y="-50" width="260" height="80" as="geometry" />
+        </mxCell>
+        <mxCell id="IOTIunx05AJiKDH4-Efz-2" value="可执行程序加载" style="rounded=0;whiteSpace=wrap;html=1;fontSize=44;strokeWidth=2;" vertex="1" parent="1">
+          <mxGeometry x="320" y="360" width="80" height="400" as="geometry" />
+        </mxCell>
+        <mxCell id="IOTIunx05AJiKDH4-Efz-3" value="指令集注册" style="rounded=0;whiteSpace=wrap;html=1;fontSize=44;strokeWidth=2;" vertex="1" parent="1">
+          <mxGeometry x="210" y="360" width="80" height="400" as="geometry" />
+        </mxCell>
+        <mxCell id="IOTIunx05AJiKDH4-Efz-4" value="配置参数解析" style="rounded=0;whiteSpace=wrap;html=1;fontSize=44;strokeWidth=2;" vertex="1" parent="1">
+          <mxGeometry x="100" y="360" width="80" height="400" as="geometry" />
+        </mxCell>
+        <mxCell id="IOTIunx05AJiKDH4-Efz-5" value="指令流执行模块" style="rounded=0;whiteSpace=wrap;html=1;fontSize=44;strokeWidth=2;" vertex="1" parent="1">
+          <mxGeometry x="490" y="140" width="380" height="100" as="geometry" />
+        </mxCell>
+        <mxCell id="IOTIunx05AJiKDH4-Efz-6" value="预加载模块" style="rounded=0;whiteSpace=wrap;html=1;fontSize=44;strokeWidth=2;" vertex="1" parent="1">
+          <mxGeometry x="100" y="140" width="300" height="100" as="geometry" />
+        </mxCell>
+        <mxCell id="IOTIunx05AJiKDH4-Efz-7" value="总线模拟" style="rounded=0;whiteSpace=wrap;html=1;fontSize=44;strokeWidth=2;" vertex="1" parent="1">
+          <mxGeometry x="639" y="480" width="70" height="280" as="geometry" />
+        </mxCell>
+        <mxCell id="IOTIunx05AJiKDH4-Efz-9" value="中断控制器模拟" style="rounded=0;whiteSpace=wrap;html=1;fontSize=44;strokeWidth=2;" vertex="1" parent="1">
+          <mxGeometry x="730" y="360" width="80" height="400" as="geometry" />
+        </mxCell>
+        <mxCell id="IOTIunx05AJiKDH4-Efz-10" value="内存模拟" style="rounded=0;whiteSpace=wrap;html=1;fontSize=44;strokeWidth=2;" vertex="1" parent="1">
+          <mxGeometry x="830" y="360" width="80" height="400" as="geometry" />
+        </mxCell>
+        <mxCell id="IOTIunx05AJiKDH4-Efz-11" value="寄存器模拟" style="rounded=0;whiteSpace=wrap;html=1;fontSize=44;strokeWidth=2;" vertex="1" parent="1">
+          <mxGeometry x="430" y="480" width="60" height="280" as="geometry" />
+        </mxCell>
+        <mxCell id="IOTIunx05AJiKDH4-Efz-12" value="调试模块" style="rounded=0;whiteSpace=wrap;html=1;fontSize=44;strokeWidth=2;" vertex="1" parent="1">
+          <mxGeometry x="970" y="140" width="290" height="100" as="geometry" />
+        </mxCell>
+        <mxCell id="IOTIunx05AJiKDH4-Efz-13" value="UI显示模块" style="rounded=0;whiteSpace=wrap;html=1;fontSize=44;strokeWidth=2;" vertex="1" parent="1">
+          <mxGeometry x="1360" y="140" width="270" height="100" as="geometry" />
+        </mxCell>
+        <mxCell id="IOTIunx05AJiKDH4-Efz-14" value="CPU模拟" style="rounded=0;whiteSpace=wrap;html=1;fontSize=44;strokeWidth=2;" vertex="1" parent="1">
+          <mxGeometry x="460" y="320" width="210" height="80" as="geometry" />
+        </mxCell>
+        <mxCell id="IOTIunx05AJiKDH4-Efz-15" value="MMU模拟" style="rounded=0;whiteSpace=wrap;html=1;fontSize=44;strokeWidth=2;" vertex="1" parent="1">
+          <mxGeometry x="510" y="480" width="110" height="150" as="geometry" />
+        </mxCell>
+        <mxCell id="IOTIunx05AJiKDH4-Efz-34" value="断点设置" style="rounded=0;whiteSpace=wrap;html=1;fontSize=44;strokeWidth=2;" vertex="1" parent="1">
+          <mxGeometry x="1040" y="360" width="80" height="400" as="geometry" />
+        </mxCell>
+        <mxCell id="IOTIunx05AJiKDH4-Efz-35" value="指令流界面" style="rounded=0;whiteSpace=wrap;html=1;fontSize=44;strokeWidth=2;" vertex="1" parent="1">
+          <mxGeometry x="1350" y="360" width="80" height="400" as="geometry" />
+        </mxCell>
+        <mxCell id="IOTIunx05AJiKDH4-Efz-36" value="寄存器状态显示" style="rounded=0;whiteSpace=wrap;html=1;fontSize=44;strokeWidth=2;" vertex="1" parent="1">
+          <mxGeometry x="1450" y="360" width="80" height="400" as="geometry" />
+        </mxCell>
+        <mxCell id="IOTIunx05AJiKDH4-Efz-37" value="执行交互界面" style="rounded=0;whiteSpace=wrap;html=1;fontSize=44;strokeWidth=2;" vertex="1" parent="1">
+          <mxGeometry x="1550" y="360" width="80" height="400" as="geometry" />
+        </mxCell>
+        <mxCell id="IOTIunx05AJiKDH4-Efz-39" value="内存查询" style="rounded=0;whiteSpace=wrap;html=1;fontSize=44;strokeWidth=2;" vertex="1" parent="1">
+          <mxGeometry x="1140" y="360" width="80" height="400" as="geometry" />
+        </mxCell>
+        <mxCell id="IOTIunx05AJiKDH4-Efz-40" value="中断信号发送" style="rounded=0;whiteSpace=wrap;html=1;fontSize=44;strokeWidth=2;" vertex="1" parent="1">
+          <mxGeometry x="1241" y="360" width="79" height="400" as="geometry" />
+        </mxCell>
+        <mxCell id="IOTIunx05AJiKDH4-Efz-41" value="" style="endArrow=none;html=1;rounded=0;fontSize=44;strokeWidth=2;entryX=0.5;entryY=1;entryDx=0;entryDy=0;" edge="1" parent="1" target="IOTIunx05AJiKDH4-Efz-1">
+          <mxGeometry width="50" height="50" relative="1" as="geometry">
+            <mxPoint x="820" y="80" as="sourcePoint" />
+            <mxPoint x="1100" y="300" as="targetPoint" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="IOTIunx05AJiKDH4-Efz-42" value="" style="endArrow=none;html=1;rounded=0;fontSize=44;strokeWidth=2;" edge="1" parent="1">
+          <mxGeometry width="50" height="50" relative="1" as="geometry">
+            <mxPoint x="1490" y="80" as="sourcePoint" />
+            <mxPoint x="230" y="80" as="targetPoint" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="IOTIunx05AJiKDH4-Efz-43" value="" style="endArrow=classic;html=1;rounded=0;fontSize=44;strokeWidth=2;" edge="1" parent="1">
+          <mxGeometry width="50" height="50" relative="1" as="geometry">
+            <mxPoint x="230" y="80" as="sourcePoint" />
+            <mxPoint x="230" y="140" as="targetPoint" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="IOTIunx05AJiKDH4-Efz-44" value="" style="endArrow=classic;html=1;rounded=0;fontSize=44;strokeWidth=2;entryX=0.5;entryY=0;entryDx=0;entryDy=0;" edge="1" parent="1" target="IOTIunx05AJiKDH4-Efz-5">
+          <mxGeometry width="50" height="50" relative="1" as="geometry">
+            <mxPoint x="680" y="80" as="sourcePoint" />
+            <mxPoint x="1100" y="300" as="targetPoint" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="IOTIunx05AJiKDH4-Efz-45" value="" style="endArrow=classic;html=1;rounded=0;fontSize=44;strokeWidth=2;entryX=0.483;entryY=-0.012;entryDx=0;entryDy=0;entryPerimeter=0;" edge="1" parent="1" target="IOTIunx05AJiKDH4-Efz-12">
+          <mxGeometry width="50" height="50" relative="1" as="geometry">
+            <mxPoint x="1110" y="80" as="sourcePoint" />
+            <mxPoint x="1100" y="300" as="targetPoint" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="IOTIunx05AJiKDH4-Efz-46" value="" style="endArrow=classic;html=1;rounded=0;fontSize=44;strokeWidth=2;entryX=0.483;entryY=-0.003;entryDx=0;entryDy=0;entryPerimeter=0;" edge="1" parent="1" target="IOTIunx05AJiKDH4-Efz-13">
+          <mxGeometry width="50" height="50" relative="1" as="geometry">
+            <mxPoint x="1490" y="80" as="sourcePoint" />
+            <mxPoint x="1100" y="300" as="targetPoint" />
+            <Array as="points">
+              <mxPoint x="1490" y="120" />
+            </Array>
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="IOTIunx05AJiKDH4-Efz-47" value="" style="endArrow=none;html=1;rounded=0;fontSize=44;strokeWidth=2;entryX=0.442;entryY=1.001;entryDx=0;entryDy=0;entryPerimeter=0;" edge="1" parent="1" target="IOTIunx05AJiKDH4-Efz-6">
+          <mxGeometry width="50" height="50" relative="1" as="geometry">
+            <mxPoint x="233" y="290" as="sourcePoint" />
+            <mxPoint x="1160" y="350" as="targetPoint" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="IOTIunx05AJiKDH4-Efz-48" value="" style="endArrow=none;html=1;rounded=0;fontSize=44;strokeWidth=2;" edge="1" parent="1">
+          <mxGeometry width="50" height="50" relative="1" as="geometry">
+            <mxPoint x="360" y="290" as="sourcePoint" />
+            <mxPoint x="140" y="290" as="targetPoint" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="IOTIunx05AJiKDH4-Efz-50" value="" style="endArrow=none;html=1;rounded=0;fontSize=44;strokeWidth=2;exitX=0.5;exitY=0;exitDx=0;exitDy=0;" edge="1" parent="1" source="IOTIunx05AJiKDH4-Efz-4">
+          <mxGeometry width="50" height="50" relative="1" as="geometry">
+            <mxPoint x="1110" y="400" as="sourcePoint" />
+            <mxPoint x="140" y="290" as="targetPoint" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="IOTIunx05AJiKDH4-Efz-52" value="" style="endArrow=none;html=1;rounded=0;fontSize=44;strokeWidth=2;exitX=0.5;exitY=0;exitDx=0;exitDy=0;" edge="1" parent="1" source="IOTIunx05AJiKDH4-Efz-3">
+          <mxGeometry width="50" height="50" relative="1" as="geometry">
+            <mxPoint x="260" y="400" as="sourcePoint" />
+            <mxPoint x="250" y="290" as="targetPoint" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="IOTIunx05AJiKDH4-Efz-53" value="" style="endArrow=none;html=1;rounded=0;fontSize=44;strokeWidth=2;exitX=0.5;exitY=0;exitDx=0;exitDy=0;" edge="1" parent="1">
+          <mxGeometry width="50" height="50" relative="1" as="geometry">
+            <mxPoint x="359.7" y="360" as="sourcePoint" />
+            <mxPoint x="359.7" y="290" as="targetPoint" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="IOTIunx05AJiKDH4-Efz-54" value="" style="endArrow=none;html=1;rounded=0;fontSize=44;strokeWidth=2;entryX=0.5;entryY=1;entryDx=0;entryDy=0;" edge="1" parent="1" target="IOTIunx05AJiKDH4-Efz-5">
+          <mxGeometry width="50" height="50" relative="1" as="geometry">
+            <mxPoint x="680" y="280" as="sourcePoint" />
+            <mxPoint x="770" y="290" as="targetPoint" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="IOTIunx05AJiKDH4-Efz-55" value="" style="endArrow=none;html=1;rounded=0;fontSize=44;strokeWidth=2;" edge="1" parent="1">
+          <mxGeometry width="50" height="50" relative="1" as="geometry">
+            <mxPoint x="560" y="280" as="sourcePoint" />
+            <mxPoint x="970" y="280" as="targetPoint" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="IOTIunx05AJiKDH4-Efz-56" value="" style="endArrow=none;html=1;rounded=0;fontSize=44;strokeWidth=2;exitX=0.475;exitY=-0.017;exitDx=0;exitDy=0;exitPerimeter=0;" edge="1" parent="1" source="IOTIunx05AJiKDH4-Efz-14">
+          <mxGeometry width="50" height="50" relative="1" as="geometry">
+            <mxPoint x="730" y="370" as="sourcePoint" />
+            <mxPoint x="560" y="280" as="targetPoint" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="IOTIunx05AJiKDH4-Efz-57" value="" style="endArrow=none;html=1;rounded=0;fontSize=44;strokeWidth=2;exitX=0.5;exitY=0;exitDx=0;exitDy=0;" edge="1" parent="1" source="IOTIunx05AJiKDH4-Efz-9">
+          <mxGeometry width="50" height="50" relative="1" as="geometry">
+            <mxPoint x="740" y="380" as="sourcePoint" />
+            <mxPoint x="770" y="280" as="targetPoint" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="IOTIunx05AJiKDH4-Efz-58" value="" style="endArrow=none;html=1;rounded=0;fontSize=44;strokeWidth=2;entryX=0.5;entryY=0;entryDx=0;entryDy=0;" edge="1" parent="1" target="IOTIunx05AJiKDH4-Efz-10">
+          <mxGeometry width="50" height="50" relative="1" as="geometry">
+            <mxPoint x="869" y="280" as="sourcePoint" />
+            <mxPoint x="810" y="330" as="targetPoint" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="IOTIunx05AJiKDH4-Efz-59" value="" style="endArrow=none;html=1;rounded=0;fontSize=44;strokeWidth=2;entryX=0.475;entryY=1.014;entryDx=0;entryDy=0;entryPerimeter=0;" edge="1" parent="1" target="IOTIunx05AJiKDH4-Efz-14">
+          <mxGeometry width="50" height="50" relative="1" as="geometry">
+            <mxPoint x="560" y="440" as="sourcePoint" />
+            <mxPoint x="565" y="400" as="targetPoint" />
+            <Array as="points" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="IOTIunx05AJiKDH4-Efz-61" value="" style="endArrow=none;html=1;rounded=0;fontSize=44;strokeWidth=2;" edge="1" parent="1">
+          <mxGeometry width="50" height="50" relative="1" as="geometry">
+            <mxPoint x="460" y="440" as="sourcePoint" />
+            <mxPoint x="680" y="440" as="targetPoint" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="IOTIunx05AJiKDH4-Efz-62" value="" style="endArrow=none;html=1;rounded=0;fontSize=44;strokeWidth=2;exitX=0.586;exitY=0;exitDx=0;exitDy=0;exitPerimeter=0;" edge="1" parent="1" source="IOTIunx05AJiKDH4-Efz-7">
+          <mxGeometry width="50" height="50" relative="1" as="geometry">
+            <mxPoint x="710" y="350" as="sourcePoint" />
+            <mxPoint x="680" y="440" as="targetPoint" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="IOTIunx05AJiKDH4-Efz-63" value="" style="endArrow=none;html=1;rounded=0;fontSize=44;strokeWidth=2;exitX=0.541;exitY=-0.017;exitDx=0;exitDy=0;exitPerimeter=0;" edge="1" parent="1" source="IOTIunx05AJiKDH4-Efz-15">
+          <mxGeometry width="50" height="50" relative="1" as="geometry">
+            <mxPoint x="710" y="350" as="sourcePoint" />
+            <mxPoint x="570" y="440" as="targetPoint" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="IOTIunx05AJiKDH4-Efz-64" value="" style="endArrow=none;html=1;rounded=0;fontSize=44;strokeWidth=2;" edge="1" parent="1">
+          <mxGeometry width="50" height="50" relative="1" as="geometry">
+            <mxPoint x="460" y="480" as="sourcePoint" />
+            <mxPoint x="460" y="440" as="targetPoint" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="IOTIunx05AJiKDH4-Efz-65" value="外设模拟" style="rounded=0;whiteSpace=wrap;html=1;fontSize=44;strokeWidth=2;" vertex="1" parent="1">
+          <mxGeometry x="930" y="360" width="80" height="400" as="geometry" />
+        </mxCell>
+        <mxCell id="IOTIunx05AJiKDH4-Efz-66" value="" style="endArrow=none;html=1;rounded=0;fontSize=44;strokeWidth=2;exitX=0.5;exitY=0;exitDx=0;exitDy=0;" edge="1" parent="1" source="IOTIunx05AJiKDH4-Efz-65">
+          <mxGeometry width="50" height="50" relative="1" as="geometry">
+            <mxPoint x="870" y="470" as="sourcePoint" />
+            <mxPoint x="970" y="280" as="targetPoint" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="IOTIunx05AJiKDH4-Efz-67" value="" style="endArrow=none;html=1;rounded=0;fontSize=44;strokeWidth=2;exitX=0.5;exitY=0;exitDx=0;exitDy=0;" edge="1" parent="1" source="IOTIunx05AJiKDH4-Efz-34">
+          <mxGeometry width="50" height="50" relative="1" as="geometry">
+            <mxPoint x="1075" y="360" as="sourcePoint" />
+            <mxPoint x="1080" y="280" as="targetPoint" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="IOTIunx05AJiKDH4-Efz-68" value="" style="endArrow=none;html=1;rounded=0;fontSize=44;strokeWidth=2;" edge="1" parent="1">
+          <mxGeometry width="50" height="50" relative="1" as="geometry">
+            <mxPoint x="1180" y="360" as="sourcePoint" />
+            <mxPoint x="1180" y="280" as="targetPoint" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="IOTIunx05AJiKDH4-Efz-69" value="" style="endArrow=none;html=1;rounded=0;fontSize=44;strokeWidth=2;" edge="1" parent="1">
+          <mxGeometry width="50" height="50" relative="1" as="geometry">
+            <mxPoint x="1280" y="360" as="sourcePoint" />
+            <mxPoint x="1280" y="280" as="targetPoint" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="IOTIunx05AJiKDH4-Efz-70" value="" style="endArrow=none;html=1;rounded=0;fontSize=44;strokeWidth=2;exitX=0.5;exitY=0;exitDx=0;exitDy=0;" edge="1" parent="1" source="IOTIunx05AJiKDH4-Efz-35">
+          <mxGeometry width="50" height="50" relative="1" as="geometry">
+            <mxPoint x="1310" y="340" as="sourcePoint" />
+            <mxPoint x="1390" y="280" as="targetPoint" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="IOTIunx05AJiKDH4-Efz-71" value="" style="endArrow=none;html=1;rounded=0;fontSize=44;strokeWidth=2;" edge="1" parent="1">
+          <mxGeometry width="50" height="50" relative="1" as="geometry">
+            <mxPoint x="1390" y="280" as="sourcePoint" />
+            <mxPoint x="1590" y="280" as="targetPoint" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="IOTIunx05AJiKDH4-Efz-72" value="" style="endArrow=none;html=1;rounded=0;fontSize=44;strokeWidth=2;" edge="1" parent="1">
+          <mxGeometry width="50" height="50" relative="1" as="geometry">
+            <mxPoint x="1080" y="280" as="sourcePoint" />
+            <mxPoint x="1280" y="280" as="targetPoint" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="IOTIunx05AJiKDH4-Efz-73" value="" style="endArrow=none;html=1;rounded=0;fontSize=44;strokeWidth=2;entryX=0.582;entryY=1.004;entryDx=0;entryDy=0;entryPerimeter=0;" edge="1" parent="1" target="IOTIunx05AJiKDH4-Efz-12">
+          <mxGeometry width="50" height="50" relative="1" as="geometry">
+            <mxPoint x="1139" y="280" as="sourcePoint" />
+            <mxPoint x="1180" y="570" as="targetPoint" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="IOTIunx05AJiKDH4-Efz-74" value="" style="endArrow=none;html=1;rounded=0;fontSize=44;strokeWidth=2;" edge="1" parent="1">
+          <mxGeometry width="50" height="50" relative="1" as="geometry">
+            <mxPoint x="1500" y="280" as="sourcePoint" />
+            <mxPoint x="1499.83" y="240" as="targetPoint" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="IOTIunx05AJiKDH4-Efz-75" value="" style="endArrow=none;html=1;rounded=0;fontSize=44;strokeWidth=2;exitX=0.5;exitY=0;exitDx=0;exitDy=0;" edge="1" parent="1">
+          <mxGeometry width="50" height="50" relative="1" as="geometry">
+            <mxPoint x="1489.76" y="360" as="sourcePoint" />
+            <mxPoint x="1489.76" y="280" as="targetPoint" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="IOTIunx05AJiKDH4-Efz-76" value="" style="endArrow=none;html=1;rounded=0;fontSize=44;strokeWidth=2;exitX=0.5;exitY=0;exitDx=0;exitDy=0;" edge="1" parent="1">
+          <mxGeometry width="50" height="50" relative="1" as="geometry">
+            <mxPoint x="1589.7600000000002" y="360" as="sourcePoint" />
+            <mxPoint x="1589.7600000000002" y="280" as="targetPoint" />
+          </mxGeometry>
+        </mxCell>
+      </root>
+    </mxGraphModel>
+  </diagram>
+</mxfile>

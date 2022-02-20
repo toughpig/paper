@@ -1,0 +1,88 @@
+<mxfile host="app.diagrams.net" modified="2022-02-19T13:34:13.394Z" agent="5.0 (Windows)" etag="pIadplWG1fWKkVJPZ90i" version="16.6.1" type="github">
+  <diagram id="WZPSnhNBhCsICeyBbSXf" name="Page-1">
+    <mxGraphModel dx="2249" dy="791" grid="1" gridSize="10" guides="1" tooltips="1" connect="1" arrows="1" fold="1" page="1" pageScale="1" pageWidth="827" pageHeight="1169" math="0" shadow="0">
+      <root>
+        <mxCell id="0" />
+        <mxCell id="1" parent="0" />
+        <mxCell id="kspEkG2AYDm2vSh5nX-M-1" value="芯片开发团队成员" style="shape=umlActor;verticalLabelPosition=bottom;verticalAlign=top;html=1;fontSize=24;strokeWidth=3;fontStyle=0;fontFamily=Helvetica;" parent="1" vertex="1">
+          <mxGeometry x="-30" y="320" width="90" height="190" as="geometry" />
+        </mxCell>
+        <mxCell id="kspEkG2AYDm2vSh5nX-M-2" value="模拟器启停管理" style="ellipse;whiteSpace=wrap;html=1;fontSize=24;strokeWidth=3;fontStyle=0;fontFamily=Helvetica;" parent="1" vertex="1">
+          <mxGeometry x="140" y="210" width="210" height="90" as="geometry" />
+        </mxCell>
+        <mxCell id="kspEkG2AYDm2vSh5nX-M-4" value="切换至运行模式" style="ellipse;whiteSpace=wrap;html=1;fontSize=24;strokeWidth=3;fontStyle=0;fontFamily=Helvetica;" parent="1" vertex="1">
+          <mxGeometry x="590" y="400" width="230" height="100" as="geometry" />
+        </mxCell>
+        <mxCell id="kspEkG2AYDm2vSh5nX-M-5" value="模拟器运行状态切换" style="ellipse;whiteSpace=wrap;html=1;fontSize=24;strokeWidth=3;fontStyle=0;fontFamily=Helvetica;" parent="1" vertex="1">
+          <mxGeometry x="130" y="350" width="230" height="90" as="geometry" />
+        </mxCell>
+        <mxCell id="kspEkG2AYDm2vSh5nX-M-6" value="切换至调试模式" style="ellipse;whiteSpace=wrap;html=1;fontSize=24;strokeWidth=3;fontStyle=0;fontFamily=Helvetica;" parent="1" vertex="1">
+          <mxGeometry x="590" y="280" width="230" height="90" as="geometry" />
+        </mxCell>
+        <mxCell id="kspEkG2AYDm2vSh5nX-M-7" value="重启模拟器" style="ellipse;whiteSpace=wrap;html=1;fontSize=24;strokeWidth=3;fontStyle=0;fontFamily=Helvetica;" parent="1" vertex="1">
+          <mxGeometry x="540" y="180" width="250" height="80" as="geometry" />
+        </mxCell>
+        <mxCell id="kspEkG2AYDm2vSh5nX-M-8" value="&lt;p style=&quot;font-size: 24px;&quot;&gt;&lt;span style=&quot;font-size: 24px;&quot;&gt;&lt;font style=&quot;font-size: 24px;&quot;&gt;模拟器配置并启动&lt;/font&gt;&lt;/span&gt;&lt;/p&gt;" style="ellipse;whiteSpace=wrap;html=1;fontSize=24;rotation=1;strokeWidth=3;fontStyle=0;fontFamily=Helvetica;" parent="1" vertex="1">
+          <mxGeometry x="500" y="70" width="220" height="90" as="geometry" />
+        </mxCell>
+        <mxCell id="kspEkG2AYDm2vSh5nX-M-9" value="调试" style="ellipse;whiteSpace=wrap;html=1;fontSize=24;strokeWidth=3;fontStyle=0;fontFamily=Helvetica;" parent="1" vertex="1">
+          <mxGeometry x="135" y="490" width="220" height="90" as="geometry" />
+        </mxCell>
+        <mxCell id="kspEkG2AYDm2vSh5nX-M-15" value="" style="endArrow=open;html=1;rounded=0;dashed=1;entryX=0;entryY=1;entryDx=0;entryDy=0;endFill=0;fontSize=24;strokeWidth=3;exitX=0.952;exitY=0.222;exitDx=0;exitDy=0;exitPerimeter=0;fontStyle=0;fontFamily=Helvetica;" parent="1" source="kspEkG2AYDm2vSh5nX-M-2" target="kspEkG2AYDm2vSh5nX-M-8" edge="1">
+          <mxGeometry relative="1" as="geometry">
+            <mxPoint x="290" y="249" as="sourcePoint" />
+            <mxPoint x="450" y="249" as="targetPoint" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="kspEkG2AYDm2vSh5nX-M-16" value="&amp;lt;&amp;lt;include&amp;gt;&amp;gt;" style="edgeLabel;resizable=0;html=1;align=center;verticalAlign=middle;fontSize=24;fontStyle=0;fontFamily=Helvetica;" parent="kspEkG2AYDm2vSh5nX-M-15" connectable="0" vertex="1">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="kspEkG2AYDm2vSh5nX-M-18" value="" style="endArrow=open;html=1;rounded=0;dashed=1;entryX=0.072;entryY=0.788;entryDx=0;entryDy=0;exitX=0.952;exitY=0.667;exitDx=0;exitDy=0;exitPerimeter=0;endFill=0;fontSize=24;strokeWidth=3;entryPerimeter=0;fontStyle=0;fontFamily=Helvetica;" parent="1" source="kspEkG2AYDm2vSh5nX-M-2" target="kspEkG2AYDm2vSh5nX-M-7" edge="1">
+          <mxGeometry relative="1" as="geometry">
+            <mxPoint x="350" y="269.63" as="sourcePoint" />
+            <mxPoint x="480.5025253169417" y="180.37873734152913" as="targetPoint" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="kspEkG2AYDm2vSh5nX-M-19" value="&amp;lt;&amp;lt;include&amp;gt;&amp;gt;" style="edgeLabel;resizable=0;html=1;align=center;verticalAlign=middle;fontSize=24;fontStyle=0;fontFamily=Helvetica;" parent="kspEkG2AYDm2vSh5nX-M-18" connectable="0" vertex="1">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="kspEkG2AYDm2vSh5nX-M-21" value="" style="endArrow=open;html=1;rounded=0;dashed=1;entryX=0.996;entryY=0.344;entryDx=0;entryDy=0;endFill=0;exitX=0;exitY=0.5;exitDx=0;exitDy=0;entryPerimeter=0;fontSize=24;strokeWidth=3;fontStyle=0;fontFamily=Helvetica;" parent="1" source="kspEkG2AYDm2vSh5nX-M-6" target="kspEkG2AYDm2vSh5nX-M-5" edge="1">
+          <mxGeometry relative="1" as="geometry">
+            <mxPoint x="590" y="349.25" as="sourcePoint" />
+            <mxPoint x="720.5025253169417" y="259.99873734152914" as="targetPoint" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="kspEkG2AYDm2vSh5nX-M-22" value="&amp;lt;&amp;lt;Extend&amp;gt;&amp;gt;" style="edgeLabel;resizable=0;html=1;align=center;verticalAlign=middle;fontSize=24;fontStyle=0;fontFamily=Helvetica;" parent="kspEkG2AYDm2vSh5nX-M-21" connectable="0" vertex="1">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="kspEkG2AYDm2vSh5nX-M-23" value="" style="endArrow=open;html=1;rounded=0;dashed=1;entryX=1.004;entryY=0.644;entryDx=0;entryDy=0;endFill=0;fontSize=24;strokeWidth=3;entryPerimeter=0;fontStyle=0;fontFamily=Helvetica;" parent="1" source="kspEkG2AYDm2vSh5nX-M-4" target="kspEkG2AYDm2vSh5nX-M-5" edge="1">
+          <mxGeometry relative="1" as="geometry">
+            <mxPoint x="410" y="335" as="sourcePoint" />
+            <mxPoint x="321.98" y="372.03" as="targetPoint" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="kspEkG2AYDm2vSh5nX-M-24" value="&amp;lt;&amp;lt;Extend&amp;gt;&amp;gt;" style="edgeLabel;resizable=0;html=1;align=center;verticalAlign=middle;fontSize=24;fontStyle=0;fontFamily=Helvetica;" parent="kspEkG2AYDm2vSh5nX-M-23" connectable="0" vertex="1">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="kspEkG2AYDm2vSh5nX-M-27" value="" style="endArrow=none;html=1;rounded=0;entryX=0;entryY=0.5;entryDx=0;entryDy=0;fontSize=24;strokeWidth=3;fontStyle=0;fontFamily=Helvetica;" parent="1" target="kspEkG2AYDm2vSh5nX-M-2" edge="1">
+          <mxGeometry width="50" height="50" relative="1" as="geometry">
+            <mxPoint x="70" y="380" as="sourcePoint" />
+            <mxPoint x="210" y="290" as="targetPoint" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="kspEkG2AYDm2vSh5nX-M-28" value="" style="endArrow=none;html=1;rounded=0;fontSize=24;strokeWidth=3;fontStyle=0;fontFamily=Helvetica;" parent="1" target="kspEkG2AYDm2vSh5nX-M-5" edge="1">
+          <mxGeometry width="50" height="50" relative="1" as="geometry">
+            <mxPoint x="70" y="395" as="sourcePoint" />
+            <mxPoint x="220" y="330" as="targetPoint" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="kspEkG2AYDm2vSh5nX-M-29" value="" style="endArrow=none;html=1;rounded=0;entryX=0.1;entryY=0.171;entryDx=0;entryDy=0;entryPerimeter=0;fontSize=24;strokeWidth=3;fontStyle=0;fontFamily=Helvetica;" parent="1" target="kspEkG2AYDm2vSh5nX-M-9" edge="1">
+          <mxGeometry width="50" height="50" relative="1" as="geometry">
+            <mxPoint x="70" y="410" as="sourcePoint" />
+            <mxPoint x="230" y="405" as="targetPoint" />
+          </mxGeometry>
+        </mxCell>
+      </root>
+    </mxGraphModel>
+  </diagram>
+</mxfile>
