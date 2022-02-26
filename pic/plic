@@ -1,1 +1,190 @@
-<mxfile host="app.diagrams.net" modified="2022-02-26T07:42:17.007Z" agent="5.0 (Windows)" etag="elCskLGWKlxB9S3694kc" version="16.6.2" type="github"><diagram id="kgpKYQtTHZ0yAKxKKP6v" name="Page-1">7ZjLcpswFIafhmU6RhgbL2Pn0kU6yTSdSbOU4QTUCMQIEeM+fSUQYC5OcGrctNOVpV8XxP/pnMPYsFZhds1xHHxhHlADTbzMsC4MhEyELPmjlK1WTAcVis+Jp7VauCc/QYsTrabEg6QxUTBGBYmbosuiCFzR0DDnbNOc9sRo86kx9qEj3LuYdtUH4omgUB17UuufgfhB+WRzokdCXE7WQhJgj212JOvSsFacMVG0wmwFVLlX+lKsu9ozWh2MQySGLLCidHmV8YW7vZnE0e3DN4Svz/QuL5im+oUN6/x2/UNZWZxabEsr5AvEqpmG9IY8ASWR7C1j4CQEAVyOUC3f1dpSghFYamrczPuU4jgh63zbiVQ4uClPyAt8haTgn6ssjTzwdK8yL+8Izp4rHGpT/RbABWR77TEr0+V1BSYPyLdySnVXNSd9Ux3d3dTUK7bBDnGrFLG+aX61dQ1DNjSPA9igLps2kpiRSOTPtZeGfdHCwbgImM8iTHeBHN/Y/Tdrr9tTu2H2vM/srtfmYiyvrY7XHkliLNyg47kyg8gEcU6JH0lpzYRgYe4e5uJc5RzlvdxKahB5pbKmzH0up+lE5wwlAF4nTQ3xXyZLzH14bR7q58SBYiFjsplQe2zXS+/UTaz5npn9gMsdEpZyF/SiFrvqFO/HOf2HQ8du5qkqb70RO85YoWP/LyFZqxR8mBIy+6vjwD6khPSa3VNCZmN5Pe94zUGkPBpeQHaKBYtBDi09nAS5z2YxvFM2ICPiuzZdtR9V+9PCfndFKVLy25dpWEUZFDe/WWTQvHkFkDVrblEcdbQq4xzho6HnA0G6xrcVWtV5PCTSDgeLBoKd/SmwnaAd+fNh0QEr0dE1lniOAtY8EdihETs9Gdhps0KiduUbGWxZEU6dpM2TJenph4vlNnJ7fqQkLbv1vyfF9PpPKOvyFw==</diagram></mxfile>
+<mxfile host="app.diagrams.net" modified="2022-02-26T14:57:33.056Z" agent="5.0 (Windows)" etag="klgIk6jTzq5kFGBMZgR_" version="16.6.2" type="github">
+  <diagram id="kgpKYQtTHZ0yAKxKKP6v" name="Page-1">
+    <mxGraphModel dx="981" dy="546" grid="1" gridSize="10" guides="1" tooltips="1" connect="1" arrows="1" fold="1" page="1" pageScale="1" pageWidth="850" pageHeight="1100" math="0" shadow="0">
+      <root>
+        <mxCell id="0" />
+        <mxCell id="1" parent="0" />
+        <mxCell id="8xU7QgqJvoiaFiiC9FAE-1" value="" style="endArrow=none;html=1;rounded=0;strokeWidth=3;fontSize=20;" edge="1" parent="1">
+          <mxGeometry width="50" height="50" relative="1" as="geometry">
+            <mxPoint x="120" y="800" as="sourcePoint" />
+            <mxPoint x="120" y="80" as="targetPoint" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="8xU7QgqJvoiaFiiC9FAE-2" value="" style="endArrow=none;html=1;rounded=0;strokeWidth=3;fontSize=20;" edge="1" parent="1">
+          <mxGeometry width="50" height="50" relative="1" as="geometry">
+            <mxPoint x="360" y="800" as="sourcePoint" />
+            <mxPoint x="360" y="80" as="targetPoint" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="8xU7QgqJvoiaFiiC9FAE-3" value="" style="endArrow=none;html=1;rounded=0;strokeWidth=3;fontSize=20;" edge="1" parent="1">
+          <mxGeometry width="50" height="50" relative="1" as="geometry">
+            <mxPoint x="600" y="800" as="sourcePoint" />
+            <mxPoint x="600" y="80" as="targetPoint" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="8xU7QgqJvoiaFiiC9FAE-4" value="" style="endArrow=none;html=1;rounded=0;strokeWidth=3;fontSize=20;" edge="1" parent="1">
+          <mxGeometry width="50" height="50" relative="1" as="geometry">
+            <mxPoint x="839.5" y="800" as="sourcePoint" />
+            <mxPoint x="839.5" y="80" as="targetPoint" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="8xU7QgqJvoiaFiiC9FAE-5" value="中断源" style="rounded=0;whiteSpace=wrap;html=1;fillOpacity=0;opacity=0;strokeWidth=3;fontSize=20;" vertex="1" parent="1">
+          <mxGeometry x="60" y="10" width="120" height="60" as="geometry" />
+        </mxCell>
+        <mxCell id="8xU7QgqJvoiaFiiC9FAE-6" value="闸口" style="rounded=0;whiteSpace=wrap;html=1;fillOpacity=0;opacity=0;strokeWidth=3;fontSize=20;" vertex="1" parent="1">
+          <mxGeometry x="300" y="10" width="120" height="60" as="geometry" />
+        </mxCell>
+        <mxCell id="8xU7QgqJvoiaFiiC9FAE-7" value="PLIC core" style="rounded=0;whiteSpace=wrap;html=1;fillOpacity=0;opacity=0;strokeWidth=3;fontSize=20;" vertex="1" parent="1">
+          <mxGeometry x="540" y="10" width="120" height="60" as="geometry" />
+        </mxCell>
+        <mxCell id="8xU7QgqJvoiaFiiC9FAE-8" value="处理器" style="rounded=0;whiteSpace=wrap;html=1;fillOpacity=0;opacity=0;strokeWidth=3;fontSize=20;" vertex="1" parent="1">
+          <mxGeometry x="780" y="10" width="120" height="60" as="geometry" />
+        </mxCell>
+        <mxCell id="8xU7QgqJvoiaFiiC9FAE-9" value="" style="endArrow=classic;html=1;rounded=0;strokeWidth=3;fontSize=20;" edge="1" parent="1">
+          <mxGeometry width="50" height="50" relative="1" as="geometry">
+            <mxPoint x="120" y="120" as="sourcePoint" />
+            <mxPoint x="360" y="180" as="targetPoint" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="8xU7QgqJvoiaFiiC9FAE-10" value="中断源1发起中断请求" style="rounded=0;whiteSpace=wrap;html=1;fillOpacity=0;opacity=0;strokeWidth=3;fontSize=20;" vertex="1" parent="1">
+          <mxGeometry x="190" y="90" width="120" height="60" as="geometry" />
+        </mxCell>
+        <mxCell id="8xU7QgqJvoiaFiiC9FAE-11" value="" style="endArrow=classic;html=1;rounded=0;strokeWidth=3;fontSize=20;" edge="1" parent="1">
+          <mxGeometry width="50" height="50" relative="1" as="geometry">
+            <mxPoint x="360" y="200" as="sourcePoint" />
+            <mxPoint x="600" y="260" as="targetPoint" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="8xU7QgqJvoiaFiiC9FAE-12" value="中断源1挂起" style="rounded=0;whiteSpace=wrap;html=1;fillOpacity=0;opacity=0;strokeWidth=3;fontSize=20;" vertex="1" parent="1">
+          <mxGeometry x="400" y="170" width="120" height="60" as="geometry" />
+        </mxCell>
+        <mxCell id="8xU7QgqJvoiaFiiC9FAE-13" value="" style="endArrow=classic;html=1;rounded=0;strokeWidth=3;fontSize=20;" edge="1" parent="1">
+          <mxGeometry width="50" height="50" relative="1" as="geometry">
+            <mxPoint x="600" y="270" as="sourcePoint" />
+            <mxPoint x="360" y="320" as="targetPoint" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="8xU7QgqJvoiaFiiC9FAE-14" value="关闭中断源1闸口" style="rounded=0;whiteSpace=wrap;html=1;fillOpacity=0;opacity=0;strokeWidth=3;fontSize=20;" vertex="1" parent="1">
+          <mxGeometry x="360" y="240" width="190" height="60" as="geometry" />
+        </mxCell>
+        <mxCell id="8xU7QgqJvoiaFiiC9FAE-15" value="" style="endArrow=classic;html=1;rounded=0;strokeWidth=3;fontSize=20;" edge="1" parent="1">
+          <mxGeometry width="50" height="50" relative="1" as="geometry">
+            <mxPoint x="120" y="340" as="sourcePoint" />
+            <mxPoint x="360" y="400" as="targetPoint" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="8xU7QgqJvoiaFiiC9FAE-16" value="中断源1发起中断请求" style="rounded=0;whiteSpace=wrap;html=1;fillOpacity=0;opacity=0;strokeWidth=3;fontSize=20;" vertex="1" parent="1">
+          <mxGeometry x="170" y="300" width="120" height="60" as="geometry" />
+        </mxCell>
+        <mxCell id="8xU7QgqJvoiaFiiC9FAE-17" value="&lt;div style=&quot;font-size: 20px;&quot;&gt;闸口关闭&lt;/div&gt;&lt;div style=&quot;font-size: 20px;&quot;&gt;不再挂起&lt;br style=&quot;font-size: 20px;&quot;&gt;&lt;/div&gt;" style="rounded=0;whiteSpace=wrap;html=1;fillOpacity=0;opacity=0;strokeWidth=3;fontSize=20;" vertex="1" parent="1">
+          <mxGeometry x="340" y="470" width="120" height="60" as="geometry" />
+        </mxCell>
+        <mxCell id="8xU7QgqJvoiaFiiC9FAE-18" value="" style="endArrow=none;dashed=1;html=1;rounded=0;strokeWidth=3;fontSize=20;" edge="1" parent="1">
+          <mxGeometry width="50" height="50" relative="1" as="geometry">
+            <mxPoint x="280" y="320" as="sourcePoint" />
+            <mxPoint x="450" y="320" as="targetPoint" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="8xU7QgqJvoiaFiiC9FAE-19" value="" style="endArrow=none;dashed=1;html=1;rounded=0;strokeWidth=3;fontSize=20;" edge="1" parent="1">
+          <mxGeometry width="50" height="50" relative="1" as="geometry">
+            <mxPoint x="275" y="690" as="sourcePoint" />
+            <mxPoint x="445" y="690" as="targetPoint" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="8xU7QgqJvoiaFiiC9FAE-21" value="中断裁决" style="rounded=0;whiteSpace=wrap;html=1;fillOpacity=0;opacity=0;strokeWidth=3;fontSize=20;" vertex="1" parent="1">
+          <mxGeometry x="580" y="260" width="170" height="60" as="geometry" />
+        </mxCell>
+        <mxCell id="8xU7QgqJvoiaFiiC9FAE-22" value="" style="endArrow=none;dashed=1;html=1;rounded=0;strokeWidth=3;fontSize=20;" edge="1" parent="1">
+          <mxGeometry width="50" height="50" relative="1" as="geometry">
+            <mxPoint x="600" y="269" as="sourcePoint" />
+            <mxPoint x="770" y="269" as="targetPoint" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="8xU7QgqJvoiaFiiC9FAE-23" value="" style="endArrow=none;dashed=1;html=1;rounded=0;strokeWidth=3;fontSize=20;" edge="1" parent="1">
+          <mxGeometry width="50" height="50" relative="1" as="geometry">
+            <mxPoint x="600" y="310" as="sourcePoint" />
+            <mxPoint x="770" y="310" as="targetPoint" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="8xU7QgqJvoiaFiiC9FAE-24" value="" style="endArrow=classic;html=1;rounded=0;strokeWidth=3;fontSize=20;" edge="1" parent="1">
+          <mxGeometry width="50" height="50" relative="1" as="geometry">
+            <mxPoint x="600" y="360" as="sourcePoint" />
+            <mxPoint x="840" y="420" as="targetPoint" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="8xU7QgqJvoiaFiiC9FAE-25" value="发送外部中断信号" style="rounded=0;whiteSpace=wrap;html=1;fillOpacity=0;opacity=0;strokeWidth=3;fontSize=20;" vertex="1" parent="1">
+          <mxGeometry x="650" y="330" width="170" height="60" as="geometry" />
+        </mxCell>
+        <mxCell id="8xU7QgqJvoiaFiiC9FAE-26" value="" style="endArrow=none;dashed=1;html=1;rounded=0;strokeWidth=3;fontSize=20;" edge="1" parent="1">
+          <mxGeometry width="50" height="50" relative="1" as="geometry">
+            <mxPoint x="840" y="420" as="sourcePoint" />
+            <mxPoint x="1010" y="420" as="targetPoint" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="8xU7QgqJvoiaFiiC9FAE-27" value="" style="endArrow=none;dashed=1;html=1;rounded=0;strokeWidth=3;fontSize=20;" edge="1" parent="1">
+          <mxGeometry width="50" height="50" relative="1" as="geometry">
+            <mxPoint x="840" y="460" as="sourcePoint" />
+            <mxPoint x="1010" y="460" as="targetPoint" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="8xU7QgqJvoiaFiiC9FAE-28" value="外部中断触发" style="rounded=0;whiteSpace=wrap;html=1;fillOpacity=0;opacity=0;strokeWidth=3;fontSize=20;" vertex="1" parent="1">
+          <mxGeometry x="840" y="410" width="150" height="60" as="geometry" />
+        </mxCell>
+        <mxCell id="8xU7QgqJvoiaFiiC9FAE-29" value="" style="endArrow=classic;html=1;rounded=0;strokeWidth=3;fontSize=20;" edge="1" parent="1">
+          <mxGeometry width="50" height="50" relative="1" as="geometry">
+            <mxPoint x="840" y="460" as="sourcePoint" />
+            <mxPoint x="600" y="490" as="targetPoint" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="8xU7QgqJvoiaFiiC9FAE-30" value="外部中断响应" style="rounded=0;whiteSpace=wrap;html=1;fillOpacity=0;opacity=0;strokeWidth=3;fontSize=20;" vertex="1" parent="1">
+          <mxGeometry x="640" y="420" width="160" height="60" as="geometry" />
+        </mxCell>
+        <mxCell id="8xU7QgqJvoiaFiiC9FAE-31" value="" style="endArrow=classic;html=1;rounded=0;strokeWidth=3;fontSize=20;" edge="1" parent="1">
+          <mxGeometry width="50" height="50" relative="1" as="geometry">
+            <mxPoint x="600" y="500" as="sourcePoint" />
+            <mxPoint x="840" y="540" as="targetPoint" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="8xU7QgqJvoiaFiiC9FAE-32" value="裁决中断ID" style="rounded=0;whiteSpace=wrap;html=1;fillOpacity=0;opacity=0;strokeWidth=3;fontSize=20;" vertex="1" parent="1">
+          <mxGeometry x="700" y="470" width="120" height="60" as="geometry" />
+        </mxCell>
+        <mxCell id="8xU7QgqJvoiaFiiC9FAE-33" value="" style="endArrow=none;dashed=1;html=1;rounded=0;strokeWidth=3;fontSize=20;" edge="1" parent="1">
+          <mxGeometry width="50" height="50" relative="1" as="geometry">
+            <mxPoint x="840" y="580" as="sourcePoint" />
+            <mxPoint x="1010" y="580" as="targetPoint" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="8xU7QgqJvoiaFiiC9FAE-34" value="中断处理程序" style="rounded=0;whiteSpace=wrap;html=1;fillOpacity=0;opacity=0;strokeWidth=3;fontSize=20;" vertex="1" parent="1">
+          <mxGeometry x="840" y="490" width="150" height="60" as="geometry" />
+        </mxCell>
+        <mxCell id="8xU7QgqJvoiaFiiC9FAE-35" value="" style="endArrow=classic;html=1;rounded=0;strokeWidth=3;fontSize=20;" edge="1" parent="1">
+          <mxGeometry width="50" height="50" relative="1" as="geometry">
+            <mxPoint x="840" y="580" as="sourcePoint" />
+            <mxPoint x="600" y="630" as="targetPoint" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="8xU7QgqJvoiaFiiC9FAE-36" value="中断完成" style="rounded=0;whiteSpace=wrap;html=1;fillOpacity=0;opacity=0;strokeWidth=3;fontSize=20;" vertex="1" parent="1">
+          <mxGeometry x="670" y="550" width="120" height="60" as="geometry" />
+        </mxCell>
+        <mxCell id="8xU7QgqJvoiaFiiC9FAE-37" value="" style="endArrow=classic;html=1;rounded=0;strokeWidth=3;fontSize=20;" edge="1" parent="1">
+          <mxGeometry width="50" height="50" relative="1" as="geometry">
+            <mxPoint x="600" y="640" as="sourcePoint" />
+            <mxPoint x="360" y="690" as="targetPoint" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="8xU7QgqJvoiaFiiC9FAE-38" value="打开中断源1闸口" style="rounded=0;whiteSpace=wrap;html=1;fillOpacity=0;opacity=0;strokeWidth=3;fontSize=20;" vertex="1" parent="1">
+          <mxGeometry x="380" y="610" width="160" height="60" as="geometry" />
+        </mxCell>
+        <mxCell id="8xU7QgqJvoiaFiiC9FAE-39" value="" style="endArrow=classic;html=1;rounded=0;strokeWidth=3;fontSize=20;" edge="1" parent="1">
+          <mxGeometry width="50" height="50" relative="1" as="geometry">
+            <mxPoint x="120" y="690" as="sourcePoint" />
+            <mxPoint x="360" y="750" as="targetPoint" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="8xU7QgqJvoiaFiiC9FAE-40" value="中断源1发起中断请求" style="rounded=0;whiteSpace=wrap;html=1;fillOpacity=0;opacity=0;strokeWidth=3;fontSize=20;" vertex="1" parent="1">
+          <mxGeometry x="170" y="650" width="120" height="60" as="geometry" />
+        </mxCell>
+      </root>
+    </mxGraphModel>
+  </diagram>
+</mxfile>
