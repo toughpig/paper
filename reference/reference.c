@@ -177,3 +177,6 @@ MPI(message passing interface)类应用进行调优．
 [20] Magnusson P S, Christensson M, Eskilson J, et al. Simics: A full system simulationplatform [J]. Computer, 2002, 35(2): 50-58
 [21] Ceze L, Strauss K, Almasi G, et al. Full circle: Simulating Linux clusters on Linux clusters[C]//Proc of the 4th LCI Int Conf on LInux Clusters: The HPC Revolution. New York: ACM, 2003
 [22] OpenSim Ltd. OMNeT++[EB/OL].[2019-01-23]. http://ispass.org/ispass2007/keynote2.pdf
+
+
+很多RISC架构的处理器在运算指令产生错误之时，例如上溢（overflow）、下溢（Underflow）、非规格化浮点数（Subnormal）和除零（Divide by Zero），都会产生软件异常。RISC-V架构的一个特殊之处是对任何的运算指令错误（包括整数和浮点指令）均不产生异常，而是产生某个特殊的默认值，同时设置某些状态寄存器的状态位，RISC-V架构推荐软件通过其他方法来找到这些错误。
