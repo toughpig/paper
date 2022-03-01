@@ -1,1 +1,99 @@
-<mxfile host="app.diagrams.net" modified="2022-03-01T12:32:27.523Z" agent="5.0 (Windows)" version="16.6.4" etag="jIUmmg3BTfwbZcY7GgsE" type="github"><diagram id="8NxcAt-fLL-W4Udf92vm">UzV2zq1wL0osyPDNT0nNUTV2VTV2LsrPL4GwciucU3NyVI0MMlNUjV1UjYwMgFjVyA2HrCFY1qAgsSg1rwSLBiADYTaQg2Y1AA==</diagram></mxfile>
+<mxfile host="app.diagrams.net" modified="2022-03-01T14:12:43.359Z" agent="5.0 (Windows)" etag="VIn0Q_shy3pkBCGBG3oQ" version="16.6.4" type="github">
+  <diagram id="8NxcAt-fLL-W4Udf92vm" name="Page-1">
+    <mxGraphModel dx="1422" dy="792" grid="1" gridSize="10" guides="1" tooltips="1" connect="1" arrows="1" fold="1" page="1" pageScale="1" pageWidth="827" pageHeight="1169" math="0" shadow="0">
+      <root>
+        <mxCell id="0" />
+        <mxCell id="1" parent="0" />
+        <mxCell id="ELVM9AwUVXcoAaTIksoM-3" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;entryX=0;entryY=0.5;entryDx=0;entryDy=0;strokeWidth=3;fontSize=20;" edge="1" parent="1" source="ELVM9AwUVXcoAaTIksoM-1" target="ELVM9AwUVXcoAaTIksoM-2">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="ELVM9AwUVXcoAaTIksoM-1" value="目标程序" style="rounded=0;whiteSpace=wrap;html=1;strokeWidth=3;fontSize=20;" vertex="1" parent="1">
+          <mxGeometry x="130" y="120" width="110" height="120" as="geometry" />
+        </mxCell>
+        <mxCell id="ELVM9AwUVXcoAaTIksoM-7" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;entryX=0;entryY=0.5;entryDx=0;entryDy=0;fontSize=20;strokeWidth=3;" edge="1" parent="1" source="ELVM9AwUVXcoAaTIksoM-2" target="ELVM9AwUVXcoAaTIksoM-4">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="ELVM9AwUVXcoAaTIksoM-2" value="目标机编译器" style="rounded=0;whiteSpace=wrap;html=1;strokeWidth=3;fontSize=20;" vertex="1" parent="1">
+          <mxGeometry x="300" y="120" width="110" height="120" as="geometry" />
+        </mxCell>
+        <mxCell id="ELVM9AwUVXcoAaTIksoM-8" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;entryX=0;entryY=0.5;entryDx=0;entryDy=0;fontSize=20;strokeWidth=3;" edge="1" parent="1" source="ELVM9AwUVXcoAaTIksoM-4" target="ELVM9AwUVXcoAaTIksoM-5">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="ELVM9AwUVXcoAaTIksoM-4" value="目标机汇编代码" style="rounded=0;whiteSpace=wrap;html=1;strokeWidth=3;fontSize=20;" vertex="1" parent="1">
+          <mxGeometry x="460" y="120" width="110" height="120" as="geometry" />
+        </mxCell>
+        <mxCell id="ELVM9AwUVXcoAaTIksoM-9" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;entryX=0;entryY=0.5;entryDx=0;entryDy=0;fontSize=20;strokeWidth=3;" edge="1" parent="1" source="ELVM9AwUVXcoAaTIksoM-5" target="ELVM9AwUVXcoAaTIksoM-6">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="ELVM9AwUVXcoAaTIksoM-5" value="代码生成器" style="rounded=0;whiteSpace=wrap;html=1;strokeWidth=3;fontSize=20;" vertex="1" parent="1">
+          <mxGeometry x="620" y="120" width="110" height="120" as="geometry" />
+        </mxCell>
+        <mxCell id="ELVM9AwUVXcoAaTIksoM-6" value="宿主机二进制代码" style="rounded=0;whiteSpace=wrap;html=1;strokeWidth=3;fontSize=20;" vertex="1" parent="1">
+          <mxGeometry x="795" y="120" width="110" height="120" as="geometry" />
+        </mxCell>
+        <mxCell id="ELVM9AwUVXcoAaTIksoM-10" value="" style="endArrow=none;dashed=1;html=1;rounded=0;fontSize=20;strokeWidth=3;" edge="1" parent="1">
+          <mxGeometry width="50" height="50" relative="1" as="geometry">
+            <mxPoint x="760" y="300" as="sourcePoint" />
+            <mxPoint x="760" y="80" as="targetPoint" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="ELVM9AwUVXcoAaTIksoM-11" value="编译时" style="rounded=0;whiteSpace=wrap;html=1;strokeWidth=3;fontSize=20;fillOpacity=0;opacity=0;" vertex="1" parent="1">
+          <mxGeometry x="380" y="220" width="110" height="120" as="geometry" />
+        </mxCell>
+        <mxCell id="ELVM9AwUVXcoAaTIksoM-12" value="运行时" style="rounded=0;whiteSpace=wrap;html=1;strokeWidth=3;fontSize=20;fillOpacity=0;opacity=0;" vertex="1" parent="1">
+          <mxGeometry x="800" y="220" width="100" height="120" as="geometry" />
+        </mxCell>
+        <mxCell id="ELVM9AwUVXcoAaTIksoM-13" value="" style="endArrow=classic;html=1;rounded=0;fontSize=20;strokeWidth=3;" edge="1" parent="1" source="ELVM9AwUVXcoAaTIksoM-11">
+          <mxGeometry width="50" height="50" relative="1" as="geometry">
+            <mxPoint x="390" y="430" as="sourcePoint" />
+            <mxPoint x="720" y="280" as="targetPoint" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="ELVM9AwUVXcoAaTIksoM-14" value="" style="endArrow=classic;html=1;rounded=0;fontSize=20;strokeWidth=3;" edge="1" parent="1">
+          <mxGeometry width="50" height="50" relative="1" as="geometry">
+            <mxPoint x="380" y="279.5" as="sourcePoint" />
+            <mxPoint x="140" y="280" as="targetPoint" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="ELVM9AwUVXcoAaTIksoM-17" value="" style="endArrow=classic;html=1;rounded=0;fontSize=20;strokeWidth=3;" edge="1" parent="1">
+          <mxGeometry width="50" height="50" relative="1" as="geometry">
+            <mxPoint x="880" y="279.5" as="sourcePoint" />
+            <mxPoint x="910" y="279.5" as="targetPoint" />
+            <Array as="points" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="ELVM9AwUVXcoAaTIksoM-18" value="" style="endArrow=classic;html=1;rounded=0;fontSize=20;strokeWidth=3;" edge="1" parent="1">
+          <mxGeometry width="50" height="50" relative="1" as="geometry">
+            <mxPoint x="820" y="279.5" as="sourcePoint" />
+            <mxPoint x="790" y="279.5" as="targetPoint" />
+            <Array as="points" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="ELVM9AwUVXcoAaTIksoM-19" value="" style="endArrow=none;html=1;rounded=0;fontSize=20;strokeWidth=3;" edge="1" parent="1">
+          <mxGeometry width="50" height="50" relative="1" as="geometry">
+            <mxPoint x="140" y="305" as="sourcePoint" />
+            <mxPoint x="140" y="255" as="targetPoint" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="ELVM9AwUVXcoAaTIksoM-20" value="" style="endArrow=none;html=1;rounded=0;fontSize=20;strokeWidth=3;" edge="1" parent="1">
+          <mxGeometry width="50" height="50" relative="1" as="geometry">
+            <mxPoint x="720" y="305" as="sourcePoint" />
+            <mxPoint x="720" y="255" as="targetPoint" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="ELVM9AwUVXcoAaTIksoM-21" value="" style="endArrow=none;html=1;rounded=0;fontSize=20;strokeWidth=3;" edge="1" parent="1">
+          <mxGeometry width="50" height="50" relative="1" as="geometry">
+            <mxPoint x="790" y="305" as="sourcePoint" />
+            <mxPoint x="790" y="255" as="targetPoint" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="ELVM9AwUVXcoAaTIksoM-23" value="" style="endArrow=none;html=1;rounded=0;fontSize=20;strokeWidth=3;" edge="1" parent="1">
+          <mxGeometry width="50" height="50" relative="1" as="geometry">
+            <mxPoint x="910" y="305" as="sourcePoint" />
+            <mxPoint x="910" y="255" as="targetPoint" />
+          </mxGeometry>
+        </mxCell>
+      </root>
+    </mxGraphModel>
+  </diagram>
+</mxfile>
