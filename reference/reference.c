@@ -93,10 +93,8 @@ Single-Threaded  Applications,  ACM  SIGARCH  Computer  Architecture  News,
 器是他们进行体系结构研究的唯一手段。国际上绝大部分的体系结构研究成果都
 是基于模拟器平台做出的[6][7][8][9]，国外各大处理器设计公司也都有自己专用的模
 拟器平台[10][11]，因此，软件模拟器是体系结构研究和微处理器设计的重要基础支撑平台。
-[5]  濮晨,吴磊. CPU 模拟器研究综述[C]，江苏省计算机学会系统结构专委会学术
-年会论文集, 2007: 124-132. 
-[6]  Yi  J,  Eeckhout  L,  Lilja  D  et  al.  The  Future  of  Simulation:  A  Field  of  Dreams 
-[J].Computer. 2006, 39(11): 22 -29.ustin T, Larson E, Ernst D. SimpleScalar: An 
+[5]  濮晨,吴磊. CPU模拟器研究综述[C]，江苏省计算机学会系统结构专委会学术年会论文集, 2007: 124-132. 
+[6]  Yi J, Eeckhout L, Lilja D et al. The Future of Simulation: A Field of Dreams [J]. Computer. 2006, 39(11): 22-29.ustin T, Larson E, Ernst D. SimpleScalar: An 
 Infrastructure for Computer System Modeling [J]. Computer. 2002, 35: 59–67. 
 [7]  Burger  D,  Austin  T  M.  The  SimpleScalar  tool  set,  version  2.0  [J].  SIGARCH 
 Comput. Archit. News. 1997, 25: 13-25. 
@@ -117,6 +115,7 @@ Instruction  Set  Simulator）和性能模拟器（时钟周期精确模拟器�
 分支预测、Cache 层次等[13]
 [13]  喻之斌,  金海,  邹南海.  计算机体系结构软件模拟技术[J].  软件学报，2008, 4: 
 1051-1067. 
+
 LSE（Liberty Simulation Environment）是由普林斯顿大学开发的用于计算机系
 统建模的集成开发环境[15]，该开发环境主要用来对计算机系统的并行结构化部件
 进行建模，然后自动生成模拟器，在模拟器的开发过程中可以最大限度地重用已
