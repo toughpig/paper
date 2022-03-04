@@ -56,7 +56,8 @@ M 状态下是 32 位，在 Thumb 状态下是 16 位）。如今，ARM 处理�
 克利分校的David.Paterson教授团队研发的一套指令集架构,其设计初衷是为了支持计算机体系结构的
 研究和教育,如今RISC-V已经成为行业实施的标准免费开源指令集架构.在 RISC-V 指令子集中，包括基础
 指令集和扩展指令集，在使用过程中必须实现基础指令集，而作为 RISC-V 的基础指令集－RV32I，仅包含了
- 4种指令、且每种指令的编码方式都非常统一、富有规律，简单明了的使用文档也让许多初学者能快速上手\cite{huzhenbo}。
+ 4种指令、且每种指令的编码方式都非常统一、富有规律，简单明了的使用文档也让许多初学者能快速上
+ 手\cite{huzhenbo}。
 
 
 RISC-V的指令集使用模块化的方式进行组织，每一个模块使用一个英文字符来表示。其中’I’表示的基本整数
@@ -66,24 +67,25 @@ RISC-V的指令集使用模块化的方式进行组织，每一个模块使用�
   \centering
   \caption{RISC-V指令集模块}
   \label{tab:isa-general}
+  \renewcommand\arraystretch{1.2}
   \begin{tabular}{cccl}
     \toprule
 指令集类型 & 类型简写	& 指令数 &	说明 \\
     \midrule
     \multirow{4}{*}
     {基本指令集} &	
-      RV32I &	47	& \makecell[l]{基本整数指令集，包含算数指令、访存指令、环境\\调用等指令，具有32个32-bit通用寄存器，32位\\寻址空间} \\ \cline{2-4}
-      & RV32E	& 47	& \makecell[l]{RV32I指令集简化版本，专为嵌入式设计，与 RV32I\\相比寄存器数量减少为16个} \\ \cline{2-4}
-      & RV64I	& 59	& 整数指令，32 个 64-bit 通用寄存器，64 位寻址空间 \\ \cline{2-4}
-      & RV128I	& 71	& 整数指令，32 个 128-bit 通用寄存器，128 位寻址空间 \\ \hline
+      RV32I &	47	& \multicolumn{1}{m{8.5cm}}{基本整数指令集，包含算数指令、访存指令、环境调用等指令，具有32个32-bit通用寄存器，32位寻址空间} \\ \cline{2-4}
+      & RV32E	& 47	& \multicolumn{1}{m{8.5cm}}{RV32I指令集简化版本，专为嵌入式设计，与 RV32I相比寄存器数量减少为16个} \\ \cline{2-4}
+      & RV64I	& 59	& \multicolumn{1}{m{8.5cm}}{整数指令，32 个 64-bit 通用寄存器，64 位寻址空间} \\ \cline{2-4}
+      & RV128I	& 71	& \multicolumn{1}{m{8.5cm}}{整数指令，32 个 128-bit 通用寄存器，128 位寻址空间} \\ \hline
     \multirow{6}{*}
     {扩展指令集} &
-      M	& 8	& 乘除扩展，4 条取余数，4 条除法，5 条乘法操作指令 \\ \cline{2-4}
-      & A	& 11	& 原子扩展，包含原子读-修改-写、原子加减或、异或等\\ \cline{2-4}
-      & F	& 26	& 单精度浮点扩展，单精度访存、单精度浮点运算指令\\ \cline{2-4}
-      & D	& 26	& 双精度浮点扩展，双精度访存、双精度浮点运算指令\\ \cline{2-4}
-      & Q	& 26	& 四倍精度浮点指令扩展\\ \cline{2-4}
-      & C	& 46	& 压缩指令扩展，16 位指令编码，减少静/动态代码大小    \\
+      M	& 8	& \multicolumn{1}{m{8.5cm}}{乘除扩展，4 条取余数，4 条除法，5 条乘法操作指令} \\ \cline{2-4}
+      & A	& 11	& \multicolumn{1}{m{8.5cm}}{原子扩展，包含原子读-修改-写、原子加减或、异或等}\\ \cline{2-4}
+      & F	& 26	& \multicolumn{1}{m{8.5cm}}{单精度浮点扩展，单精度访存、单精度浮点运算指令}\\ \cline{2-4}
+      & D	& 26	& \multicolumn{1}{m{8.5cm}}{双精度浮点扩展，双精度访存、双精度浮点运算指令}\\ \cline{2-4}
+      & Q	& 26	& \multicolumn{1}{m{8.5cm}}{四倍精度浮点指令扩展}\\ \cline{2-4}
+      & C	& 46	& \multicolumn{1}{m{8.5cm}}{压缩指令扩展，16 位指令编码，减少静/动态代码大小}    \\
     \bottomrule
   \end{tabular}
 \end{table}
@@ -234,7 +236,7 @@ RISC-V指令集有以下特点：
 \begin{figure}[h]
   \centering
   \includegraphics[width=0.6\textwidth]{simulator-develop-process.png}
-  \caption{体系结构模拟器在CPU开发流程中的作用}
+  \caption{体系结构模拟器开发流程图}
   \label{fig:sim-dev-process}
 \end{figure}
 
