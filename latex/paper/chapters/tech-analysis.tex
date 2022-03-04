@@ -1,189 +1,322 @@
 % !TeX root = ../main.tex
 
-\chapter{数学}
+\chapter{相关技术分析}
 
-\section{数学符号和公式}
+由于本系统是基于RISC-V指令集的体系结构模拟器,目标是模
+拟处理器执行RISC-V汇编指令前后的软硬件行为,故本章介绍
+RISC-V指令集架构相关的内容以及体系结构模拟器的相关技术.
 
-《撰写手册》要求数学符号遵循 GB/T 3102.11—1993《物理科学和技术中使用的数学符号》
-\footnote{原 GB 3102.11—1993，自 2017 年 3 月 23 日起，该标准转为推荐性标准。}。
-该标准参照采纳 ISO 31-11:1992 \footnote{目前已更新为 ISO 80000-2:2019。}，
-但是与 \TeX{} 默认的美国数学学会（AMS）的符号习惯有所区别。
-具体地来说主要有以下差异：
-\begin{enumerate}
-  \item 大写希腊字母默认为斜体，如
-    \begin{equation*}
-      \Gamma \Delta \Theta \Lambda \Xi \Pi \Sigma \Upsilon \Phi \Psi \Omega.
-    \end{equation*}
-    注意有限增量符号 $\increment$ 固定使用正体，模板提供了 \cs{increment} 命令。
-  \item 小于等于号和大于等于号使用倾斜的字形 $\le$、$\ge$。
-  \item 积分号使用正体，比如 $\int$、$\oint$。
-  \item 行间公式积分号的上下限位于积分号的上下两端，比如
-    \begin{equation*}
-      \int_a^b f(x) \dif x.
-    \end{equation*}
-    行内公式为了版面的美观，统一居右侧，如 $\int_a^b f(x) \dif x$ 。
-  \item
-    偏微分符号 $\partial$ 使用正体。
-  \item
-    省略号 \cs{dots} 按照中文的习惯固定居中，比如
-    \begin{equation*}
-      1, 2, \dots, n \quad 1 + 2 + \dots + n.
-    \end{equation*}
-  \item
-    实部 $\Re$ 和虚部 $\Im$ 的字体使用罗马体。
-\end{enumerate}
+\section{指令集架构概述}
 
-以上数学符号样式的差异可以在模板中统一设置。
-但是还有一些需要用户在写作时进行处理：
-\begin{enumerate}
-  \item 数学常数和特殊函数名用正体，如
-    \begin{equation*}
-      \uppi = 3.14\dots; \quad
-      \symup{i}^2 = -1; \quad
-      \symup{e} = \lim_{n \to \infty} \left( 1 + \frac{1}{n} \right)^n.
-    \end{equation*}
-  \item 微分号使用正体，比如 $\dif y / \dif x$。
-  \item 向量、矩阵和张量用粗斜体（\cs{symbf}），如 $\symbf{x}$、$\symbf{\Sigma}$、$\symbfsf{T}$。
-  \item 自然对数用 $\ln x$ 不用 $\log x$。
-\end{enumerate}
-
-模板中使用 \pkg{unicode-math} 宏包配置数学字体。
-该宏包与传统的 \pkg{amsfonts}、\pkg{amssymb}、\pkg{bm}、
-\pkg{mathrsfs}、\pkg{upgreek} 等宏包\emph{不}兼容。
-本模板作了处理，用户可以直接使用 \cs{bm}, \cs{mathscr},
-\cs{upGamma} 等命令。
-关于数学符号更多的用法，参见 \pkg{unicode-math} 宏包的使用说明和符号列表
-\pkg{unimath-symbols}。
+指令集架构（Instruction Set Architecture, ISA）是计算
+机体系结构中定义的软硬件接口规范，是信息技术生态的原始起
+点。指令集架构的内容包含了基本数据类型，指令集，寄存器，寻
+址模式，存储体系，中断，异常处理以及外部I/O。微架构是指处理器
+的具体硬件实现方法。同一种指令集架构，可以通过实现不同的微架构
+来设计出性能各异的处理器，其制造成本、功耗、性能可能会有差异，
+但是软件可以不经过修改直接运行在同种指令集架构的不同处理器上。
+ 指令集架构不仅仅是指令的集合，它还定义了处理器的一些硬件信息，
+ 比如寻址模式、寄存器设置、存储器、数据类型等等一些需要让程序员了
+ 解的硬件信息，以方便程序员进行软件开发。指令集架构主要分为复杂指
+ 令集（Complex Instruction Set Computer, CSIC）和精简指令集（R
+ educed Instruction Set Computer，RSIC），前者使用不定长的指令设
+ 计方案，包含了许多处理器不常使用的复杂指令，使得CPU设计变得异常复杂，
+ 大大增加了硬件设计的时间成本和面积开销；而后者采用定长的指令设计方案，
+ 只保留处理器常用指令，因此指令结构较为精简，相应的硬件设计也会比较
+ 简洁。随着信息技术的发展,在这几十年间,世界上诞生了许多指令集架构,也
+ 消亡了很多指令集架构,现在保留的比较比较知名的有x86指令集架构和 A
+ RM 指令集架构。下面就简单介绍下这两款指令集架构。
 
 
-
-\section{量和单位}
-
-宏包 \pkg{siunitx} 提供了更好的数字和单位支持：
-\begin{itemize}
-  \item \num{12345.67890}
-  \item \num{.3e45}
-  \item \si{kg.m.s^{-1}}
-  \item \si{\micro\meter} $\si{\micro\meter}$
-  \item \si{\ohm} $\si{\ohm}$
-  \item \numlist{10;20}
-  \item \numlist{10;20;30}
-  \item \SIlist{0.13;0.67;0.80}{\milli\metre}
-  \item \numrange{10}{20}
-  \item \SIrange{10}{20}{\degreeCelsius}
-\end{itemize}
+x86是由英特尔公司推出的一种复杂指令集架构，采用可变指令长
+度的设计，经过数代的发展，相继由最初的 16 位架构发展成如今的6
+4位架构。在x86诞生初期，CSIC还是业界主流，虽然在之后RSIC已经取
+代CSIC成为主流，但是由于英特尔公司的巨大成功以及为了软件兼容性做
+出的妥协，x86架构被一直保留了下来。为了克服CSIC的部分缺点，英特
+尔也做出了很多优化。例如，Intel 采用“微码化”先把复杂的 CISC 指令用
+硬件解码器翻译，变成简单的指令序列，然后再运行，采用流水线的方法，
+使得即使是 CISC 架构的 x86 也可以借鉴 RISC 架构的优点。但是这样也带
+来了额外的硬件开销，影响其性能，这是作为 CISC 架构的 x86 不得不付出的代价。
 
 
+ARM（Advanced RISC Machines）是一家诞生于英国的处理器设计与软件
+公司，其主要业务是设计ARM架构的处理器，以及向其他 CPU 设计制造商提
+供知识产权（IP），并通过收取专利许可费来获取利润。ARM采用RISC架构，
+支持 Thumb（16 位）/ARM（32 位）双指令集，能很好地兼容 8 位/16 位器
+件（Thumb 是 ARM 体系结构中一种 16 位的指令集）。指令执行采用 3 级流
+水线/5 级流水线技术。寻址方式灵活简单，执行效率高。指令长度固定（在 AR
+M 状态下是 32 位，在 Thumb 状态下是 16 位）。如今，ARM 处理器占领了 32 位
+嵌入式处理器的大部分市场，并且是世界上使用最广泛的 32 位处理器体系结
+构。来自世界各地的数十家著名的半导体公司都在使用 ARM 的授权。然后通过自己
+的外围电路设计，开发的 ARM 处理器可用于许多领域。
 
-\section{定理和证明}
+\section{RISC-V架构}
 
-示例文件中使用 \pkg{amsthm} 宏包配置了定理、引理和证明等环境。
-用户也可以使用 \pkg{ntheorem} 宏包。
+第五代精简指令集(RISC-V, Reduced Instruction Set Computer - Five)是由加州大学伯
+克利分校的David.Paterson教授团队研发的一套指令集架构,其设计初衷是为了支持计算机体系结构的
+研究和教育,如今RISC-V已经成为行业实施的标准免费开源指令集架构.在 RISC-V 指令子集中，包括基础
+指令集和扩展指令集，在使用过程中必须实现基础指令集，而作为 RISC-V 的基础指令集－RV32I，仅包含了
+ 4种指令、且每种指令的编码方式都非常统一、富有规律，简单明了的使用文档也让许多初学者能快速上手\cite{huzhenbo}。
 
-\begin{definition}
-  If the integral of function $f$ is measurable and non-negative, we define
-  its (extended) \textbf{Lebesgue integral} by
-  \begin{equation}
-    \int f = \sup_g \int g,
-  \end{equation}
-  where the supremum is taken over all measurable functions $g$ such that
-  $0 \le g \le f$, and where $g$ is bounded and supported on a set of
-  finite measure.
-\end{definition}
 
-\begin{assumption}
-The communication graph is strongly connected.
-\end{assumption}
+RISC-V的指令集使用模块化的方式进行组织，每一个模块使用一个英文字符来表示。其中’I’表示的基本整数
+指令集部分是强制要求实现的部分，其他指令子集部分表示可选的模块。
+标准拓展的RISC-V指令集组成如表~\ref{tab:isa-general}所示。
+\begin{table}[h]
+  \centering
+  \caption{RISC-V指令集模块}
+  \label{tab:isa-general}
+  \begin{tabular}{cccl}
+    \toprule
+指令集类型 & 类型简写	& 指令数 &	说明 \\
+    \midrule
+    \multirow{4}{*}
+    {基本指令集} &	
+      RV32I &	47	& \makecell[l]{基本整数指令集，包含算数指令、访存指令、环境\\调用等指令，具有32个32-bit通用寄存器，32位\\寻址空间} \\ \cline{2-4}
+      & RV32E	& 47	& \makecell[l]{RV32I指令集简化版本，专为嵌入式设计，与 RV32I\\相比寄存器数量减少为16个} \\ \cline{2-4}
+      & RV64I	& 59	& 整数指令，32 个 64-bit 通用寄存器，64 位寻址空间 \\ \cline{2-4}
+      & RV128I	& 71	& 整数指令，32 个 128-bit 通用寄存器，128 位寻址空间 \\ \hline
+    \multirow{6}{*}
+    {扩展指令集} &
+      M	& 8	& 乘除扩展，4 条取余数，4 条除法，5 条乘法操作指令 \\ \cline{2-4}
+      & A	& 11	& 原子扩展，包含原子读-修改-写、原子加减或、异或等\\ \cline{2-4}
+      & F	& 26	& 单精度浮点扩展，单精度访存、单精度浮点运算指令\\ \cline{2-4}
+      & D	& 26	& 双精度浮点扩展，双精度访存、双精度浮点运算指令\\ \cline{2-4}
+      & Q	& 26	& 四倍精度浮点指令扩展\\ \cline{2-4}
+      & C	& 46	& 压缩指令扩展，16 位指令编码，减少静/动态代码大小    \\
+    \bottomrule
+  \end{tabular}
+\end{table}
 
-\begin{example}
-  Simple examples of functions on $\mathbb{R}^d$ that are integrable
-  (or non-integrable) are given by
-  \begin{equation}
-    f_a(x) =
-    \begin{cases}
-      |x|^{-a} & \text{if } |x| \le 1, \\
-      0        & \text{if } x > 1.
-    \end{cases}
-  \end{equation}
-  \begin{equation}
-    F_a(x) = \frac{1}{1 + |x|^a}, \qquad \text{all } x \in \mathbb{R}^d.
-  \end{equation}
-  Then $f_a$ is integrable exactly when $a < d$, while $F_a$ is integrable
-  exactly when $a > d$.
-\end{example}
 
-\begin{lemma}[Fatou]
-  Suppose $\{f_n\}$ is a sequence of measurable functions with $f_n \geq 0$.
-  If $\lim_{n \to \infty} f_n(x) = f(x)$ for a.e. $x$, then
-  \begin{equation}
-    \int f \le \liminf_{n \to \infty} \int f_n.
-  \end{equation}
-\end{lemma}
+其中， RV32 和 RV64 表示寄存器的位宽，决定了处理器寻址范围的大小。在该指令集架构
+中基本整数指令集（Integer）使用简写“I”来表示 ，该模块包含了整数计算指令、整数加载指
+令、整数存储指令和控制流指令，实现基本整数指令集是任何一款基于 RISC-V 指令集架构的微
+处理器所必须满足的；标准的整数乘法和除法扩展（Multiply）使用简写“M”表示，指令功能是对
+整数寄存器中保存的值进行乘法和除法操作；标准的原子指令扩展（Atomic）使用简写“A”表示，
+添加原子性的读取、修改和写入内存的指令，保证了多核处理器间的访存一致性；单精度浮点扩展
+（Float）使用简写“F”来表示，该扩展增加了浮点寄存器、单精度计算指令和单精度加载以及存储
+指令；标准的双精度扩展（Double）使用简写“D”表示，扩展了浮点寄存器，并且增加了双精度计算
+、加载和存储指令。整数基数集加上四个标准扩展（即“IMAFD”）可以缩写为“G”，表示实现通用标
+量指令集。为了提高代码密度，RISC-V架构也提供可选的“压缩”指令子集(Compress)，由英文字母“C”
+表示。压缩指令的指令编码长度为16比特，而普通的非压缩指令的长度为32比特。
 
-\begin{remark}
-  We do not exclude the cases $\int f = \infty$,
-  or $\liminf_{n \to \infty} f_n = \infty$.
-\end{remark}
 
-\begin{corollary}
-  Suppose $f$ is a non-negative measurable function, and $\{f_n\}$ a sequence
-  of non-negative measurable functions with
-  $f_n(x) \le f(x)$ and $f_n(x) \to f(x)$ for almost every $x$. Then
-  \begin{equation}
-    \lim_{n \to \infty} \int f_n = \int f.
-  \end{equation}
-\end{corollary}
+RISC-V 指令集架构所使用的定点通用寄存器如表\ref{tab:xpr}所示，浮点通用寄存器如表\ref{tab:fpr}所示。
+\begin{table}[h]
+  \centering
+  \caption{RISC-V定点通用寄存器}
+  \label{tab:xpr}
+  \begin{tabular}{cccc}
+    \toprule
+寄存器 &	助记符	& 描述 &	调用与被调用\\
+    \midrule
+    x0 & zero & 硬编码为 0 & -\\
+    x1 & ra & 返回地址寄存器 & 调用者\\
+    x2 & sp & 堆栈指针寄存器 & 被调用者\\
+    x3 & gp & 全局指针寄存器 & -\\
+    x4 & tp & 线程指针寄存器 & -\\
+    x5 & t0 & 临时/备用链接寄存器 & 调用者\\
+    x6-7 & t1-2 & 临时寄存器 & 调用者\\
+    x8 & s0/fp & 保存的寄存器/帧指针 & 被调用者\\
+    x9 & s1 & 保存的寄存器 & 被调用者\\
+    x10-11 & a0-1 & 函数参数/返回值寄存器 & 调用者\\
+    x12-17 & a2-7 & 函数参数寄存器 & 调用者\\
+    x18-27 & s2-11 & 保存的寄存器 & 被调用者\\
+    x28-31	& t3-6 & 临时寄存器 & 调用者\\
+    \bottomrule
+  \end{tabular}
+\end{table}
 
-\begin{proposition}
-  Suppose $f$ is integrable on $\mathbb{R}^d$. Then for every $\epsilon > 0$:
-  \begin{enumerate}
-    \renewcommand{\theenumi}{\roman{enumi}}
-    \item There exists a set of finite measure $B$ (a ball, for example) such
-      that
-      \begin{equation}
-        \int_{B^c} |f| < \epsilon.
-      \end{equation}
-    \item There is a $\delta > 0$ such that
-      \begin{equation}
-        \int_E |f| < \epsilon \qquad \text{whenever } m(E) < \delta.
-      \end{equation}
-  \end{enumerate}
-\end{proposition}
 
-\begin{theorem}
-  Suppose $\{f_n\}$ is a sequence of measurable functions such that
-  $f_n(x) \to f(x)$ a.e. $x$, as $n$ tends to infinity.
-  If $|f_n(x)| \le g(x)$, where $g$ is integrable, then
-  \begin{equation}
-    \int |f_n - f| \to 0 \qquad \text{as } n \to \infty,
-  \end{equation}
-  and consequently
-  \begin{equation}
-    \int f_n \to \int f \qquad \text{as } n \to \infty.
-  \end{equation}
-\end{theorem}
+\begin{table}[h]
+  \centering
+  \caption{RISC-V浮点通用寄存器}
+  \label{tab:fpr}
+  \begin{tabular}{cccc}
+    \toprule
+寄存器 &	助记符	& 描述 &	调用与被调用\\
+    \midrule
+    f0-7 & ft0-7 & 浮点临时寄存器 & 调用者\\
+    f8-9 & fs0-1 & 浮点保存寄存器 & 被调用者\\
+    f10-11 & fa0-1 & 浮点参数/返回值寄存器 & 调用者\\
+    f12-17 & fa2-7 & 浮点参数寄存器 & 调用者\\
+    f18-27 & fs2-11 & 浮点保存寄存器 & 被调用者\\
+    f28-31 & ft8-11 & 浮点临时寄存器 & 调用者\\
+    \bottomrule
+  \end{tabular}
+\end{table}
 
-\begin{proof}
-  Trivial.
-\end{proof}
 
-\newtheorem*{axiomofchoice}{Axiom of choice}
-\begin{axiomofchoice}
-  Suppose $E$ is a set and ${E_\alpha}$ is a collection of
-  non-empty subsets of $E$. Then there is a function $\alpha
-  \mapsto x_\alpha$ (a ``choice function'') such that
-  \begin{equation}
-    x_\alpha \in E_\alpha,\qquad \text{for all }\alpha.
-  \end{equation}
-\end{axiomofchoice}
+RISC-V指令集有以下特点：
 
-\newtheorem{observation}{Observation}
-\begin{observation}
-  Suppose a partially ordered set $P$ has the property
-  that every chain has an upper bound in $P$. Then the
-  set $P$ contains at least one maximal element.
-\end{observation}
-\begin{proof}[A concise proof]
-  Obvious.
-\end{proof}
 
+(1) 一个完全开放的指令集架构，可供学术界和工业界免费使用；
+
+
+(2) 适用于直接本机硬件实现，而不仅仅是模拟或二进制转换的真正的 ISA；
+
+
+(3) 避免在微体系结构（例如：顺序、乱序、解耦微处理器）或微技术（例如：全定制、ASIC、FPGA）实现中“过渡架构”，并且在这些实现中更有效率的一款指令集架构；
+
+
+(4) RISC-V 可以将指令集架构分成一个小的基本整数指令集架构，具备可选的标准扩展，以支持通用软件开发，并且可用于自定义加速器开发或教学；
+
+
+(5) 支持 2008 年修订的浮点 IEEE-754 标准；
+
+
+(6) 一款支持广泛的用户级 ISA 扩展和专用变体的指令集架构；
+
+
+(7) 适用于应用程序，操作系统内核以及计算机硬件实现 32 位或 64 位地址空间变体；
+
+
+(8) 该指令集架构支持包括异构多核处理器在内高度并行多核的实现；
+
+
+(9) 可供用户选则的可变长度指令格式，对可用指令编码空间进行扩展，指令集架构所支持的可选密集指令编码用以提高性能，减小静态代码大小以及提升能量效率；
+
+
+(10)完全可虚拟化的 ISA，可简化虚拟机管理程序开发；
+
+
+(11)一个简化了新的管理员级和管理程序级的 ISA 设计。
+
+\section{体系结构模拟器}
+模拟器是体系结构量化分析的重要手段，对架构设计、芯片开发有重要的指
+导作用．基于模拟器辅助进行集成电路设计可以追溯到1980年代，自此模拟
+器便一直是处理器设计过程中不可或缺的工具．在芯片开发过程中，体系结构
+模拟器可以缩短处理器的设计时间，降低开发成本，其具体作用如图~\ref{fig:sim-func}所示：
+\begin{figure}[h]
+  \centering
+  \includegraphics[width=1.0\textwidth]{simulator-func.png}
+  \caption{体系结构模拟器在CPU开发流程中的作用}
+  \label{fig:sim-func}
+\end{figure}
+
+
+由图１可知：
+
+
+1) 在芯片开发早期，基于模拟器可以进行微结构探索和粗粒度微结构定义，
+此时模拟器的开发抽象层次较高．
+
+
+2) 随着处理器设计的不断推进和模拟器的不断完善，基于模拟器可以持续对芯片
+微结构进行评估、修改和取舍．
+
+
+3) 当模拟器趋于成熟，可以对微结构、多核互联系统、一致性协议等进行详细性
+能分析，基于分析结果对微结构进行微调．
+
+
+4) 在对处理器逻辑设计进行验证的阶段，模拟器可以作为参考模型辅助进行验证
+，可以快速定位逻辑设计错误．
+
+
+5) 在未流片之前基于模拟器就可以开展系统软件开发和适配工作，这样可以在芯片
+流片结束后以最快速度启动系统软件．
+
+
+6) 流片结束后，基于模拟器可以辅助进行芯片硅后验证环境的搭建以及测试用
+例编写工作．为了保证模拟器可以顺利辅助进行处理器设计，在整个芯片开发过
+程中，需要持续对模拟器进行校准，通过持续对比模拟器和寄存器传输
+层(Register-Transfer Level, RTL)之间的差别，可以互相校准并发现模拟器或者 RTL
+的设计错误.
+
+
+体系结构模拟器根据模拟的详细程度可以分为功能模拟器（指令集模拟器 ISS，Instruction  Set  Simulator）和
+性能模拟器（时钟周期精确模拟器）两类。前者
+只模拟目标系统的指令集体系结构，比如寄存器状态、指令语义、存储器状态等功能
+特性；后者除了模拟功能特性外，还模拟目标系统的微体系结构，比如流水线、分支
+预测、Cache 层次等\cite{cachecengcideng}。
+\begin{figure}[h]
+  \centering
+  \includegraphics[width=0.6\textwidth]{simulator-develop-process.png}
+  \caption{体系结构模拟器在CPU开发流程中的作用}
+  \label{fig:sim-dev-process}
+\end{figure}
+
+
+
+模拟开发的基本流程如图~\ref{fig:sim-dev-process}所示。进行模拟，首先通过对
+实际硬件系统建模来将之具体化。建模与具体化的过程中必须保证所建模型的结构与实际
+硬件系统相近或一致，以确保所建模型的精确性，只有精确度较高的模型才能真实的模拟
+出硬件系统的行为，最终获得正确的结果。在对硬件系统的建模过程中，需要考虑所选择的
+算法是否合适。评价一种算法是否合适的准则在于是否符合模拟的要求和硬件系统的特征。为
+了保证最终的模拟精度，必须确保所选择算法的精度够高，稳定性够好。选定合适的算法后，
+进行程序设计，即用程序语言将模型描述出来。待确定程序模型的正确以后，就可以用这个模
+型来进行模拟实验，得到相应的结果。最后分析模拟结果，结果分析既可以是针对模型本身的
+数据，对模型本身进行评价或研究，也可以是对模拟的目标系统性能作出评价。
+
+
+对于指令集模拟器ISS，在设计过程中，需要充分考虑指令集模拟策略以及模拟器驱动方式。
+指令集模拟策略是ISS设计的基础，它决定了模拟器的性能，同时也会影响模拟器调试模块的
+功能实现。因此在ISS的设计之前，需要首先拟定指令集模拟策略。指令集模拟策略分为两
+种：基于解释型和基于编译型。
+
+\subsection{解释型指令集模拟}
+长期以来，由于工作原理简单和模拟精度高，解释型指令集模拟器受到了广泛的
+关注（如Gem5、SimpleScalar等）。解释型 ISS 最大的特点在于直接将硬件行为映
+射到软件\cite{jump}，从而模拟出真实的硬件环境。由于其对指令进行逐条翻译，使得指令的执行可以
+很好的被控制。解释型指令集模拟器的工作流程很简单，通常是取指－译码－执行的循环，如图~\ref{fig:ISS-interprete}所示。
+\begin{figure}[h]
+  \centering
+  \includegraphics[width=0.9\textwidth]{ISS-interprete.png}
+  \caption{体系结构模拟器在CPU开发流程中的作用}
+  \label{fig:ISS-interprete}
+\end{figure}
+
+
+1) 取指：模拟器取出目标程序的单条指令；
+
+
+2) 译码：模拟器对目标指令进行翻译，得到指令对应的功能函数； 
+
+
+3) 执行：模拟器执行目标指令所对应的功能函数，完成功能函数中定义的软硬件行为。
+
+
+解释型ISS的工作流程使得模拟器设计比较简单，易于建模和实现，且灵活性较好，模
+拟精度高。由于其对指令进行逐条翻译然后执行，使得模拟器调试木块很容易实现。但是由
+于模拟器通过软件行为对指令进行逐条译码，相较于真实硬件电路效率太低，所以解释型ISS的
+模拟速度一般不是很高。
+
+
+\subsection{编译型指令集模拟}
+基于编译型的ISS通过对译码过程的改进，大幅度提升了模拟的效率，模拟器引入编译
+的思想，采用一次翻译多次执行的方法，加速译码过程。通过将目标指令翻译成宿主机可
+识别的指令来完成对目标机状态的模拟。编译型ISS根据译码过程处于编译还是运行时，又可
+分为静态编译型指令集模拟器（Static Compiled ISS）和动态编译型指令集模拟
+器（Dynamic Compiled ISS）。由Zhu and Gajski给出的静态编译型指令集模拟器将
+本处于运行时的指令译码过程转移至编译时，如图~\ref{fig:static-ISS}所示。目标机二进制代码经编译器编
+译，之后由代码生成器优化生成宿主机的二进制代码，并最终运行于宿主机。
+\begin{figure}[h]
+  \centering
+  \includegraphics[width=0.9\textwidth]{static-ISS.png}
+  \caption{体系结构模拟器在CPU开发流程中的作用}
+  \label{fig:static-ISS}
+\end{figure}
+
+
+动态编译型指令集模拟器的典型代表为 Embra[33]及 Shade[34]，其工作流程如图~\ref{fig:dynamic-ISS}所示：
+\begin{figure}[h]
+  \centering
+  \includegraphics[width=0.9\textwidth]{dynamic-ISS.png}
+  \caption{体系结构模拟器在CPU开发流程中的作用}
+  \label{fig:dynamic-ISS}
+\end{figure}
+
+
+其借鉴了iCache的思想，模拟器取指之后判断该条指令是否是第一次执行，若是，那么对
+其进行译码，并将译码信息保存到Cache中，然后执行；若不是，则直接在 Cache 中调用
+该指令的译码信息执行。由于该技术在程序运行时进行指令译码，因此很难进行代码优化。
+
+\section{本章小结}
+本章节主要介绍了RISC-V指令集架构的特点以及体系结构模拟器的相关技术。对体系结构
+模拟器的功能和开发流程做了介绍，并对几种常见的模拟器类型作了分析对比，其中详细
+介绍了指令集模拟器ISS，对指令集模拟器的模拟流程以及两种指令集模拟策略的优缺点进
+行了阐述，最终结合RISC-V指令集架构的特点，拟定了本次模拟器的设计方案：采用基于
+解释性的指令集模拟策略，结合动态编译型ISS的译码优化策略，一方面丰富模拟器的调试
+手段，另一方面也可以提高模拟器执行效率。
