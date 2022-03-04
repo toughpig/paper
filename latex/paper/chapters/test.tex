@@ -6,7 +6,23 @@
 系统测试是系统开发过程中必不可少的重要阶段,是确保系统开发质量的关键,它贯穿于系统开发的整个过程,尽可能地发掘系统中存在的问题和错误,可以及时地进行纠错,促进系统开发工作高效有质量地进行.
 
 \subsection{测试环境}
-RISC-V模拟器的测试环境分为软件模拟环境和硬件对照环境,软件模拟环境是系统设计使用到的第三方库和模拟器的宿主机环境,硬件对照环境主要是芯片开发过程中的FPGA开发板S2C Single U440平台以及流片后的真实芯片环境.具体的模拟器环境如表1.1所示.
+RISC-V模拟器的测试环境分为软件模拟环境和硬件对照环境,软件模拟环境是系统设计使用到的第三方库和模拟器的宿主机环境,硬件对照环境主要是芯片开发过程中的FPGA开发板S2C Single U440平台以及流片后的真实芯片环境.具体的模拟器环境如表~\ref{tab:env}所示.
+\begin{table}[h]
+    \centering
+    \caption{系统测试环境}
+    \label{tab:env}
+    \begin{tabular}{cc}
+      \toprule
+      名称	& 说明\\
+      \midrule
+    Ubuntu20.04	& \multicolumn{1}{c}{模拟器的宿主机环境}\\
+    Qt5	& \multicolumn{1}{c}{Qt5的UI类库}\\
+    BBL(berkele-bootloader)	& \multicolumn{1}{c}{RISC-V官方的bootloader}\\
+    linux-v5.10    & \multicolumn{1}{c}{目标程序linux内核版本}\\
+    busybox-1.32.1 & \multicolumn{1}{c}{linux命令集合}\\
+      \bottomrule
+    \end{tabular}
+\end{table}
 
 
 \subsection{概述}
@@ -51,19 +67,110 @@ RISC-V模拟器的测试环境分为软件模拟环境和硬件对照环境,软�
 依据模块测试的需求,对RISC-V指令集模拟器的四个功能模块进行测试, 各个模块的测试用例设计如下:
 
 
-(1) 指令集模块: 根据测试需求,该模块的功能是根据模拟器启动参数加载对应的指令集模块,对指令列表进行注册,将指令格式和对应的功能函数绑定起来,完成解码器的初始化工作,该模块检测到未定义指令模块,会发出告警信息,提示未定义行为.具体的测试用例设计如表1.1所示.
+(1) 指令集模块: 根据测试需求,该模块的功能是根据模拟器启动参数加载对应的指令集模块,对指令列表进行注册,将指令格式和对应的功能函数绑定起来,完成解码器的初始化工作,该模块检测到未定义指令模块,会发出告警信息,提示未定义行为.具体的测试用例设计如表~\ref{tab:test1}所示.
+\begin{table}[h]
+    \centering
+    \caption{指令集模块测试用例表}
+    \label{tab:test1}
+    \begin{tabular}{clll}
+      \toprule
+      \multicolumn{1}{c}{序号} & \multicolumn{1}{c}{输入} & \multicolumn{1}{c}{预期输出} &\multicolumn{1}{c}{说明}\\
+      \midrule
+  1	& \multicolumn{1}{m{3.5cm}}{指令集标准拓展rv64imafdc} & \multicolumn{1}{m{3.5cm}}{模拟器注册指令列表的全部内容,解码器保存指令格式和功能函数的映射} & \multicolumn{1}{m{3.5cm}}{验证功能模块的有效性}\\
+  \hline
+  2	& \multicolumn{1}{m{3.5cm}}{未定义指令集拓展rv64jkl} & \multicolumn{1}{m{3.5cm}}{提示未定义的指令集拓展} & \multicolumn{1}{m{3.5cm}}{验证功能模块的健壮性}\\
+  \hline
+  3	& \multicolumn{1}{m{3.5cm}}{未定义功能函数的自定义指令} & \multicolumn{1}{m{3.5cm}}{解码器提示功能函数未定义} & \multicolumn{1}{m{3.5cm}}{验证功能模块的健壮性}\\
+      \bottomrule
+    \end{tabular}
+\end{table}
 
 
-(2) CPU和总线模块: 根据测试需求,该模块的功能是模拟指令执行过程中的硬件行为,包括寄存器,MMU,缓存,内存,IO控制器等,测试目的是验证该模块的硬件行为模拟和真实硬件行为一致.该模块的输入总是已注册的指令,不会有其他未定义输入,主要检测是否达到预期输出,具体的测试用例设计如表1.1所示.
+(2) CPU和总线模块: 根据测试需求,该模块的功能是模拟指令执行过程中的硬件行为,包括寄存器,MMU,缓存,内存,IO控制器等,测试目的是验证该模块的硬件行为模拟和真实硬件行为一致.该模块的输入总是已注册的指令,不会有其他未定义输入,主要检测是否达到预期输出,具体的测试用例设计如表~\ref{tab:test2}所示.
+\begin{table}[h]
+    \centering
+    \caption{CPU和总线测试用例表}
+    \label{tab:test2}
+    \begin{tabular}{clll}
+      \toprule
+      \multicolumn{1}{c}{序号} & \multicolumn{1}{c}{输入} & \multicolumn{1}{c}{预期输出} &\multicolumn{1}{c}{说明}\\
+      \midrule
+  4	& \multicolumn{1}{m{3.5cm}}{汇编指令ld t0 1000} & \multicolumn{1}{m{3.5cm}}{通用数据寄存器t0内容0x1000} & \multicolumn{1}{m{3.5cm}}{验证功能模块的有效性}\\
+  \hline
+  5	& \multicolumn{1}{m{3.5cm}}{汇编指令csrw mtevc, t0} & \multicolumn{1}{m{3.5cm}}{CSR寄存器mtevc被写入t0寄存器的值} & \multicolumn{1}{m{3.5cm}}{验证功能模块的有效性}\\
+  \hline
+  6	& \multicolumn{1}{m{3.5cm}}{机器模式下的内存查询请求} & \multicolumn{1}{m{3.5cm}}{MMU显示Mbare模式,不进行地址翻译} & \multicolumn{1}{m{3.5cm}}{验证功能模块的有效性}\\
+  \hline
+  7	& \multicolumn{1}{m{3.5cm}}{监管模式下的sv39内存查询请求} & \multicolumn{1}{m{3.5cm}}{MMU查询页表,输出地址翻译过程} & \multicolumn{1}{m{3.5cm}}{验证功能模块的有效性}\\
+  \hline
+  8	& \multicolumn{1}{m{3.5cm}}{和序号7同一地址的监管模式下的sv39内存查询请求} & \multicolumn{1}{m{3.5cm}}{MMU查询快表,TLB命中,输出查询内容} & \multicolumn{1}{m{3.5cm}}{验证功能模块的有效性}\\
+      \bottomrule
+    \end{tabular}
+\end{table}
+
+(3) 中断控制器模块: 根据测试需求,该模块的功能是将内存映射的I/O设备挂载到中断控制器,和处理器进行通信.测试目的为了验证中断控制器能够对外部中断信号源进行有效裁决,并配合处理器完成外部中断的流程,以及测试当外部中断源优先级低于处理器门限寄存器时能否屏蔽该中断源.具体的测试用例设计如表~\ref{tab:test3}所示.
+\begin{table}[h]
+    \centering
+    \caption{中断控制器测试用例表}
+    \label{tab:test3}
+    \begin{tabular}{clll}
+      \toprule
+      \multicolumn{1}{c}{序号} & \multicolumn{1}{c}{输入} & \multicolumn{1}{c}{预期输出} &\multicolumn{1}{c}{说明}\\
+      \midrule
+  9	& \multicolumn{1}{m{3.5cm}}{对UART的mmio请求} & \multicolumn{1}{m{3.5cm}}{前端窗口输出请求回复内容} & \multicolumn{1}{m{3.5cm}}{验证功能模块的有效性}\\
+  \hline
+  10	& \multicolumn{1}{m{3.5cm}}{UART以优先级2挂载到PLIC,处理器机器模式和监管模式的门限优先级设置为3} & \multicolumn{1}{m{3.5cm}}{处理器不再响应UART中断源的外部中断请求} & \multicolumn{1}{m{3.5cm}}{验证功能模块的健壮性}\\
+  \bottomrule
+    \end{tabular}
+\end{table}
 
 
-(3) 中断控制器模块: 根据测试需求,该模块的功能是将内存映射的I/O设备挂载到中断控制器,和处理器进行通信.测试目的为了验证中断控制器能够对外部中断信号源进行有效裁决,并配合处理器完成外部中断的流程,以及测试当外部中断源优先级低于处理器门限寄存器时能否屏蔽该中断源.具体的测试用例设计如表1.1所示.
-
-
-(4) 调试模块和UI: 根据测试需求,该模块的功能是对目标程序运行流程进行控制,切换至调试模式进行断点设置,寄存器/内存查询,单步调试等功能,测试目的是验证该模块通过UI将调试信号发送给后端模拟器,并进行断点匹配的过程,还有验证寄存器/内存查询的正确性,以及查询无效内存地址给出告警信息的过程.具体测试用例设计如表1.1所示.
+(4) 调试模块和UI: 根据测试需求,该模块的功能是对目标程序运行流程进行控制,切换至调试模式进行断点设置,寄存器/内存查询,单步调试等功能,测试目的是验证该模块通过UI将调试信号发送给后端模拟器,并进行断点匹配的过程,还有验证寄存器/内存查询的正确性,以及查询无效内存地址给出告警信息的过程.具体测试用例设计如表~\ref{tab:test4}所示.
+\begin{table}[h]
+    \centering
+    \caption{调试模块和UI测试用例表}
+    \label{tab:test4}
+    \begin{tabular}{clll}
+      \toprule
+      \multicolumn{1}{c}{序号} & \multicolumn{1}{c}{输入} & \multicolumn{1}{c}{预期输出} &\multicolumn{1}{c}{说明}\\
+      \midrule
+  11	& \multicolumn{1}{m{3cm}}{调试模式下单步执行信号} & \multicolumn{1}{m{4cm}}{模拟器执行完一条指令后发出更新信号,前端UI刷新寄存器状态} & \multicolumn{1}{m{3.5cm}}{验证功能模块的有效性}\\
+  \hline
+  12	& \multicolumn{1}{m{3cm}}{断点信息pc core0 0x80000000} & \multicolumn{1}{m{4cm}}{核0在PC=0x80000000处匹配断点,进入调试模式,输出断点信息} & \multicolumn{1}{m{3.5cm}}{验证功能模块的有效性}\\
+  \hline
+  13	& \multicolumn{1}{m{3cm}}{内存地址0x80000000查询信号} & \makecell[l]{0xif80006f\\
+  对应汇编指令j pc+504\\
+  表示跳转到reset\_vector
+  } & \multicolumn{1}{m{3.5cm}}{验证功能模块的有效性}\\
+  \hline
+  14	& \multicolumn{1}{m{3cm}}{内存地址0xffffffff查询信号} & \multicolumn{1}{m{4cm}}{发出警告信息,无效内存地址} & \multicolumn{1}{m{3.5cm}}{验证功能模块的健壮性}\\
+      \bottomrule
+    \end{tabular}
+\end{table}
 
 \subsection{配置项测试用例设计}
-依据配置项测试需求,采用基于实际业务的场景设计法对RISC-V指令集模拟器的RISC-V架构目标程序调试功能进行测试用例设计.该功能设计的基本流有:1.设置断点信息,点击应用后,调试窗口发送断点信号到模拟器后端,添加新的断点信息到处理器断点检测列表; 2.删除处理器断点检测列表中的某一项; 3.点击单步执行,模拟器进行一次取值,译码,执行周期,更新寄存器状态窗口,输出当前指令到指令历史窗口; 4.输入待查询内存地址,点击查询,模拟器进入MMU访存逻辑,查询当前地址内容; 5.点击运行,模拟器进入运行模式,将交互信息输出到交互窗口; 该功能的备选流有: 1.设置断点信息错误,导致处理器断点检测列表添加失败; 2.输入无效地址导致内存查询失败,发出告警信息.基本流和备选流可以组合成各个场景,进而对每个场景设计测试用例,具体的测试用例设计如表1.1所示.
+依据配置项测试需求,采用基于实际业务的场景设计法对RISC-V指令集模拟器的RISC-V架构目标程序调试功能进行测试用例设计.该功能设计的基本流有:1.设置断点信息,点击应用后,调试窗口发送断点信号到模拟器后端,添加新的断点信息到处理器断点检测列表; 2.删除处理器断点检测列表中的某一项; 3.点击单步执行,模拟器进行一次取值,译码,执行周期,更新寄存器状态窗口,输出当前指令到指令历史窗口; 4.输入待查询内存地址,点击查询,模拟器进入MMU访存逻辑,查询当前地址内容; 5.点击运行,模拟器进入运行模式,将交互信息输出到交互窗口; 该功能的备选流有: 1.设置断点信息错误,导致处理器断点检测列表添加失败; 2.输入无效地址导致内存查询失败,发出告警信息.基本流和备选流可以组合成各个场景,进而对每个场景设计测试用例,具体的测试用例设计如表~\ref{tab:test5}所示.
+\begin{table}[h]
+    \centering
+    \caption{配置型测试用例表}
+    \label{tab:test5}
+    \begin{tabular}{clll}
+      \toprule
+      \multicolumn{1}{c}{序号} & \multicolumn{1}{c}{操作} & \multicolumn{1}{c}{预期输出} &\multicolumn{1}{c}{说明}\\
+      \midrule
+  15	& \multicolumn{1}{m{3.5cm}}{设置断点信息,点击应用} & \multicolumn{1}{m{3.5cm}}{处理器断点检测列表添加成功} & \multicolumn{1}{m{3.5cm}}{基本流1,备选流1}\\
+  \hline
+  16	& \multicolumn{1}{m{3.5cm}}{删除某一断断点信息} & \multicolumn{1}{m{3.5cm}}{删除成功} & \multicolumn{1}{m{3.5cm}}{基本流2}\\
+  \hline
+  17	& \multicolumn{1}{m{3.5cm}}{点击单步执行} & \multicolumn{1}{m{3.5cm}}{寄存器状态更新,指令历史窗口更新} & \multicolumn{1}{m{3.5cm}}{基本流3}\\
+  \hline
+  18	& \multicolumn{1}{m{3.5cm}}{输入内存地址,点击查询} & \multicolumn{1}{m{3.5cm}}{对应内存地址的内容} & \multicolumn{1}{m{3.5cm}}{基本流4,备选流2}\\
+  \hline
+  19	& \multicolumn{1}{m{3.5cm}}{调试模式下点击运行} & \multicolumn{1}{m{3.5cm}}{更新目标程序的交互信息} & \multicolumn{1}{m{3.5cm}}{基本流5}\\
+      \bottomrule
+    \end{tabular}
+\end{table}
+
 
 \subsection{系统测试用例设计}
 依据系统测试需求,主要对RISC-V指令集模拟器进行稳定性测试,容错性测试和性能测试,下面分别对各个测试进行测试用例设计:

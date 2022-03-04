@@ -206,3 +206,9 @@ spike模拟器的运行过程包括三个部分，模拟器自身部分，面向
 踪迹驱动模拟将每条指令顺序执行所产生的所有信息作为模拟器的输入，从而模拟某种体系结构处理器的功能和性能[30]。其模拟过程如图 2.7所示。
 图 2.7 踪迹驱动模拟过程
 假设要模拟的目标系统为 T，目标系统上执行的应用程序为 w，则模拟 T 中 w执行的问题可以分解为两个部分：生成踪迹信息以及输入踪迹信息进行模拟。如果把生成踪迹信息的系统命名为 G，那么，踪迹信息就是 G 执行 w 时产生的所有信息。接下来将踪迹信息作为模拟器的输入，在目标系统 T 中模拟执行 w。踪迹驱动的优点在于比较简单，而且可以不关心其它无关部分而只对局部进行详细的模拟。但是这种方式要求生成踪迹的系统 G与模拟的目标系统 T的体系结构相似，否则由 G 生成的踪迹信息不能正确反映 w 在 T 上的实际运行情况，从而导致获得错误的模拟结果。踪迹驱动的另外一个缺点在于模拟器的输入信息是静态的，不能对目标系统的动态特征进行研究。
+
+
+interrupt notification，由PLIC Core 发给各target的中断请求，PLIC Core为每个target赋予了一个(external interrupt pending bit) EIP，表示有待处理的中断。EIP的值可以被source，target或者其他源进行修改。EIP发送给target的过程被称为interrupt notification。PLIC Core只支持multicasting，即中断信号会发给所有符合条件的target，并不会选择其中之一发送。这样虽然响应较快，但会带来一些冗余处理。软件可以通过控制IE 位间接改善。首先claim的target会负责该中断的处理，PLIC Core只保证对于EIP的修改所有对应的targets都可见。
+interrupt claim，由target返回给PLIC Core的响应信号，表示请求接受。PLIC Core收到claim后，会选出最高优先级的source ID，并将其对应的IP清除。这个ID会发送给target。如果ID为0，表示没有需要处理的中断。claim被PLIC Core接受后，次优先级的中断会显现出来，因此对应的EIP可能并不会被清0。因此target可以在退出中断服务程序前检查本地Xeip 位(X表示当前特权模式)，确认是否有pending 的EIP。PLIC支持target在EIP=0的情况下仍然发起claim。这是为了支持某些target的threshold设置为最高，不接受中断打断，但使用claim方式进行查询。
+interrupt completion，由target 返回给PLIC Core的完成响应信号。
+global interrupt handling，基本过程是，global sources首先发送给interrupt gateway，由gateway负责产生interrupt request，发送给PLIC Core， PLIC Core将每个interrupt request储存在内部的(interrupt pending bits) IP中，如果该targets有enabled pending interrupt， 并且priority超过了per-target threshold ，PLIC Core将interrupt notification发送给一个或者多个targets。当target接受了该外部中断，会发送一个interrupt claim request给PLIC Core，用以取得对应该target的最高优先级的pending interrupt，同时将对应的IP位清零，当target完成了中断服务，需发送一个interrupt completion message给对应的interrupt gateway表示中断完成。接下来gateway可以发送另一个interrupt request给该target。
