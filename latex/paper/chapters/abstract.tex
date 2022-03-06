@@ -2,34 +2,29 @@
 
 \ustcsetup{
   keywords = {
-    中国科学技术大学, 学位论文, \LaTeX{} 模板, 学士, 硕士, 博士
+    RISC-V, 模拟器, PLIC, 调试
   },
   keywords* = {
-    University of Science and Technology of China (USTC), Thesis,
-    \LaTeX{} Template, Bachelor, Master, PhD
+    RISC-V, Simulator, PLIC, Debug
   },
 }
 
 \begin{abstract}
-  摘要分中文和英文两种，中文在前，英文在后，博士论文中文摘要一般 800～1500 个汉字，硕士论文中文摘要一般 500～1000 个汉字。
-  英文摘要的篇幅参照中文摘要。
+  众所周知，芯片产业是投入极高、回报极慢的领域，而 RISC-V 提供了免费开源、开发周期较短的解决方案。面对国外芯片的生态和专利壁垒，RISC-V 有望成为我国自主研制处理器芯片的极好的选择。而在集成度越来越高的今天，面对数千万乃至上亿晶体管的规模，那种“设计硬件原型-实现-评估-改进-再实现”的模式已经无法满足现代设计应用的需求,尤其在芯片后期验证的流程中，对于基础系统软件尤其是操作系统，底层驱动等的适配和验证往往是反馈硬件设计缺陷最频繁的部分，如果不能够提供体系结构模拟器进行辅助验证,并提前进行并行的系统软件开发工作,将极大的延长芯片开发周期.
 
-  关键词另起一行并隔行排列于摘要下方，左顶格，中文关键词间空一字或用分号“，”隔开，英文关键词之间用逗号“,”或分号“;”隔开。
 
-  中文摘要是论文内容的总结概括，应简要说明论文的研究目的、基本研究内容、研究方法或过程、结果和结论，突出论文的创新之处。
-  摘要应具有独立性和自明性，即不用阅读全文，就能获得论文必要的信息。
-  摘要中不宜使用公式、图表，不引用文献。
+  本文通过在实际RISC-V芯片开发过程中总结的经验,设计并实现了一款RISC-V指令集模拟器,能够完成对实际硬件的功能模拟,包括处理器核模拟,平台级中断控制器PLIC模拟等,并且提供了UI调试窗口,可以直接对RISC-V架构目标程序进行调试.主要功能是脱离硬件平台进行系统软件的移植开发工作,能够极大的缩短芯片开发后期的软件移植开发工作,另外也能够辅助进行处理器验证.
 
-  中文关键词是为了文献标引工作从论文中选取出来用以表示全文主题内容信息的单词和术语，一般 3～8 个词，要求能够准确概括论文的核心内容。
+
+  本模拟器已在实际的芯片开发过程中承担了系统软件的前期移植工作,在流片之前完成了linux内核的适配移植,并辅助进行了部分外设的驱动程序开发工作.
 \end{abstract}
 
 \begin{abstract*}
-  This is a sample document of USTC thesis \LaTeX{} template for bachelor,
-  master and doctor. The template is created by zepinglee and seisman, which
-  orignate from the template created by ywg. The template meets the
-  equirements of USTC thesis writing standards.
+  As we all know, the chip industry is an area with extremely high investment and extremely slow returns, and RISC-V provides a solution that is free and open source, with a short development cycle. In the face of the ecological and patent barriers of foreign chips, RISC-V is expected to become an excellent choice for China's independent development of processor chips. And in today's increasingly integrated degree, in the face of tens of millions or even hundreds of millions of transistors scale, that kind of "design hardware prototype - implementation - evaluation - improvement - re-implementation" model has been unable to meet the needs of modern design applications, especially in the process of chip verification, for the basic system software, especially the operating system, the underlying driver and other adaptation and verification is often the most frequent part of the feedback hardware design defects, if you can not provide an architecture simulator for auxiliary verification, And parallel system software development work in advance will greatly extend the chip development cycle.
 
-  This document will show the usage of basic commands provided by \LaTeX{} and
-  some features provided by the template. For more information, please refer to
-  the template document ustcthesis.pdf.
+
+  This paper designs and implements a RISC-V instruction set simulator based on the experience summarized in the actual RISC-V chip development process, which can complete the functional simulation of the actual hardware, including processor core simulation, platform-level interrupt controller PLIC simulation, etc. and provides a UI debugging window that can directly debug the TARGET program of the RISC-V architecture. The main function is to carry out the porting and development of system software without the hardware platform, which can greatly shorten the software porting and development work in the later stage of chip development, and also assist in processor verification.
+
+  
+This simulator has undertaken the pre-migration of the system software in the actual chip development process, completed the adaptation and porting of the Linux kernel before the tape-out, and assisted in the driver development of some peripherals.
 \end{abstract*}

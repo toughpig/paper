@@ -2,8 +2,7 @@
 
 \chapter{系统需求分析}
 
-需求分析是软件生产周期中的一个重要环节，本章将采用面向对象分析的方法对体系结构模拟
-器的需求进行具体分析与建模。明确模拟器所需实现的功能性需求和非功能性需求。
+需求分析是软件生产周期中的一个重要环节，本章将采用面向对象分析的方法对体系结构模拟器的需求进行具体分析与建模。明确模拟器所需实现的功能性需求和非功能性需求。
 
 \section{需求导出}
 
@@ -13,8 +12,7 @@
 
 \section{分析建模}
 
-指令集模拟器的主要参与者是进行系统软件开发和移植的程序员，通过对实际芯片开发验证过程的分析和归纳
-，得出模拟器所需要的主要功能有:
+指令集模拟器的主要参与者是进行系统软件开发和移植的程序员，通过对实际芯片开发验证过程的分析和归纳，得出模拟器所需要的主要功能有:
 
 
 1) 设置模拟器启动配置，包括elf文件路径添加，指令集模块注册，运行模式选择等。
@@ -34,38 +32,46 @@
   \centering
   \caption{用户需求描述表}
   \label{tab:tab1}
+  \renewcommand\arraystretch{1.2}
   \begin{tabular}{ccl}
     \toprule
     名称   & 参与者   & 说明   \\
     \midrule
-    模拟器配置并启动 & 系统软件开发/移植程序员 & \multicolumn{1}{p{5cm}}{设置模拟器启动参数并运行} \\
+    模拟器配置并启动 & 系统软件开发/移植程序员 & \multicolumn{1}{p{5cm}}{设置模拟器启动参数并运行} \\ \hline
     切换至调试模式 &	系统软件开发/移植程序员	& \multicolumn{1}{m{5cm}}{模拟器从运行模式切换为调试模式}\\
+    \hline
     切换至运行模式 & 系统软件开发/移植程序员	& \multicolumn{1}{m{5cm}}{模拟器从调试模式切换为运行模式}\\
+    \hline
     重启模拟器	& 系统软件开发/移植程序员	& \multicolumn{1}{p{5cm}}{重新加载当前配置项并运行}\\
+    \hline
     断点设置 &	系统软件开发/移植程序员 &	\multicolumn{1}{p{5cm}}{调试模式下进行断点添加/移除}\\
+    \hline
     内存查询 &	系统软件开发/移植程序员 &	\multicolumn{1}{m{5cm}}{调试模式下对虚拟地址/物理地址内容查询}\\
+    \hline
     中断信号发送	& 系统软件开发/移植程序员 &	\multicolumn{1}{m{5cm}}{点击外部中断源按钮，发送对应的外部中断到plic}\\
     \bottomrule
   \end{tabular}
 \end{table}
 
 
-根据用例描述表可以得出系统软件开发/移植程序员的用例图如图~\ref{fig:badge}所示。
-
-
+根据用例描述表可以得出系统软件开发/移植程序员的用例图如图~\ref{fig:use-case}所示。
 \begin{figure}[h]
   \centering
-  \includegraphics[width=0.7\textwidth]{PLICArch.jpg}
-  \caption{图号、图题置于图的下方}
-  \label{fig:badge}
+  \includegraphics[width=0.9\textwidth]{use-case.png}
+  \caption{系统软件开发/移植人员用例图}
+  \label{fig:use-case}
 \end{figure}
 
 
-下面分别对系统软件开发/移植程序员的五个主要用例进行详细描述。 模拟器配置启动的用例描述如表~\ref{tab:yongli1}所示。
+下面分别对系统软件开发/移植程序员的五个主要用例进行详细描述。 
+
+
+模拟器配置启动的用例描述如表~\ref{tab:yongli1}所示。
 \begin{table}[h]
   \centering
   \caption{模拟器配置启动用例描述}
   \label{tab:yongli1}
+  \renewcommand\arraystretch{1.1}
   \begin{tabular}{cl}
     \toprule
 用例名称 &	模拟器配置启动\\
@@ -87,6 +93,7 @@
   \centering
   \caption{切换调试模式用例描述}
   \label{tab:yongli2}
+  \renewcommand\arraystretch{1.1}
   \begin{tabular}{cl}
     \toprule
 用例名称	& 切换调试模式\\
@@ -106,6 +113,7 @@
   \centering
   \caption{断点设置用例描述}
   \label{tab:yongli3}
+  \renewcommand\arraystretch{1.1}
   \begin{tabular}{cl}
     \toprule
 用例名称	& 断点设置\\
@@ -127,6 +135,7 @@
   \centering
   \caption{内存查询用例描述}
   \label{tab:yongli4}
+  \renewcommand\arraystretch{1.1}
   \begin{tabular}{cl}
     \toprule
 用例名称	& 内存查询\\
@@ -148,6 +157,7 @@
   \centering
   \caption{mailbox中断信号发送用例描述}
   \label{tab:yongli5}
+  \renewcommand\arraystretch{1.1}
   \begin{tabular}{cl}
     \toprule
 用例名称 & mailbox中断信号发送\\
@@ -184,5 +194,7 @@
 
 
 \section{本章小结}
+
+本章主要是采用面向对象分析的方法，在实际的芯片开发项目过程中,对系统软件移植/开发/测试流程进行剖析,确定了指令集模拟器需要实现的功能以及其他的非功能性需求,最终形成了系统的需求规格说明书,为后续的系统概要设计,具体实现以及最后的系统测试工作奠定了基础.
 
 
