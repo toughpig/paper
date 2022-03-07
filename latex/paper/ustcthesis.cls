@@ -2300,10 +2300,10 @@
   % 中文摘要环境。
   % 判断 \cs{ustc@tocloaded} 是为了防止本科生未调整摘要位置时的目录页码缺失。
 \newcommand\ustc@keywords@text{%
-  \ustc@clist@use{\ustc@keywords}{；}%
+  \ustc@clist@use{\ustc@keywords}{, }%
 }
 \newcommand\ustc@keywords@en@text{%
-  \ustc@clist@use{\ustc@keywords@en}{; }%
+  \ustc@clist@use{\ustc@keywords@en}{, }%
 }
 \newenvironment{abstract}{%
   \ustcsetup{language=chinese}%

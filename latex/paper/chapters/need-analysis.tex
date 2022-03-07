@@ -12,7 +12,9 @@
 
 \section{分析建模}
 
-指令集模拟器的主要参与者是进行系统软件开发和移植的程序员，通过对实际芯片开发验证过程的分析和归纳，得出模拟器所需要的主要功能有:
+指令集模拟器的主要参与者是进行系统软件开发和移植的程序员，
+首先使用RISC-V交叉编译工具链将目标程序编译为RISC-V架构的ELF文件，然后模拟器解析该elf文件，将对应的指令流搬运到bootrom，模拟器在配置启动后为处理器注册指令集，绑定解码器，逐条进行译码，执行。指令译码器完成包括操作数在内的指令信息提取，找到该条指令注册时对应的功能函数，执行该功能函数，然后将更新后的寄存器状态信息，内存状态信息同步到前端UI显示模块。在模拟器运行的过程中，用户还可以通过前端交互调试窗口来切换模拟器运行模式，设置断点触发条件，进行单步调试，状态查询等操作。
+通过对实际芯片开发验证过程的分析和归纳，得出模拟器所需要的主要功能有:
 
 
 1) 设置模拟器启动配置，包括elf文件路径添加，指令集模块注册，运行模式选择等。
@@ -28,7 +30,7 @@
 
 
 综上所述，用户需求描述表如表~\ref{tab:tab1}所示。
-\begin{table}[h]
+\begin{table}[H]
   \centering
   \caption{用户需求描述表}
   \label{tab:tab1}
@@ -55,7 +57,7 @@
 
 
 根据用例描述表可以得出系统软件开发/移植程序员的用例图如图~\ref{fig:use-case}所示。
-\begin{figure}[h]
+\begin{figure}[H]
   \centering
   \includegraphics[width=0.9\textwidth]{use-case.png}
   \caption{系统软件开发/移植人员用例图}
@@ -67,7 +69,7 @@
 
 
 模拟器配置启动的用例描述如表~\ref{tab:yongli1}所示。
-\begin{table}[h]
+\begin{table}[H]
   \centering
   \caption{模拟器配置启动用例描述}
   \label{tab:yongli1}
@@ -89,7 +91,7 @@
 
 
 模拟器切换调试模式用例描述如表~\ref{tab:yongli2}所示。
-\begin{table}[h]
+\begin{table}[H]
   \centering
   \caption{切换调试模式用例描述}
   \label{tab:yongli2}
@@ -109,7 +111,7 @@
 
 
 模拟器断点设置的用例描述如表~\ref{tab:yongli3}所示。
-\begin{table}[h]
+\begin{table}[H]
   \centering
   \caption{断点设置用例描述}
   \label{tab:yongli3}
@@ -131,7 +133,7 @@
 
 
 模拟器内存查询的用例描述如表~\ref{tab:yongli4}所示。
-\begin{table}[h]
+\begin{table}[H]
   \centering
   \caption{内存查询用例描述}
   \label{tab:yongli4}
@@ -153,7 +155,7 @@
 
 
 模拟器mailbox中断信号发送的用例描述如表~\ref{tab:yongli5}所示。
-\begin{table}[h]
+\begin{table}[H]
   \centering
   \caption{mailbox中断信号发送用例描述}
   \label{tab:yongli5}

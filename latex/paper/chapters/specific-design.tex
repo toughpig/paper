@@ -226,7 +226,7 @@ MMU模块对取值做特殊处理,取值首先会查找iCache,当iCache未命中
 
 
 总线在模拟器初始化的过程中会根据配置挂载设备,在总线类bus\_t中维护一个物理地址和设备类对象的map,模拟器在接收到访存请求时,首先检查物理地址是否是主存地址范围,不在主存地址区间内的I/O请求都是内存映射的I/O请求(Memory-Mapped I/O, MMIO),模拟器将调用总线设备的IO接口,对内存映射的外设进行读写操作.
-\begin{figure}[h]
+\begin{figure}[H]
     \centering
     \includegraphics[width=0.8\textwidth]{mmap.png}
     \caption{SiFive公司的内存映射方案}
@@ -328,7 +328,7 @@ RISC-V 架构中规定了一些硬件行为来实现异常事件的响应和处�
 \end{lstlisting}
 
 处理器响应的流程如图~\ref{fig:interrupt}所示.
-\begin{figure}[h]
+\begin{figure}[H]
     \centering
     \includegraphics[width=0.6\textwidth]{interrupt.png}
     \caption{处理器响应中断流程}
@@ -362,7 +362,7 @@ PLIC的功能是接受外部中断源发出的中断信号,对中断请求进行
 
 
 图~\ref{fig:plic-core}是SiFive公司给出的PLIC规范框架图.
-\begin{figure}[h]
+\begin{figure}[H]
     \centering
     \includegraphics[width=0.8\textwidth]{plic-core.png}
     \caption{SiFive公司的PLIC框架}
