@@ -317,46 +317,7 @@ RISC-V 架构中规定了一些硬件行为来实现异常事件的响应和处�
 
 \subsection{PLIC模拟}
 
-PLIC的功能是接受外部中断源发出的中断信号,对中断请求进行裁决,将裁决结果和外部中断信号发送给处理器.本模拟器参照了SiFive公司的PLIC规范文档进行设计,通过设备树挂载PLIC设备,通过对内存映射的寄存器进行读写来配置PLIC.
-
-
-图~\ref{fig:plic-core}是SiFive公司给出的PLIC规范框架图.
-\begin{figure}[H]
-    \centering
-    \includegraphics[width=1.0\textwidth]{plic-core.png}
-    \caption{SiFive公司的PLIC框架}
-    \label{fig:plic-core}
-\end{figure}
-
-
-中断源(interrupt sources)是挂载在PLIC上的设备的统称,一般是I/O设备.PLIC理论上支持任意多个中断源,每个中断源分配有如下的信息:
-
-
-1) 闸口(Gateway)和IP(interrupt pending).闸口控制中断源发送中断请求.IP标识当前中断源是否有请求.IP拉高时,闸口不再接受该中断源的请求.
-
-
-2) 设备编号ID.PLIC为每个中断源分配的唯一编号ID.该ID也作为在多个中断源具有相同优先级时的选择条件,数值较小优先级更高。
-
-
-3) 优先级(Priority).每个中断源都有一个内存映射的Priority寄存器,表示该中断源的优先级,软件可以通过配置(设备树)将其设置成不同的优先级.优先级的数字越大，表示优先级越高.
-
-
-中断使能(Interrupt Enabled, IE).每个中断源均分配了一个内存映射的中断使能寄存器，和优先级一样也可以通过设备树进行配置.IE寄存器配置为0表示该中断源被中断目标屏蔽,反之则是使能.
-
-
-中断目标(interrupt targets)对应为RISC-V处理器核心的各个特权级模式。PLIC产生的外部中断请求会分别标示在处理器的mip寄存器的meip/seip位,对应于机器模式和监管模式。每个中断目标都有对应的内存映射的优先级门限(priority threshold)寄存器，只有中断源优先级高于该门限,PLIC才会将中断源ID发送给对应中断目标。
-
-
-PLIC Core负责所有中断请求的仲裁和分发.图~\ref{fig:plic-process}展示了PLIC处理外部中断的流程.
-\begin{figure}[h]
-    \centering
-    \includegraphics[width=0.9\textwidth]{plic-process.png}
-    \caption{PLIC中断处理流程}
-    \label{fig:plic-process}
-\end{figure}
-
-
-根据以上的流程，将中断源和中断目标分别抽象成plic\_dev\_info\_t类和plic\_core\_info\_t类,整体的PLIC中断控制器的设备类图如图~\ref{fig:plic-class}所示。
+PLIC的功能是接受外部中断源发出的中断信号,对中断请求进行裁决,将裁决结果和外部中断信号发送给处理器.本模拟器参照了SiFive公司的PLIC规范文档进行设计,通过设备树挂载PLIC设备,通过对内存映射的寄存器进行读写来配置PLIC.根据上一章的PLIC概要设计,将中断源和中断目标分别抽象成plic\_dev\_info\_t类和plic\_core\_info\_t类,整体的PLIC中断控制器的设备类图如图~\ref{fig:plic-class}所示。
 \begin{figure}[H]
     \centering
     \includegraphics[width=1.0\textwidth]{plic-class.png}
