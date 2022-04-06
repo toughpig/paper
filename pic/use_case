@@ -1,10 +1,10 @@
-<mxfile host="app.diagrams.net" modified="2022-04-06T13:39:05.443Z" agent="5.0 (Windows)" etag="Zha9OPUR2Z-LHGylOox6" version="17.4.0" type="github">
+<mxfile host="app.diagrams.net" modified="2022-04-06T13:39:32.842Z" agent="5.0 (Windows)" etag="1HRb20PTl3ev37ZTN5FU" version="17.4.0" type="github">
   <diagram id="WZPSnhNBhCsICeyBbSXf" name="Page-1">
     <mxGraphModel dx="2249" dy="1961" grid="1" gridSize="10" guides="1" tooltips="1" connect="1" arrows="1" fold="1" page="1" pageScale="1" pageWidth="827" pageHeight="1169" math="0" shadow="0">
       <root>
         <mxCell id="0" />
         <mxCell id="1" parent="0" />
-        <mxCell id="kspEkG2AYDm2vSh5nX-M-1" value="芯片开发团队成员" style="shape=umlActor;verticalLabelPosition=bottom;verticalAlign=top;html=1;fontSize=24;strokeWidth=3;fontStyle=0;fontFamily=Helvetica;" parent="1" vertex="1">
+        <mxCell id="kspEkG2AYDm2vSh5nX-M-1" value="系统软件开发人员" style="shape=umlActor;verticalLabelPosition=bottom;verticalAlign=top;html=1;fontSize=24;strokeWidth=3;fontStyle=0;fontFamily=Helvetica;" parent="1" vertex="1">
           <mxGeometry x="-30" y="320" width="90" height="190" as="geometry" />
         </mxCell>
         <mxCell id="kspEkG2AYDm2vSh5nX-M-2" value="模拟器启停管理" style="ellipse;whiteSpace=wrap;html=1;fontSize=24;strokeWidth=3;fontStyle=0;fontFamily=Helvetica;" parent="1" vertex="1">
