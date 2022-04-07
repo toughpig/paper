@@ -29,7 +29,7 @@
 预加载模块注册指令集，以及初始化解码器的流程如图~\ref{fig:decode-process}所示。
 \begin{figure}[H]
   \centering
-  \includegraphics[width=0.6\textwidth]{decode-process.png}
+  \includegraphics[width=0.5\textwidth]{decode-process.png}
   \caption{指令集模块注册流程图}
   \label{fig:decode-process}
 \end{figure}
@@ -270,6 +270,7 @@ RISC-V 架构中规定了一些硬件行为来实现异常事件的响应和处�
 \end{table}
 
 本模拟器实现了这部分的硬件行为,包括中断源的产生,和中断响应,下面进行详细的介绍。在处理器类内定义了两个uint64型数据,分别用来表示时钟中断和外部中断的pending,总线上挂载的设备可以直接对这两个pending数据进行设置,用来模拟外设”异步”的中断请求发起。处理器在下一个取值周期之前,使用try-catch语句来处理可能的中断响应,如果处理器决定响应中断,就会抛出一个trap\_t类型的异常,进入到响应中断的异步逻辑。trap\_t的定义如下:
+\clearpage
 \begin{lstlisting}{}
     class trap_t
     {

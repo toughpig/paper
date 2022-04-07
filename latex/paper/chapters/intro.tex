@@ -32,12 +32,12 @@ IBM在处理器前期设计与规划时期，使用Mambo\cite{boh}模拟器的�
 
 目前RISC-V开源社区的体系结构模拟器有Spike, Gem5, Qemu\cite{bellard2005qemu}等,这一类模拟器能够对部分RISC-V开源架构如BOOM进行模拟,对于新手熟悉RISC-V有很大的帮助。Spike是一款基于解释型的RISC-V指令集模拟器,能够提供指令级别的仿真,跟开源社区riscv-tools里的pk(proxy kernel)和fesrv(front-end server)结合能够完成系统的模拟,并且能够提供命令行的单步调试。Qemu是一款基于编译型的模拟器,直接对RISC-V二进制流进行翻译,模拟速度接近宿主机。在此类RISC-V模拟器上也能够进行软件移植工作,主要是基于Linux内核的应用软件移植。
 % 为了加速M1模拟器的执行速度，需要对所抓取的踪迹进行取样，同时为了方便调试，M1支持微结构性能数据可视化功能。在处理器验证阶段，IBM使用Mambo作为处理器验证参考模型辅助进行验证，此阶段Mambo可以为处理器功能正确性提供参考结果。Mambo模拟了所有处理器的功能特征，把某些性能相关的微结构维护操作（例如cache维护类指令）翻译成空（nop）操作，对于计算类指令产生准确的结果，并精准追踪处理器寄存器的状态变化，同时支持指令撤销操作，为处理器验证提供参考。IBM基于Mambo模拟器曾发现PowerPC CPU的一个控制寄存器存在竞争条件，使得该设计错误在流片之前就被发现并修改。在该阶段，IBM还使用自研的由多个FPGA(field programmable gate array)组成的VHDL(very-high-speed integrated circuithardware description language)仿真加速器Twinstar\cite{asaad2012cycle}进行处理器综合验证。Twinstar是时钟精准的仿真加速器，其推进方式是事件驱动模式，可以对整个处理器芯片进行仿真，以二进制程序作为输入，还支持详细的指令踪迹和处理器状态的实时追踪。该平台运行速度可以达到4MHz并可以运行未经修改的系统软件。类似Twinstar的验证平台还有帕拉丁\cite{chaix2019implementation}等。
-% 在系统软件开发方面，IBM基于Mambo（加速模式），Simics\cite{magnusson2002simics}，BGLsim\cite{ceze2003full}等多种平台，在流片之前就开始进行固件、操作系统、虚拟机管理器等软件的早期开发。IBM基于Mambo模拟器曾开发了K42操作系统，在芯片可用之后１周内就启动了操作系统\cite{boh}。IBM基于BGLsim-multi\cite{ceze2003full}平台和基于OMNeT++\cite{varga2010omnet}开发的MARS(message passing interface application replay simulation)模拟平台还可以对机群网络相关的功能进行模拟，模拟器由可执行程序或者踪迹驱动\cite{许鹏2006一种应用于嵌入式系统中断控制}，其中MARS平台还可以对MPI(message passing interface)类应用进行调优。
+% 在系统软件开发方面，IBM基于Mambo（加速模式），Simics\cite{magnusson2002simics}，BGLsim\cite{ceze2003full}等多种平台，在流片之前就开始进行固件、操作系统、虚拟机管理器等软件的早期开发。IBM基于Mambo模拟器曾开发了K42操作系统，在芯片可用之后１周内就启动了操作系统\cite{boh}。IBM基于BGLsim-multi\cite{ceze2003full}平台和基于OMNeT++\cite{varga2010omnet++}开发的MARS(message passing interface application replay simulation)模拟平台还可以对机群网络相关的功能进行模拟，模拟器由可执行程序或者踪迹驱动\cite{许鹏2006一种应用于嵌入式系统中断控制}，其中MARS平台还可以对MPI(message passing interface)类应用进行调优。
 
 
 
 \section{本文主要工作}
-为了加快芯片开发项目中的系统软件开发过程,以及辅助进行处理器验证\cite{asaad2012cycle,chaix2019implementation},本文从RISC-V芯片开发项目工作流程入手,设计并实现了一款针对RISC-V体系结构的指令集功能模拟器,可以使得芯片开发团队脱离硬件平台并行地进行系统软件移植,开发和测试工作\cite{ceze2003full,varga2010omnet},本模拟器提供对真实硬件的功能模拟,以及丰富的调试手段,缩短软件开发周期,辅助处理器验证。主要完成的工作如下:
+为了加快芯片开发项目中的系统软件开发过程,以及辅助进行处理器验证\cite{asaad2012cycle,chaix2019implementation},本文从RISC-V芯片开发项目工作流程入手,设计并实现了一款针对RISC-V体系结构的指令集功能模拟器,可以使得芯片开发团队脱离硬件平台并行地进行系统软件移植,开发和测试工作\cite{ceze2003full,varga2010omnet++},本模拟器提供对真实硬件的功能模拟,以及丰富的调试手段,缩短软件开发周期,辅助处理器验证。主要完成的工作如下:
 
 
 (1)参照RISC-V用户手册,特权级架构手册,以及实际的硬件设计方案,对RISC-V标准拓展指令集共196条汇编指令进行C++功能函数模拟,其中大部分指令功能可以直接由RISC-V指令集手册获取,少部分指令(主要是特权架构指令)参照硬件设计团队具体的Chisel代码进行翻译,对硬件设计的功能框架进行建模,确定模拟器的实现方案,规划具体功能模块的边界。
