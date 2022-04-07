@@ -17,7 +17,7 @@ RISC-V指令集模拟器的测试环境分为软件模拟环境和硬件对照�
       \midrule
     Ubuntu20.04	& \multicolumn{1}{c}{模拟器的宿主机环境}\\
     Qt5	& \multicolumn{1}{c}{Qt5的UI类库}\\
-    BBL(berkele-bootloader)	& \multicolumn{1}{c}{RISC-V官方的bootloader}\\
+    BBL(Berkele-BootLoader)	& \multicolumn{1}{c}{RISC-V官方的bootloader}\\
     linux-v5.10    & \multicolumn{1}{c}{目标程序linux内核版本}\\
     busybox-1.32.1 & \multicolumn{1}{c}{linux命令集合}\\
       \bottomrule
@@ -35,7 +35,7 @@ RISC-V指令集模拟器的测试环境分为软件模拟环境和硬件对照�
 (2) 根据需求分析中的需求规格说明,使用场景法对模拟器进行配置项测试,测试模拟器的业务功能是否满足需求。
 
 
-(3) 最后进行系统测试,重点测试linux内核移植过程中的MMU启动,挂载PLIC外设,以及调试功能是否满足后续的系统软件移植开发需求。
+(3) 最后进行系统测试,重点测试Linux内核移植过程中的MMU启动,挂载PLIC外设,以及调试功能是否满足后续的系统软件移植开发需求。
 
 
 \section{测试分析}
@@ -48,10 +48,10 @@ RISC-V指令集模拟器的测试环境分为软件模拟环境和硬件对照�
 (1) 预加载模块: 该模块解析模拟器启动参数,获取指令集配置,对相应的指令集模块进行注册,为后续的指令译码,以及功能函数调用提供所需的数据,依据概要设计的要求,主要测试该模块能否将所需指令集全部注册进解码器,并且在后续译码执行过程中调用正确的功能函数。
 
 
-(2) CPU和总线模块: 该模块用于模拟处理器执行过程中的硬件行为,依据概要设计的要求,主要测试该模块的寄存器读写过程;访存请求涉及到的MMU行为,包括快表查询,iCache查询,通过页表的地址翻译过程;经过总线的MMIO请求过程。主要测试其正确性。
+(2) CPU和总线模块: 该模块用于模拟处理器执行过程中的硬件行为,依据概要设计的要求,主要测试该模块的寄存器读写过程;访存请求涉及到的MMU行为,包括快表查询,iCache查询,通过页表的地址翻译过程,以及经过总线的MMIO请求过程。主要测试其正确性。
 
 
-(3) 中断控制器模块: 该模块用于模拟中断控制器的软硬件行为,依据概要设计的要求,主要测试通过PLIC挂载设备的中断请求过程能够被处理器响应,中断控制器能够做到规范文档的功能要求。
+(3) 中断控制器模块: 该模块用于模拟中断控制器的软硬件行为,依据概要设计的要求,主要测试通过PLIC挂载设备的中断请求过程能够被处理器响应,平台级中断控制器PLIC能够做到SiFive公司规范文档的功能要求。
 
 (3) 调试和UI模块: 该模块提供前端窗口交互功能和相应的调试功能,是本系统的重点测试部分,依据概要设计的要求,主要测试窗口对象和后端模拟器对象间的通信情况,包括断点信息的设置,处理器状态查询,调试模式下的UI更新情况等,既要测试其正确性,也要测试调试模式下的性能是否满足规范文档的要求。
 
@@ -72,8 +72,9 @@ RISC-V指令集模拟器的测试环境分为软件模拟环境和硬件对照�
 (1) 预加载模块: 根据测试需求,该模块的功能是根据模拟器启动参数加载对应的指令集模块,对指令列表进行注册,将指令格式和对应的功能函数绑定起来,完成解码器的初始化工作,该模块检测到未定义指令模块,会发出告警信息,提示未定义行为。具体的测试用例设计如表~\ref{tab:test1}所示。
 \begin{table}[h]
     \centering
-    \caption{指令集模块测试用例表}
+    \caption{预加载模块测试用例表}
     \label{tab:test1}
+    \renewcommand\arraystretch{1.2}
     \begin{tabular}{clll}
       \toprule
       \multicolumn{1}{c}{序号} & \multicolumn{1}{c}{输入} & \multicolumn{1}{c}{预期输出} &\multicolumn{1}{c}{说明}\\
@@ -93,6 +94,7 @@ RISC-V指令集模拟器的测试环境分为软件模拟环境和硬件对照�
     \centering
     \caption{CPU和总线测试用例表}
     \label{tab:test2}
+    \renewcommand\arraystretch{1.2}
     \begin{tabular}{clll}
       \toprule
       \multicolumn{1}{c}{序号} & \multicolumn{1}{c}{输入} & \multicolumn{1}{c}{预期输出} &\multicolumn{1}{c}{说明}\\
@@ -115,6 +117,7 @@ RISC-V指令集模拟器的测试环境分为软件模拟环境和硬件对照�
     \centering
     \caption{中断控制器测试用例表}
     \label{tab:test3}
+    \renewcommand\arraystretch{1.2}
     \begin{tabular}{clll}
       \toprule
       \multicolumn{1}{c}{序号} & \multicolumn{1}{c}{输入} & \multicolumn{1}{c}{预期输出} &\multicolumn{1}{c}{说明}\\
@@ -132,6 +135,7 @@ RISC-V指令集模拟器的测试环境分为软件模拟环境和硬件对照�
     \centering
     \caption{调试模块和UI测试用例表}
     \label{tab:test4}
+    \renewcommand\arraystretch{1.2}
     \begin{tabular}{clll}
       \toprule
       \multicolumn{1}{c}{序号} & \multicolumn{1}{c}{输入} & \multicolumn{1}{c}{预期输出} &\multicolumn{1}{c}{说明}\\
@@ -140,7 +144,7 @@ RISC-V指令集模拟器的测试环境分为软件模拟环境和硬件对照�
   \hline
   12	& \multicolumn{1}{m{3cm}}{断点信息pc core0 0x80000000} & \multicolumn{1}{m{4cm}}{核0在PC=0x80000000处匹配断点,进入调试模式,输出断点信息} & \multicolumn{1}{m{3.5cm}}{验证功能模块的有效性}\\
   \hline
-  13	& \multicolumn{1}{m{3cm}}{内存地址0x80000000查询信号} & \makecell[l]{0xif80006f\\
+  13	& \multicolumn{1}{m{3cm}}{内存地址0x80000000查询信号} & \makecell[l]{0x1f80006f\\
   对应汇编指令j pc+504\\
   表示跳转到reset\_vector
   } & \multicolumn{1}{m{3.5cm}}{验证功能模块的有效性}\\
@@ -156,19 +160,20 @@ RISC-V指令集模拟器的测试环境分为软件模拟环境和硬件对照�
     \centering
     \caption{配置型测试用例表}
     \label{tab:test5}
+    \renewcommand\arraystretch{1.2}
     \begin{tabular}{clll}
       \toprule
       \multicolumn{1}{c}{序号} & \multicolumn{1}{c}{操作} & \multicolumn{1}{c}{预期输出} &\multicolumn{1}{c}{说明}\\
       \midrule
-  15	& \multicolumn{1}{m{3.5cm}}{设置断点信息,点击应用} & \multicolumn{1}{m{3.5cm}}{处理器断点检测列表添加成功} & \multicolumn{1}{m{3.5cm}}{基本流1,备选流1}\\
+  15	& \multicolumn{1}{m{4cm}}{设置断点信息,点击应用} & \multicolumn{1}{m{3.5cm}}{处理器断点检测列表添加成功} & \multicolumn{1}{m{3cm}}{基本流1,备选流1}\\
   \hline
-  16	& \multicolumn{1}{m{3.5cm}}{删除某一断断点信息} & \multicolumn{1}{m{3.5cm}}{删除成功} & \multicolumn{1}{m{3.5cm}}{基本流2}\\
+  16	& \multicolumn{1}{m{4cm}}{删除某一断点信息} & \multicolumn{1}{m{3.5cm}}{删除成功} & \multicolumn{1}{m{3cm}}{基本流2}\\
   \hline
-  17	& \multicolumn{1}{m{3.5cm}}{点击单步执行} & \multicolumn{1}{m{3.5cm}}{寄存器状态更新,指令历史窗口更新} & \multicolumn{1}{m{3.5cm}}{基本流3}\\
+  17	& \multicolumn{1}{m{4cm}}{点击单步执行} & \multicolumn{1}{m{3.5cm}}{寄存器状态更新,指令历史窗口更新} & \multicolumn{1}{m{3cm}}{基本流3}\\
   \hline
-  18	& \multicolumn{1}{m{3.5cm}}{输入内存地址,点击查询} & \multicolumn{1}{m{3.5cm}}{对应内存地址的内容} & \multicolumn{1}{m{3.5cm}}{基本流4,备选流2}\\
+  18	& \multicolumn{1}{m{4cm}}{输入内存地址,点击查询} & \multicolumn{1}{m{3.5cm}}{对应内存地址的内容} & \multicolumn{1}{m{3cm}}{基本流4,备选流2}\\
   \hline
-  19	& \multicolumn{1}{m{3.5cm}}{调试模式下点击运行} & \multicolumn{1}{m{3.5cm}}{更新目标程序的交互信息} & \multicolumn{1}{m{3.5cm}}{基本流5}\\
+  19	& \multicolumn{1}{m{4cm}}{调试模式下点击运行} & \multicolumn{1}{m{3.5cm}}{更新目标程序的交互信息} & \multicolumn{1}{m{3cm}}{基本流5}\\
       \bottomrule
     \end{tabular}
 \end{table}
@@ -181,10 +186,10 @@ RISC-V指令集模拟器的测试环境分为软件模拟环境和硬件对照�
 (1)	稳定性测试: 依据系统测试需求,模拟器需要在加载给定的目标程序后不间断地稳定运行。因此稳定性测试设计为模拟器加载linux内核运行top程序三天,预期结果是模拟器可以一直持续运行,并且实时检测模拟CPU的进程状态。
 
 
-(2)	容错性测试: 依据系统测试需求,从一下两个方面进行测试用例设计: 加载含有未定义指令的程序,检测程序能否陷入对应的异常(illegal instruction);设置错误的断点信息,检测模拟器在端点检测逻辑是否会发生因设计错误导致的程序崩溃。
+(2)	容错性测试: 依据系统测试需求,从一下两个方面进行测试用例设计: 加载含有未定义指令的程序,检测程序能否陷入对应的异常(illegal instruction);设置错误的断点信息,检测模拟器在断点检测逻辑是否会发生因设计错误导致的程序崩溃。
 
 
-(3)	性能测试: 依据系统测试需求,记录模拟器在断点检测列表为空的状态下,和含有断点检测列表的状态下的MIPS(Million instruction per-second),和实际的硬件MIPS做对比,测试模拟器模拟速度。另外从模拟器进行系统软件调试的功能考虑,记录了在模拟器和真在实硬件平台上的调试周期,进行对照测试,分析模拟器在软件移植/开发/测试流程中的性能。
+(3)	性能测试: 依据系统测试需求,记录模拟器在断点检测列表为空的状态下,和含有断点检测列表的状态下的MIPS(Million instruction per-second),和实际的硬件MIPS做对比,测试模拟器模拟速度。另外从模拟器进行系统软件调试的功能考虑,记录了在模拟器和在真实硬件平台上的调试周期,进行对照测试,分析模拟器在软件移植、开发、测试迭代过程中的性能。
 
 \section{测试结果及分析}
 使用各个测试阶段所设计的测试用例,对RISC-V指令集模拟器展开了单元测试,配置项测试和系统测试,具体测试结果如下:
@@ -209,6 +214,7 @@ RISC-V指令集模拟器的测试环境分为软件模拟环境和硬件对照�
   \centering
   \caption{模拟器和硬件平台对照表}
   \label{tab:cmp}
+  \renewcommand\arraystretch{1.2}
   \renewcommand\arraystretch{1.1}
   \begin{tabular}{cccc}
     \toprule
