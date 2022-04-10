@@ -64,7 +64,7 @@ RISC-V指令集模拟器的核心业务流程如图\ref{fig:sim-seq}所示。
     \hline
     内存查询 &	系统软件开发人员 &	\multicolumn{1}{m{6cm}}{调试模式下对虚拟地址/物理地址内容查询}\\
     \hline
-    中断信号发送	& 系统软件开发人员 &	\multicolumn{1}{m{6cm}}{点击外部中断源按钮，发送对应的外部中断到平台及中断控制器}\\
+    中断信号发送	& 系统软件开发人员 &	\multicolumn{1}{m{6cm}}{点击外部中断源按钮，发送对应的外部中断到平台级中断控制器}\\
     \bottomrule
   \end{tabular}
 \end{table}
@@ -74,7 +74,7 @@ RISC-V指令集模拟器的核心业务流程如图\ref{fig:sim-seq}所示。
 \begin{figure}[H]
   \centering
   \includegraphics[width=0.9\textwidth]{use_case.png}
-  \caption{系统软件开发/移植人员用例图}
+  \caption{系统软件开发人员用例图}
   \label{fig:use-case}
 \end{figure}
 
@@ -118,7 +118,7 @@ RISC-V指令集模拟器的核心业务流程如图\ref{fig:sim-seq}所示。
 触发条件	& \multicolumn{1}{p{9cm}}{点击run/stop按键}\\ \hline
 后置条件	& \multicolumn{1}{p{9cm}}{模拟器暂停指令流程,进入调试模式}\\ \hline
 基本事件流	& \multicolumn{1}{p{9cm}}{在运行模式下点击run/stop按键}\\ \hline
-异常事件流	& \multicolumn{1}{p{9cm}}{运行模式下点击"单步执行"按键}\\
+异常事件流	& \multicolumn{1}{p{9cm}}{运行模式下点击调试窗口按键}\\
     \bottomrule
   \end{tabular}
 \end{table}
@@ -158,7 +158,7 @@ RISC-V指令集模拟器的核心业务流程如图\ref{fig:sim-seq}所示。
     \midrule
 用例描述	& \multicolumn{1}{p{9cm}}{调试模式下对虚拟地址/物理地址内容查询}\\ \hline
 触发条件	& \multicolumn{1}{p{9cm}}{查询窗口输入内存地址，点击查询}\\ \hline
-后置条件	& \multicolumn{1}{p{9cm}}{输出内存对应地址内容}\\ \hline
+后置条件	& \multicolumn{1}{p{9cm}}{输出地址对应的主存内容}\\ \hline
 	& \multicolumn{1}{p{9cm}}{(1) 选择地址类型为虚拟地址/物理地址}\\
   基本事件流 &            \multicolumn{1}{p{9cm}}{(2) 虚拟地址需要指定核心ID}\\
  &            \multicolumn{1}{p{9cm}}{(3) 输入16进制地址，点击查询}\\ \hline
@@ -198,7 +198,7 @@ RISC-V指令集模拟器的核心业务流程如图\ref{fig:sim-seq}所示。
 (1) 准确性: 体系结构模拟器的首要需求就是准确性，只有准确模拟出真实硬件的行为，才能在模拟器上进行后续的软件开发和移植工作。由于本模拟器的模拟精度在指令级别，不涉及到流水线，乱序执行，分支预测等更细粒度的模拟，因此要求模拟器要和真实硬件在寄存器级别完全一致。
 
 
-(2) 可靠性: 可靠性要求模拟器要能够在使用过程中持续稳定运行，不会因为宿主机上程序的设计缺陷导致模拟过程发生崩溃。如果遇到异常情况，模拟器需要能够在不修改启动配置的情况下重启成功，且模拟过程是可复现的。
+(2) 可靠性: 可靠性要求模拟器要能够在使用过程中持续稳定运行，不会因为宿主机上模拟器程序的设计缺陷导致模拟过程发生崩溃。如果遇到异常情况，模拟器需要能够在不修改启动配置的情况下重启成功，且模拟过程是可复现的。
 
 
 (3) 实时性: 作为一个基于指令集翻译的体系结构模拟器，虽然本身的设计初衷不是为了测试CPU性能，但是模拟器运行速度至少需要达到10MIPS。

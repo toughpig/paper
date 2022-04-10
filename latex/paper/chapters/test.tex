@@ -9,7 +9,7 @@
 RISC-V指令集模拟器的测试环境分为软件模拟环境和硬件对照环境,软件模拟环境是系统设计使用到的第三方库和模拟器的宿主机环境,硬件对照环境主要是芯片开发过程中的FPGA开发板S2C Single U440平台以及流片后的真实芯片环境。具体的模拟器环境如表~\ref{tab:env}所示。
 \begin{table}[h]
     \centering
-    \caption{系统测试环境}
+    \caption{系统测试环境表}
     \label{tab:env}
     \begin{tabular}{cc}
       \toprule
@@ -17,9 +17,9 @@ RISC-V指令集模拟器的测试环境分为软件模拟环境和硬件对照�
       \midrule
     Ubuntu20.04	& \multicolumn{1}{c}{模拟器的宿主机环境}\\
     Qt5	& \multicolumn{1}{c}{Qt5的UI类库}\\
-    BBL(Berkele-BootLoader)	& \multicolumn{1}{c}{RISC-V官方的bootloader}\\
-    linux-v5.10    & \multicolumn{1}{c}{目标程序linux内核版本}\\
-    busybox-1.32.1 & \multicolumn{1}{c}{linux命令集合}\\
+    BBL(Berkele-BootLoader)	& \multicolumn{1}{c}{RISC-V官方的BootLoader}\\
+    Linux-v5.10    & \multicolumn{1}{c}{Linux内核5.10版本目标程序}\\
+    Busybox-1.32.1 & \multicolumn{1}{c}{Linux命令集合}\\
       \bottomrule
     \end{tabular}
 \end{table}
@@ -92,7 +92,7 @@ RISC-V指令集模拟器的测试环境分为软件模拟环境和硬件对照�
 (2) CPU和总线模块: 根据测试需求,该模块的功能是模拟指令执行过程中的硬件行为,包括寄存器,MMU,缓存,内存,IO控制器等,测试目的是验证该模块的硬件行为模拟和真实硬件行为一致。该模块的输入总是已注册的指令,不会有其他未定义输入,主要检测是否达到预期输出,具体的测试用例设计如表~\ref{tab:test2}所示。
 \begin{table}[h]
     \centering
-    \caption{CPU和总线测试用例表}
+    \caption{CPU和总线模块测试用例表}
     \label{tab:test2}
     \renewcommand\arraystretch{1.2}
     \begin{tabular}{clll}
@@ -115,7 +115,7 @@ RISC-V指令集模拟器的测试环境分为软件模拟环境和硬件对照�
 (3) 中断控制器模块: 根据测试需求,该模块的功能是将内存映射的I/O设备挂载到中断控制器,和处理器进行通信。测试目的为了验证中断控制器能够对外部中断信号源进行有效裁决,并配合处理器完成外部中断的流程,以及测试当外部中断源优先级低于处理器门限寄存器时能否屏蔽该中断源。具体的测试用例设计如表~\ref{tab:test3}所示。
 \begin{table}[h]
     \centering
-    \caption{中断控制器测试用例表}
+    \caption{中断控制器模块测试用例表}
     \label{tab:test3}
     \renewcommand\arraystretch{1.2}
     \begin{tabular}{clll}
@@ -133,7 +133,7 @@ RISC-V指令集模拟器的测试环境分为软件模拟环境和硬件对照�
 (4) 调试模块和UI: 根据测试需求,该模块的功能是对目标程序运行流程进行控制,切换至调试模式进行断点设置,寄存器/内存查询,单步调试等功能,测试目的是验证该模块通过UI将调试信号发送给后端模拟器,并进行断点匹配的过程,还有验证寄存器/内存查询的正确性,以及查询无效内存地址给出告警信息的过程。具体测试用例设计如表~\ref{tab:test4}所示。
 \begin{table}[h]
     \centering
-    \caption{调试模块和UI测试用例表}
+    \caption{调试模块和UI模块测试用例表}
     \label{tab:test4}
     \renewcommand\arraystretch{1.2}
     \begin{tabular}{clll}
@@ -158,7 +158,7 @@ RISC-V指令集模拟器的测试环境分为软件模拟环境和硬件对照�
 依据配置项测试需求,采用基于实际业务的场景设计法对RISC-V指令集模拟器的RISC-V架构目标程序调试功能进行测试用例设计。该功能设计的基本流有:1.设置断点信息,点击应用后,调试窗口发送断点信号到模拟器后端,添加新的断点信息到处理器断点检测列表; 2.删除处理器断点检测列表中的某一项; 3.点击单步执行,模拟器进行一次取值,译码,执行周期,更新寄存器状态窗口,输出当前指令到指令历史窗口; 4.输入待查询内存地址,点击查询,模拟器进入MMU访存逻辑,查询当前地址内容; 5.点击运行,模拟器进入运行模式,将交互信息输出到交互窗口; 该功能的备选流有: 1.设置断点信息错误,导致处理器断点检测列表添加失败; 2.输入无效地址导致内存查询失败,发出告警信息。基本流和备选流可以组合成各个场景,进而对每个场景设计测试用例,具体的测试用例设计如表~\ref{tab:test5}所示。
 \begin{table}[h]
     \centering
-    \caption{配置型测试用例表}
+    \caption{配置项测试用例表}
     \label{tab:test5}
     \renewcommand\arraystretch{1.2}
     \begin{tabular}{clll}
@@ -222,7 +222,7 @@ RISC-V指令集模拟器的测试环境分为软件模拟环境和硬件对照�
 \end{figure}
 
 
-调试模式下进行内存信息查询情况如图\ref{fig:mem_access}所示，随机点击单步信号中断模拟器运行，查询上一次指令虚拟地址内容，可以看到对应的MMU翻译过程，以及查询结果的对照。
+调试模式下进行内存信息查询情况如图\ref{fig:mem_access}所示，在运行模式下随机点击"单步"按键,中断模拟器运行,进入调试模式，查询上一条指令虚拟地址内容，可以看到对应的MMU翻译过程，以及查询结果的对照。
 \begin{figure}[H]
   \centering
   \includegraphics[width=0.8\textwidth]{mem_access.png}
@@ -231,11 +231,11 @@ RISC-V指令集模拟器的测试环境分为软件模拟环境和硬件对照�
 \end{figure}
 
 
-(3) 在系统测试中对模拟器进行稳定性测试、容错性测试和性能测试。通过对模拟器程序计数器的统计，以宿主机时钟为基准，测得本模拟器在无断点设置的运行模式下的运行速度为37.9MIPS,在不同的断点调试模式下速度略有不同，平均值为31.7MIPS，达到了模拟器设计需求。稳定性测试时系统正常运行情况如图~\ref{fig:run}所示,容错性测试达到了预测的结果。从测试结果可以看出吸烟检测系统的可靠性满足需求规格说明书中的需求;通过和真实硬件平台的对照,在系统软件移植开发流程中,模拟器的软件迭代周期要明显比硬件平台效率更高,性能要求也达到了预期的结果。 
+(3) 在系统测试中对模拟器进行稳定性测试、容错性测试和性能测试。通过对模拟器程序计数器的统计，以宿主机时钟为基准，测得本模拟器在无断点设置的运行模式下的运行速度为37.9MIPS,在不同的断点设置情况下速度略有不同，平均值为31.7MIPS，达到了模拟器设计需求。稳定性测试时系统正常运行情况如图~\ref{fig:run}所示,容错性测试达到了预测的结果。从测试结果可以看出RISC-V指令集模拟器的可靠性满足需求规格说明书中的需求。通过和真实硬件平台的对照,在系统软件移植开发流程中,模拟器的软件迭代周期要明显比硬件平台效率更高,性能要求也达到了预期的结果。 
 \begin{figure}[h]
   \centering
   \includegraphics[width=1.0\textwidth]{run.png}
-  \caption{模拟器正常运行UI界面}
+  \caption{模拟器稳定性测试运行界面}
   \label{fig:run}
 \end{figure}
 

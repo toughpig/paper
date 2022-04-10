@@ -224,7 +224,7 @@ mmio的通信流程如图~\ref{fig:mmio}所示。
 \begin{figure}[H]
     \centering
     \includegraphics[width=0.9\textwidth]{mmio.png}
-    \caption{MMIO请求流程}
+    \caption{MMIO请求序列图}
     \label{fig:mmio}
 \end{figure}
 
@@ -238,21 +238,21 @@ RISC-V一共有两大类的中断类型：局部中断（Local Interrupts）以�
 RISC-V 架构中规定了一些硬件行为来实现异常事件的响应和处理,这些行为通过控制状态寄存器来反应异常事件信息。涉及到如下几个寄存器，见表~\ref{tab:csr}。
 \begin{table}[h]
   \centering
-  \caption{中断相关的寄存器}
+  \caption{中断相关的寄存器列表}
   \label{tab:csr}
   \renewcommand\arraystretch{1.2}
   \begin{tabular}{cl}
     \toprule
 寄存器	& \multicolumn{1}{c}{功能}\\
     \midrule
-    mstatus	& \multicolumn{1}{m{9cm}}{状态寄存器，保存全局中断使能等信息。}\\ \hline
-    mie	& \multicolumn{1}{m{9cm}}{外部中断使能寄存器}\\ \hline
-    mtvec	& \multicolumn{1}{m{9cm}}{异常入口基地址寄存器}\\ \hline
-    mscratch & \multicolumn{1}{m{9cm}}{上下文切换时用于保存当前的指针信息}\\ \hline
-    mepc & \multicolumn{1}{m{9cm}}{异常 PC 寄存器，现场保护时保存PC值}\\ \hline
-    mcause & \multicolumn{1}{m{9cm}}{异常原因寄存器}\\ \hline
-    mip	& \multicolumn{1}{m{9cm}}{中断悬挂寄存器,标识中断信号pending}\\ \hline
-    mbadaddr & \multicolumn{1}{m{9cm}}{异常原因辅助信息寄存器}\\
+    mstatus	& \multicolumn{1}{m{7cm}}{状态寄存器，保存全局中断使能等信息。}\\ \hline
+    mie	& \multicolumn{1}{m{7cm}}{外部中断使能寄存器}\\ \hline
+    mtvec	& \multicolumn{1}{m{7cm}}{异常入口基地址寄存器}\\ \hline
+    mscratch & \multicolumn{1}{m{7cm}}{上下文切换时用于保存当前的指针信息}\\ \hline
+    mepc & \multicolumn{1}{m{7cm}}{异常 PC 寄存器，现场保护时保存PC值}\\ \hline
+    mcause & \multicolumn{1}{m{7cm}}{异常原因寄存器}\\ \hline
+    mip	& \multicolumn{1}{m{7cm}}{中断悬挂寄存器,标识中断信号pending}\\ \hline
+    mbadaddr & \multicolumn{1}{m{7cm}}{异常原因辅助信息寄存器}\\
     \bottomrule
   \end{tabular}
 \end{table}
@@ -279,7 +279,7 @@ RISC-V 架构中规定了一些硬件行为来实现异常事件的响应和处�
 \begin{figure}[H]
     \centering
     \includegraphics[width=0.6\textwidth]{interrupt.png}
-    \caption{处理器响应中断流程}
+    \caption{处理器响应中断流程图}
     \label{fig:interrupt}
 \end{figure}
 
@@ -373,7 +373,7 @@ RISC-V架构还定义了硬件线程内的局部中断，局部中断控制器(C
 \begin{figure}[H]
     \centering
     \includegraphics[width=0.6\textwidth]{step.png}
-    \caption{调试模式下单步执行流程}
+    \caption{调试模式下单步执行流程图}
     \label{fig:step}
 \end{figure}
 
