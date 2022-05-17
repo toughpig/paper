@@ -4,7 +4,7 @@
 
 本章节基于系统概要设计部分，分别对模拟器四个主要功能模块的具体设计和实现细节进行阐述和说明。
 
-\section{预加载模块的实现}
+\section{预加载模块的设计与实现}
 
 预加载模块主要实现了两个功能,指令集功能函数的翻译,以及解码器对指令列表的解析和注册。
 
@@ -21,11 +21,18 @@
 
 
 区别于其他指令集架构的设计,RISC-V的译码过程是比对操作码和func位域信息,通过RISCV-OPCODES工具生成的头文件包含了所有标准指令集模块的指令格式信息,每条汇编指令都包含一对掩码(MASK)和匹配(MATCH)信息,译码过程是将指令内容与MASK取位与运算,得到的结果和MATCH一致表示是该条汇编指令。在模拟器实现过程中只需要为解码器开辟一块内存空间,存放(MATCH,MASK,insn\_t)的三元组即可,为了加快译码速度,在模拟器设计中,采用了哈希表的数据结构进行存储。综合上述接口定义,译码器取值,翻译,执行逻辑可以用伪代码表示为:
-\begin{lstlisting}
-    match = insn->GET_MATCH();           //获取指令MATCH,与掩码位与
-    func = disassembler->GET_FUNC(match);//译码器指令翻译
-    func(insn);                          //功能函数执行
-\end{lstlisting}
+\begin{figure}[H]
+    \centering
+    \includegraphics[width=1.0\textwidth]{dis-code.png}
+    % \caption{RISC-V32I 指令格式}
+    \label{fig:dis-code}
+\end{figure}
+\vspace{-0.8cm} 
+% \begin{lstlisting}
+%     match = insn->GET_MATCH();           //获取指令MATCH,与掩码位与
+%     func = disassembler->GET_FUNC(match);//译码器指令翻译
+%     func(insn);                          //功能函数执行
+% \end{lstlisting}
 预加载模块注册指令集，以及初始化解码器的流程如图~\ref{fig:decode-process}所示。
 \begin{figure}[H]
   \centering
@@ -38,7 +45,7 @@
 定义了指令数据结构和解码器之后,取指,译码的过程就完成了,接下来介绍执行步骤的核心内容,指令集功能函数的实现。指令集功能函数是整个指令集模拟的核心部分,理论上说,汇编指令的功能函数需要和实际的硬件设计一一对应,由于硬件设计所参考的指令集架构版本已经定义了各个汇编指令的功能和具体行为,所以对于指令集的功能模拟只需要参照相应的指令集手册。本模拟器的设计过程依托于具体的芯片项目,由于大多数的硬件设计团队针对不同的性能指标往往会进行一些取舍,尤其是对于RISC-V这样的开源架构,实际的设计肯定会和官方版本有所出入,所以在模拟器的设计上还是需要参照硬件设计团队的代码。本次设计依托的芯片开发项目使用Chisel进行硬件设计,通过其生成的Scala代码,可以指导模拟器指令功能函数的翻译。
 
 
-\section{CPU和总线的实现}
+\section{CPU和总线模块的设计与实现}
 
 上一节介绍了指令集模块的实现,从一个较高的抽象层次对模拟器的功能进行了定义,本节将详细介绍硬件的模拟细节,主要包含CPU内部的各个功能部件,以及CPU与片外通信的桥梁－－总线的设计与实现。
 
@@ -79,17 +86,24 @@ XPR/FPR均属于通用数据寄存器，在用户模式和机器模式下的访�
 
 
 机器模式异常返回指令mret,用于从机器模式异常处理程序返回,是RISC-V架构中断流程的最后一条机器模式指令。该指令功能包含了上述的全部三种检查条件。下面以该指令为例,用伪代码详细说明寄存器模拟实现和指令功能函数的具体实现方式。mret的功能包括将PC还原为中断前的下一条指令(保存在mepc),将特权级设置成MPP位保存的值,将中断使能位MIE还原为MPIE位保存的值,最后将MPIE设置为1,完成从机器模式到用户模式的跳转。
-\begin{lstlisting}
-require_privilege(PRV_M);   //宏定义,用于检查当前状态寄存器特权模式
-set_pc(p->get_state().mepc);//通过set\_pc()接口设置PC值
-reg_t s = STATE.mstatus;    
-reg_t prev_prv = get_field(s,MSTATUS_MPP);
-s = set_field(s,MSTATUS_UIE<<prev_prv,get_field(s,MSTATUS_MPIE));
-s = set_field(s,MSTATUS_MPIE,1); 
-s = set_field(s,MSTATUS_MPP,PRV_U); //寄存器类set\_fields()接口置位
-p->set_privilege(prev_prv);
-p->set_csr(CSR_MSTATUS,s); //处理器类set\_csr()接口写CSR寄存器
-\end{lstlisting}
+\begin{figure}[H]
+    \centering
+    \includegraphics[width=1.0\textwidth]{mret-code.png}
+    % \caption{状态寄存器位域信息}
+    \label{fig:mret-code}
+\end{figure}
+% \vspace{-0.8cm} 
+% \begin{lstlisting}
+% require_privilege(PRV_M);   //宏定义,用于检查当前状态寄存器特权模式
+% set_pc(p->get_state().mepc);//通过set\_pc()接口设置PC值
+% reg_t s = STATE.mstatus;    
+% reg_t prev_prv = get_field(s,MSTATUS_MPP);
+% s = set_field(s,MSTATUS_UIE<<prev_prv,get_field(s,MSTATUS_MPIE));
+% s = set_field(s,MSTATUS_MPIE,1); 
+% s = set_field(s,MSTATUS_MPP,PRV_U); //寄存器类set\_fields()接口置位
+% p->set_privilege(prev_prv);
+% p->set_csr(CSR_MSTATUS,s); //处理器类set\_csr()接口写CSR寄存器
+% \end{lstlisting}
 
 在set\_csr()接口的实现中,需要对于CSR的读写进行检查,一方面是为了确保读写时所处的特权级模式是否支持读写,另一方面需要针对状态寄存器的改变做出相应的动作,比如tlb的清除等。
 % \begin{lstlisting}
@@ -128,39 +142,46 @@ p->set_csr(CSR_MSTATUS,s); //处理器类set\_csr()接口写CSR寄存器
 
 % 在MSTATUS状态寄存器中,虚拟化管理字段 VM[4:0]指示了当前活跃的虚拟化方案，包括虚拟存储器翻译和保护。图~\ref{fig:VM}给出了当前定义好的虚拟化方案。对于一个 RISC-V 硬件实现，只有 Mbare 模式是强制要求的,该模式没有存储器管理或翻译，因此所有的有效地址，无论其特权模式，都被认为是机器物理地址,是复位时进入的模式,理论上在该模式下不需要经过MMU进行地址翻译。Sv39 和 Sv48 是针对 RV64 系统的基于页面的虚拟存储器体系结构，提供了一个 39 位或 者 48 位的虚拟地址空间，被设计成支持现代管理员级操作性，包括基于 Unix 的系统。Sv39、 Sv48 需要实现支持 M、 S 和 U 特权级。
 在RISC-V体系结构中,与MMU有关的CSR寄存器主要有控制与状态寄存器MSTATUS和页表基址寄存器SPTBR。MSTATUS的VM位域记录了当前的虚拟化方案,图~\ref{fig:VM}给出了RISC-V架构定义的所有虚拟化方案。对于一个 RISC-V 硬件实现，只有 Mbare 模式是强制要求的,该模式下地址是直接映射,理论上不需要经过MMU进行地址翻译,Sv39和Sv48分别表示39位和48位的虚拟地址空间,本模拟器支持上述三种虚拟化方案,但是为了实现方便,所有的主存访问请求都需要经过MMU,通过MMU模块的统一接口进行访存,当MSTATUS寄存器VM位为0时,无需进行地址翻译。以Linux内核加载过程中从物理地址向虚拟地址过渡的逻辑可以看出,当内核支持MMU时,会进入到relocate代码段进行页表基地址寄存器的初始化,内核通过setup\_vm()函数进行了首级页表的加载,然后在relocate段计算了首级页表基地址,写入SPTBR寄存器,然后通过一条mret指令跳出机器模式,以后首级页表会常驻内存,接下来就全是加载虚拟地址了,MMU开始工作。以下列出了Linux V5.10版本的relocate代码段，由于Linux内核对于RISC-V架构的支持依据的是RISC-V官方给出的最新指令集版本，所以对于芯片设计厂商的具体硬件通常不能够直接适配，经常需要对软件进行微调，以适应硬件架构设计。
-\begin{lstlisting}{}
-    #ifdef CONFIG_MMU
-    relocate:
-        li a1, PAGE_OFFSET
-        la a2, _start
-        sub a1, a1, a2
-        add ra, ra, a1
-        la a2, 1f
-        add a2, a2, a1
-        csrw CSR_TVEC, a2
-        srl a2, a0, PAGE_SHIFT
-        li a1, SATP_MODE
-        or a2, a2, a1
-        la a0, trampoline_pg_dir
-        srl a0, a0, PAGE_SHIFT
-        or a0, a0, a1
-        sfence.vma
-        csrw sptbr, a0
-    .align 2
-    1:
-        /* Set trap vector to spin forever to help debug */
-        la a0, .Lsecondary_park
-        csrw CSR_TVEC, a0
-        /* Reload the global pointer */
-    .option push
-    .option norelax
-        la gp, __global_pointer$
-    .option pop
-        csrw sptbr, a2
-        sfence.vma
-        ret
-    #endif /* CONFIG_MMU */    
-\end{lstlisting}
+\begin{figure}[H]
+    \centering
+    \includegraphics[width=1.0\textwidth]{mmu-code.png}
+    % \caption{RISC-V虚拟化方案}
+    \label{fig:mmu-code}
+\end{figure}
+\vspace{-0.8cm} 
+% \begin{lstlisting}{}
+%     #ifdef CONFIG_MMU
+%     relocate:
+%         li a1, PAGE_OFFSET
+%         la a2, _start
+%         sub a1, a1, a2
+%         add ra, ra, a1
+%         la a2, 1f
+%         add a2, a2, a1
+%         csrw CSR_TVEC, a2
+%         srl a2, a0, PAGE_SHIFT
+%         li a1, SATP_MODE
+%         or a2, a2, a1
+%         la a0, trampoline_pg_dir
+%         srl a0, a0, PAGE_SHIFT
+%         or a0, a0, a1
+%         sfence.vma
+%         csrw sptbr, a0
+%     .align 2
+%     1:
+%         /* Set trap vector to spin forever to help debug */
+%         la a0, .Lsecondary_park
+%         csrw CSR_TVEC, a0
+%         /* Reload the global pointer */
+%     .option push
+%     .option norelax
+%         la gp, __global_pointer$
+%     .option pop
+%         csrw sptbr, a2
+%         sfence.vma
+%         ret
+%     #endif /* CONFIG_MMU */    
+% \end{lstlisting}
 
 
 在本模拟器的实现中,MMU模块包含了快表TLB,加速地址翻译,本质上就是开辟了一片内存用来存放翻译过的地址内容,为了方便起见,只实现了直接映射的TLB。另外,将iCache,dCache的功能也一并放到MMU模块中,不再实现单独的缓存硬件模块,缓存采用直写的方式。这样的设计和真实硬件的差异很大,会导致缓存模拟的不准确。考虑到本模拟器并不进行缓存相关的性能模拟,所以可以忽略这部分的差别,在功能模拟上没有影响。MMU模块对取指做特殊处理,取指首先会查找iCache,当iCache未命中时,退化为其余类型的访存。访存请求通过模板函数提供的统一的接口load/store进行请求,通过模板可以忽略具体的数据类型,在功能函数的实现中也可以更加方便的使用,直接调用MMU的接口对存储单元进行操作。
@@ -198,7 +219,7 @@ MMU接收到访存请求后,首先会检查地址对齐,然后通过页大小计
 模拟器根据物理地址划分为主存,和内存映射的IO设备,图~\ref{fig:mmap}是SiFive公司提供的内存映射参考。本模拟器的总线设备需要处理的内存映射空间就是0x00000000-0x80000000,提供这块内存区间上的IO模拟。总线设备可以挂载多种通过内存映射的IO设备,某些具有特殊用途的寄存器也能够挂载在总线,比如TIMECMP寄存器,IPI寄存器。
 \begin{figure}[H]
     \centering
-    \includegraphics[width=0.8\textwidth]{mmap.png}
+    \includegraphics[width=0.85\textwidth]{mmap.png}
     \caption{SiFive公司的内存映射方案}
     \label{fig:mmap}
 \end{figure}
@@ -207,29 +228,24 @@ MMU接收到访存请求后,首先会检查地址对齐,然后通过页大小计
 总线设备的类图如图\ref{fig:bus_class}所示。所有设备都继承自抽象基类abstract\_device\_t,在总线类bus\_t中维护一个设备数组,统一管理挂载到总线的MMIO设备,比如图中的RTC设备，此类设备的IO均需要通过总线对象的MMIO接口与处理器进行通信。
 \begin{figure}[H]
     \centering
-    \includegraphics[width=0.8\textwidth]{bus_class.png}
+    \includegraphics[width=0.9\textwidth]{bus_class.png}
     \caption{总线设备类图}
     \label{fig:bus_class}
 \end{figure}
 
 
-所有支持安全启动的CPU都会有一个Bootrom固件。CPU在通电之后执行的第一条指令就在Bootrom的入口,因此Bootrom拥有最高的执行权限，也就是机器模式M-mode。它将初始化Secure Boot安全机制，加载Secure Boot Key等密钥、从存储器加载并验证第一阶段加载程序(First Stage Bootloader, FSBL)，最后跳转进FSBL中。本次芯片设计项目也包含了该部分的设计,但是由于安全启动过程涉及到部分保密信息,本文将不涉及FSBL的加载和验证过程,Bootrom固件程序仅仅用来跳转至目标程序入口。具体的实现方式包括以下的步骤,首先在配置中读取Bootrom的地址,默认0x1000,然后初始化Bootrom设备,填写Bootrom固件内容,总线对象使用add\_device()接口将物理地址0x1000和Bootrom设备对象的映射保存在字典中。本模拟器的Bootrom程序内容如图所示,包含两条汇编指令:
-\begin{lstlisting}{}
-    auipc	t0, 0x7ffff
-    jr 	t0
-\end{lstlisting}
-模拟器启动后,PC初始化为Bootrom固件地址,即0x1000,MMU检测到该地址在MMIO区间内,将访存请求转移给总线,总线对象使用MMIO接口找到对应的设备对象Bootrom,读取到Bootrom的两条指令,处理器在机器模式执行上述两条指令,跳转到主存起始位置0x80000000,即目标程序的入口地址。接下来的一系列指令执行由目标程序决定,主要包括Bootloader的reset vector以及加载Linux内核的过程。
+所有支持安全启动的CPU都会有一个Bootrom固件。CPU在通电之后执行的第一条指令就在Bootrom的入口,因此Bootrom拥有最高的执行权限，也就是机器模式M-mode。它将初始化Secure Boot安全机制，加载Secure Boot Key等密钥、从存储器加载并验证第一阶段加载程序(First Stage Bootloader, FSBL)，最后跳转进FSBL中。本次芯片设计项目也包含了该部分的设计,但是由于安全启动过程涉及到部分保密信息,本文将不涉及FSBL的加载和验证过程,Bootrom固件程序仅仅用来跳转至目标程序入口。具体的实现方式包括以下的步骤,首先在配置中读取Bootrom的地址,默认0x1000,然后初始化Bootrom设备,填写Bootrom固件内容,总线对象使用add\_device()接口将物理地址0x1000和Bootrom设备对象的映射保存在字典中。本模拟器的Bootrom程序内容如图所示,包含两条汇编指令:"auipc	t0, 0x7ffff"和"jr 	t0",模拟器启动后,PC初始化为Bootrom固件地址,即0x1000,MMU检测到该地址在MMIO区间内,将访存请求转移给总线,总线对象使用MMIO接口找到对应的设备对象Bootrom,读取到Bootrom的两条指令,处理器在机器模式执行上述两条指令,跳转到主存起始位置0x80000000,即目标程序的入口地址。接下来的一系列指令执行由目标程序决定,主要包括Bootloader的reset vector以及加载Linux内核的过程。
 
 mmio的通信流程如图~\ref{fig:mmio}所示。
 \begin{figure}[H]
     \centering
-    \includegraphics[width=0.9\textwidth]{mmio.png}
+    \includegraphics[width=1.0\textwidth]{mmio.png}
     \caption{MMIO请求序列图}
     \label{fig:mmio}
 \end{figure}
 
 
-\section{中断系统的实现}
+\section{中断控制器模块的设计与实现}
 
 在CPU运行过程中,存在两种指令流程,一种是常规的逻辑控制流,包括顺序的指令流和分支跳转;另一种称为异常控制流,用来响应处理器状态的某些变化,表现为中断或异常。之前的章节已将介绍了CPU指令控制流程的模拟,其中包括了响应中断的逻辑,CPU在取值之前检查当前是否有中断信号,根据状态寄存器判断是否响应中断,进入异常控制流逻辑。本节将详细阐述模拟器中断系统的实现。包括平台级中断控制器PLIC以及部分中断源的模拟。
 
@@ -258,22 +274,29 @@ RISC-V 架构中规定了一些硬件行为来实现异常事件的响应和处�
 \end{table}
 
 本模拟器实现了这部分的硬件行为,包括中断源的产生,和中断响应,下面进行详细的介绍。在处理器类内定义了两个uint64型数据,分别用来表示时钟中断和外部中断的pending,总线上挂载的设备可以直接对这两个pending数据进行设置,用来模拟外设”异步”的中断请求发起。处理器在下一个取值周期之前,使用try-catch语句来处理可能的中断响应,如果处理器决定响应中断,就会抛出一个trap\_t类型的异常,进入到响应中断的异步逻辑。trap\_t的定义如下:
-\clearpage
-\begin{lstlisting}{}
-    class trap_t
-    {
-    public:
-        trap_t(){}
-        trap_t(reg_t type):cause(type),addr_valid(false){}
-        trap_t(reg_t type,quint64 addr):cause(type),addr_valid(true),addr(addr){}
-        reg_t cause;
-        bool addr_valid;
-        quint64 addr;
-        static QMap<reg_t,QString> names;
-        static quint64 delegable_exceptions;
-        QString &name(){return names[cause];}
-    };        
-\end{lstlisting}
+\begin{figure}[H]
+    \centering
+    \includegraphics[width=1.0\textwidth]{trap-code.png}
+    % \caption{RISC-V虚拟化方案}
+    \label{fig:mmu-code}
+\end{figure}
+\vspace{-0.8cm} 
+% \clearpage
+% \begin{lstlisting}{}
+%     class trap_t
+%     {
+%     public:
+%         trap_t(){}
+%         trap_t(reg_t type):cause(type),addr_valid(false){}
+%         trap_t(reg_t type,quint64 addr):cause(type),addr_valid(true),addr(addr){}
+%         reg_t cause;
+%         bool addr_valid;
+%         quint64 addr;
+%         static QMap<reg_t,QString> names;
+%         static quint64 delegable_exceptions;
+%         QString &name(){return names[cause];}
+%     };        
+% \end{lstlisting}
 
 抛出异常后,处理器将根据状态寄存器以及异常信息决定是否响应中断,CPU异常处理的流程如图~\ref{fig:interrupt}所示。
 \begin{figure}[H]
@@ -325,35 +348,42 @@ RISC-V架构还定义了硬件线程内的局部中断，局部中断控制器(C
 % \subsection{外部中断源模拟}
 
 
-\section{调试模块和UI实现}
+\section{调试和UI模块的设计与实现}
 调试模块能够提供断点设置,单步执行,寄存器/内存查询等功能。UI显示界面主要包含了断点设置窗口,查询窗口和执行交互窗口。本模块使用Qt的UI Designer工具进行开发,通过拖拽摆放各种窗口控件并进行属性设置,观察界面整体效果,可以方便地进行可视化界面的设计。另外QtWidget库还提供了信号(Signals)和槽(Slots)机制,用于对象间通信,只需要在对应窗口子类化widgets来添加自定义信号,然后实现自定义的槽函数,连接到该信号即可。在本模拟器的实现中,主要的对象间通信就是前端窗口对象和后端模拟器对象间的通信,因此只需要定义一组双向的信号和槽就能够满足通信需求。
 
 
 前端UI窗口和后端模拟器之间的信号定义如下:
-\begin{lstlisting}{}
-    enum sim_cmd
-    {
-        sim_cmd_pause_sim,
-        sim_cmd_run_sim,
-        sim_cmd_run_sim_silently,
-        sim_cmd_step_sim,
-        sim_cmd_reset_sim,
-        sim_cmd_access_memory,
-        sim_cmd_set_breaks,
-        sim_cmd_key_input,
-        sim_cmd_mailbox_input
-    };
+\begin{figure}[H]
+    \centering
+    \includegraphics[width=1.0\textwidth]{enum-code.png}
+    % \caption{RISC-V虚拟化方案}
+    \label{fig:enum-code}
+\end{figure}
+\vspace{-0.8cm} 
+% \begin{lstlisting}{}
+%     enum sim_cmd
+%     {
+%         sim_cmd_pause_sim,
+%         sim_cmd_run_sim,
+%         sim_cmd_run_sim_silently,
+%         sim_cmd_step_sim,
+%         sim_cmd_reset_sim,
+%         sim_cmd_access_memory,
+%         sim_cmd_set_breaks,
+%         sim_cmd_key_input,
+%         sim_cmd_mailbox_input
+%     };
         
-    enum window_cmd
-    {
-        window_cmd_update_reg,
-        window_cmd_update_mem,
-        window_cmd_sim_output,
-        window_cmd_gst_output,
-        window_cmd_pause_sim,
-        window_cmd_update_mailbox
-    };          
-\end{lstlisting}
+%     enum window_cmd
+%     {
+%         window_cmd_update_reg,
+%         window_cmd_update_mem,
+%         window_cmd_sim_output,
+%         window_cmd_gst_output,
+%         window_cmd_pause_sim,
+%         window_cmd_update_mailbox
+%     };          
+% \end{lstlisting}
 其中sim\_cmd\_key\_input和sim\_cmd\_mailbox\_input信号分别用来模拟UART和mailbox外部中断源信号。其余信号用于断点和查询信息的交互,以及模拟器单步运行等流程的控制。
         
         
