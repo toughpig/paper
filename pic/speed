@@ -1,1 +1,67 @@
-<mxfile host="app.diagrams.net" modified="2022-05-17T07:38:41.808Z" agent="5.0 (Windows)" version="17.4.0" etag="XVlJ1vFZ5ra6AusdbDgy" type="github"><diagram id="Sexwa6-APUKZCz_aojOi">UzV2zq1wL0osyPDNT0nNUTV2VTV2LsrPL4GwciucU3NyVI0MMlNUjV1UjYwMgFjVyA2HrCFY1qAgsSg1rwSLBiADYTaQg2Y1AA==</diagram></mxfile>
+<mxfile host="app.diagrams.net" modified="2022-05-17T07:51:57.764Z" agent="5.0 (Windows)" etag="fgNXPM0gxb_mik9VG67T" version="17.4.0" type="github">
+  <diagram id="Sexwa6-APUKZCz_aojOi" name="Page-1">
+    <mxGraphModel dx="2249" dy="1961" grid="1" gridSize="10" guides="1" tooltips="1" connect="1" arrows="1" fold="1" page="1" pageScale="1" pageWidth="827" pageHeight="1169" math="0" shadow="0">
+      <root>
+        <mxCell id="0" />
+        <mxCell id="1" parent="0" />
+        <mxCell id="k-N_cHeMs7exE2l6GhI7-1" value="" style="endArrow=classic;html=1;rounded=0;strokeWidth=3;" edge="1" parent="1">
+          <mxGeometry width="50" height="50" relative="1" as="geometry">
+            <mxPoint x="80" y="370" as="sourcePoint" />
+            <mxPoint x="900" y="370" as="targetPoint" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="k-N_cHeMs7exE2l6GhI7-2" value="" style="endArrow=classic;html=1;rounded=0;strokeWidth=3;" edge="1" parent="1">
+          <mxGeometry width="50" height="50" relative="1" as="geometry">
+            <mxPoint x="80" y="370" as="sourcePoint" />
+            <mxPoint x="80" y="-120" as="targetPoint" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="k-N_cHeMs7exE2l6GhI7-4" value="&lt;font style=&quot;font-size: 21px&quot;&gt;模拟精度&lt;/font&gt;" style="rounded=0;whiteSpace=wrap;html=1;fillColor=default;strokeColor=none;fillOpacity=0;" vertex="1" parent="1">
+          <mxGeometry x="-40" y="-110" width="120" height="60" as="geometry" />
+        </mxCell>
+        <mxCell id="k-N_cHeMs7exE2l6GhI7-5" value="&lt;font style=&quot;font-size: 21px&quot;&gt;模拟速度&lt;/font&gt;" style="rounded=0;whiteSpace=wrap;html=1;fillColor=default;strokeColor=none;fillOpacity=0;" vertex="1" parent="1">
+          <mxGeometry x="770" y="370" width="120" height="60" as="geometry" />
+        </mxCell>
+        <mxCell id="k-N_cHeMs7exE2l6GhI7-6" value="0" style="rounded=0;whiteSpace=wrap;html=1;fillColor=default;strokeColor=none;fillOpacity=0;fontSize=21;" vertex="1" parent="1">
+          <mxGeometry x="10" y="360" width="120" height="60" as="geometry" />
+        </mxCell>
+        <mxCell id="k-N_cHeMs7exE2l6GhI7-7" value="RTL" style="rounded=1;whiteSpace=wrap;html=1;fontSize=21;fillColor=default;" vertex="1" parent="1">
+          <mxGeometry x="120" y="-70" width="120" height="60" as="geometry" />
+        </mxCell>
+        <mxCell id="k-N_cHeMs7exE2l6GhI7-8" value="&lt;div&gt;时钟精确&lt;/div&gt;&lt;div&gt;模拟器&lt;br&gt;&lt;/div&gt;" style="rounded=1;whiteSpace=wrap;html=1;fontSize=21;fillColor=default;" vertex="1" parent="1">
+          <mxGeometry x="240" y="10" width="120" height="80" as="geometry" />
+        </mxCell>
+        <mxCell id="k-N_cHeMs7exE2l6GhI7-9" value="&lt;div&gt;踪迹分析&lt;/div&gt;&lt;div&gt;模拟器&lt;br&gt;&lt;/div&gt;" style="rounded=1;whiteSpace=wrap;html=1;fontSize=21;fillColor=default;" vertex="1" parent="1">
+          <mxGeometry x="375" y="100" width="120" height="80" as="geometry" />
+        </mxCell>
+        <mxCell id="k-N_cHeMs7exE2l6GhI7-10" value="&lt;div&gt;二进制翻译加速&lt;/div&gt;&lt;div&gt;模拟器&lt;/div&gt;" style="rounded=1;whiteSpace=wrap;html=1;fontSize=21;fillColor=default;" vertex="1" parent="1">
+          <mxGeometry x="495" y="190" width="150" height="80" as="geometry" />
+        </mxCell>
+        <mxCell id="k-N_cHeMs7exE2l6GhI7-11" value="&lt;div&gt;指令集功能&lt;/div&gt;&lt;div&gt;模拟器&lt;/div&gt;" style="rounded=1;whiteSpace=wrap;html=1;fontSize=21;fillColor=#d5e8d4;strokeColor=#82b366;" vertex="1" parent="1">
+          <mxGeometry x="645" y="270" width="150" height="80" as="geometry" />
+        </mxCell>
+        <mxCell id="k-N_cHeMs7exE2l6GhI7-12" value="&lt;font style=&quot;font-size: 21px&quot;&gt;1~10 Hz&lt;/font&gt;" style="rounded=0;whiteSpace=wrap;html=1;fillColor=default;strokeColor=none;fillOpacity=0;" vertex="1" parent="1">
+          <mxGeometry x="120" y="-120" width="120" height="60" as="geometry" />
+        </mxCell>
+        <mxCell id="k-N_cHeMs7exE2l6GhI7-13" value="&lt;font style=&quot;font-size: 21px&quot;&gt;1~10 kHz&lt;/font&gt;" style="rounded=0;whiteSpace=wrap;html=1;fillColor=default;strokeColor=none;fillOpacity=0;" vertex="1" parent="1">
+          <mxGeometry x="240" y="-40" width="120" height="60" as="geometry" />
+        </mxCell>
+        <mxCell id="k-N_cHeMs7exE2l6GhI7-14" value="&lt;font style=&quot;font-size: 20px&quot;&gt;10~100 KIPS&lt;/font&gt;" style="rounded=0;whiteSpace=wrap;html=1;fillColor=default;strokeColor=none;fillOpacity=0;" vertex="1" parent="1">
+          <mxGeometry x="360" y="50" width="150" height="60" as="geometry" />
+        </mxCell>
+        <mxCell id="k-N_cHeMs7exE2l6GhI7-15" value="&lt;font style=&quot;font-size: 20px&quot;&gt;100~500 KIPS&lt;/font&gt;" style="rounded=0;whiteSpace=wrap;html=1;fillColor=default;strokeColor=none;fillOpacity=0;" vertex="1" parent="1">
+          <mxGeometry x="490" y="140" width="150" height="60" as="geometry" />
+        </mxCell>
+        <mxCell id="k-N_cHeMs7exE2l6GhI7-16" value="&lt;font style=&quot;font-size: 20px&quot;&gt;1~100 MIPS&lt;/font&gt;" style="rounded=0;whiteSpace=wrap;html=1;fillColor=default;strokeColor=none;fillOpacity=0;" vertex="1" parent="1">
+          <mxGeometry x="650" y="220" width="150" height="60" as="geometry" />
+        </mxCell>
+        <mxCell id="k-N_cHeMs7exE2l6GhI7-17" value="&lt;div&gt;硬件&lt;/div&gt;&lt;div&gt;(性能计数器)&lt;br&gt;&lt;/div&gt;" style="rounded=1;whiteSpace=wrap;html=1;fontSize=21;fillColor=default;" vertex="1" parent="1">
+          <mxGeometry x="750" y="-60" width="150" height="80" as="geometry" />
+        </mxCell>
+        <mxCell id="k-N_cHeMs7exE2l6GhI7-18" value="&lt;font style=&quot;font-size: 20px&quot;&gt;1~2 GIPS&lt;/font&gt;" style="rounded=0;whiteSpace=wrap;html=1;fillColor=default;strokeColor=none;fillOpacity=0;" vertex="1" parent="1">
+          <mxGeometry x="750" y="-110" width="150" height="60" as="geometry" />
+        </mxCell>
+      </root>
+    </mxGraphModel>
+  </diagram>
+</mxfile>
