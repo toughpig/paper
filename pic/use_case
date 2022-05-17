@@ -1,4 +1,4 @@
-<mxfile host="app.diagrams.net" modified="2022-04-06T13:43:22.067Z" agent="5.0 (Windows)" etag="KUDqap1BkPwbbkxOx9kB" version="17.4.0" type="github">
+<mxfile host="app.diagrams.net" modified="2022-05-17T00:22:08.911Z" agent="5.0 (Windows)" etag="2F8n6TRv2hSrlQ-XaQmT" version="17.4.0" type="github">
   <diagram id="WZPSnhNBhCsICeyBbSXf" name="Page-1">
     <mxGraphModel dx="2249" dy="1961" grid="1" gridSize="10" guides="1" tooltips="1" connect="1" arrows="1" fold="1" page="1" pageScale="1" pageWidth="827" pageHeight="1169" math="0" shadow="0">
       <root>
@@ -13,7 +13,7 @@
         <mxCell id="kspEkG2AYDm2vSh5nX-M-4" value="切换至运行模式" style="ellipse;whiteSpace=wrap;html=1;fontSize=24;strokeWidth=3;fontStyle=0;fontFamily=Helvetica;" parent="1" vertex="1">
           <mxGeometry x="650" y="250" width="230" height="100" as="geometry" />
         </mxCell>
-        <mxCell id="kspEkG2AYDm2vSh5nX-M-5" value="模拟器运行状态切换" style="ellipse;whiteSpace=wrap;html=1;fontSize=24;strokeWidth=3;fontStyle=0;fontFamily=Helvetica;" parent="1" vertex="1">
+        <mxCell id="kspEkG2AYDm2vSh5nX-M-5" value="模拟器运行状态控制" style="ellipse;whiteSpace=wrap;html=1;fontSize=24;strokeWidth=3;fontStyle=0;fontFamily=Helvetica;" parent="1" vertex="1">
           <mxGeometry x="130" y="350" width="230" height="90" as="geometry" />
         </mxCell>
         <mxCell id="kspEkG2AYDm2vSh5nX-M-6" value="切换至调试模式" style="ellipse;whiteSpace=wrap;html=1;fontSize=24;strokeWidth=3;fontStyle=0;fontFamily=Helvetica;" parent="1" vertex="1">
@@ -118,16 +118,16 @@
         <mxCell id="0g_iTcxsXEhQIYA7X8XU-9" value="&amp;lt;&amp;lt;include&amp;gt;&amp;gt;" style="edgeLabel;resizable=0;html=1;align=center;verticalAlign=middle;fontSize=24;fontStyle=0;fontFamily=Helvetica;" parent="0g_iTcxsXEhQIYA7X8XU-8" connectable="0" vertex="1">
           <mxGeometry relative="1" as="geometry" />
         </mxCell>
-        <mxCell id="MZWAC7EOnMsJwu3xMLcK-1" value="外部中断发送" style="ellipse;whiteSpace=wrap;html=1;fontSize=24;strokeWidth=3;fontStyle=0;fontFamily=Helvetica;" vertex="1" parent="1">
+        <mxCell id="MZWAC7EOnMsJwu3xMLcK-1" value="外部中断发送" style="ellipse;whiteSpace=wrap;html=1;fontSize=24;strokeWidth=3;fontStyle=0;fontFamily=Helvetica;" parent="1" vertex="1">
           <mxGeometry x="470" y="630" width="230" height="100" as="geometry" />
         </mxCell>
-        <mxCell id="MZWAC7EOnMsJwu3xMLcK-2" value="" style="endArrow=open;html=1;rounded=0;dashed=1;endFill=0;fontSize=24;strokeWidth=3;fontStyle=0;fontFamily=Helvetica;exitX=1;exitY=1;exitDx=0;exitDy=0;" edge="1" parent="1" source="kspEkG2AYDm2vSh5nX-M-9" target="MZWAC7EOnMsJwu3xMLcK-1">
+        <mxCell id="MZWAC7EOnMsJwu3xMLcK-2" value="" style="endArrow=open;html=1;rounded=0;dashed=1;endFill=0;fontSize=24;strokeWidth=3;fontStyle=0;fontFamily=Helvetica;exitX=1;exitY=1;exitDx=0;exitDy=0;" parent="1" source="kspEkG2AYDm2vSh5nX-M-9" target="MZWAC7EOnMsJwu3xMLcK-1" edge="1">
           <mxGeometry relative="1" as="geometry">
             <mxPoint x="365" y="545" as="sourcePoint" />
             <mxPoint x="640" y="540" as="targetPoint" />
           </mxGeometry>
         </mxCell>
-        <mxCell id="MZWAC7EOnMsJwu3xMLcK-3" value="&amp;lt;&amp;lt;include&amp;gt;&amp;gt;" style="edgeLabel;resizable=0;html=1;align=center;verticalAlign=middle;fontSize=24;fontStyle=0;fontFamily=Helvetica;" connectable="0" vertex="1" parent="MZWAC7EOnMsJwu3xMLcK-2">
+        <mxCell id="MZWAC7EOnMsJwu3xMLcK-3" value="&amp;lt;&amp;lt;include&amp;gt;&amp;gt;" style="edgeLabel;resizable=0;html=1;align=center;verticalAlign=middle;fontSize=24;fontStyle=0;fontFamily=Helvetica;" parent="MZWAC7EOnMsJwu3xMLcK-2" connectable="0" vertex="1">
           <mxGeometry relative="1" as="geometry" />
         </mxCell>
       </root>
