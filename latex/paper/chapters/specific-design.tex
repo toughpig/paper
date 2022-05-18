@@ -36,13 +36,13 @@
 预加载模块注册指令集，以及初始化解码器的流程如图~\ref{fig:decode-process}所示。
 \begin{figure}[H]
   \centering
-  \includegraphics[width=0.5\textwidth]{decode-process.png}
+  \includegraphics[width=0.6\textwidth]{decode-process.png}
   \caption{指令集模块注册流程图}
   \label{fig:decode-process}
 \end{figure}
 
 
-定义了指令数据结构和解码器之后,取指,译码的过程就完成了,接下来介绍执行步骤的核心内容,指令集功能函数的实现。指令集功能函数是整个指令集模拟的核心部分,理论上说,汇编指令的功能函数需要和实际的硬件设计一一对应,由于硬件设计所参考的指令集架构版本已经定义了各个汇编指令的功能和具体行为,所以对于指令集的功能模拟只需要参照相应的指令集手册。本模拟器的设计过程依托于具体的芯片项目,由于大多数的硬件设计团队针对不同的性能指标往往会进行一些取舍,尤其是对于RISC-V这样的开源架构,实际的设计肯定会和官方版本有所出入,所以在模拟器的设计上还是需要参照硬件设计团队的代码。本次设计依托的芯片开发项目使用Chisel进行硬件设计,通过其生成的Scala代码,可以指导模拟器指令功能函数的翻译。
+定义了指令数据结构和解码器之后,取指,译码的过程就完成了,接下来介绍指令集功能函数的实现。理论上说,汇编指令的功能函数需要和实际的硬件设计一一对应,由于硬件设计所参考的指令集架构版本已经定义了各个汇编指令的功能和具体行为,所以对于指令集的功能模拟只需要参照相应的指令集手册。指令集功能函数的实现大量依赖于寄存器操作,下一小节将结合寄存器组的实现策略给出的部分指令的功能函数设计。
 
 
 \section{CPU和总线模块的设计与实现}
@@ -184,7 +184,16 @@ XPR/FPR均属于通用数据寄存器，在用户模式和机器模式下的访�
 % \end{lstlisting}
 
 
-在本模拟器的实现中,MMU模块包含了快表TLB,加速地址翻译,本质上就是开辟了一片内存用来存放翻译过的地址内容,为了方便起见,只实现了直接映射的TLB。另外,将iCache,dCache的功能也一并放到MMU模块中,不再实现单独的缓存硬件模块,缓存采用直写的方式。这样的设计和真实硬件的差异很大,会导致缓存模拟的不准确。考虑到本模拟器并不进行缓存相关的性能模拟,所以可以忽略这部分的差别,在功能模拟上没有影响。MMU模块对取指做特殊处理,取指首先会查找iCache,当iCache未命中时,退化为其余类型的访存。访存请求通过模板函数提供的统一的接口load/store进行请求,通过模板可以忽略具体的数据类型,在功能函数的实现中也可以更加方便的使用,直接调用MMU的接口对存储单元进行操作。
+在本模拟器的实现中,MMU模块包含了快表TLB,加速地址翻译,另外,将iCache,dCache的功能也一并放到MMU模块中,不再实现单独的缓存硬件模块,缓存采用直写的方式。这样的设计和真实硬件的差异很大,会导致缓存模拟的不准确。考虑到本模拟器并不进行缓存相关的性能模拟,所以可以忽略这部分的差别,在功能模拟上没有影响。MMU的类图如图\ref{fig:mmu-class}所示。
+\begin{figure}[H]
+    \centering
+    \includegraphics[width=0.65\textwidth]{mmu-class.png}
+    \caption{MMU类图}
+    \label{fig:mmu-class}
+\end{figure}
+
+MMU模块对取指做特殊处理,取指首先会查找iCache,当iCache未命中时,退化为其余类型的访存。访存请求通过模板函数提供的统一的接口load/store进行请求,通过模板可以忽略具体的数据类型,在功能函数的实现中也可以更加方便的使用,直接调用MMU的接口对存储单元进行操作。
+
 % 模板函数定义如下:
 % \begin{lstlisting}{}
 %     template<class T>
@@ -214,7 +223,7 @@ MMU接收到访存请求后,首先会检查地址对齐,然后通过页大小计
 总线是CPU与外部设备进行数据交换的桥梁,按照功能有不同的总线类型划分，本模拟器对总线设备进行了功能抽象,将总线设计为某一块物理地址区间内的IO控制器,提供统一接口,处理CPU和内存映射的IO设备之间的通信。
 
 
-总线在模拟器初始化的过程中会根据配置挂载设备,在总线类bus\_t中维护一个物理地址和设备类对象的字典,模拟器在接收到访存请求时,首先检查物理地址是否是主存地址范围,不在主存地址区间内的I/O请求都是内存映射的I/O请求(Memory-Mapped I/O, MMIO),模拟器将调用总线设备的I/O接口,对内存映射的外设进行读写操作。
+总线在模拟器初始化的过程中会根据配置挂载设备,在总线类bus\_t中维护一个物理地址和设备类对象的字典,模拟器在接收到访存请求时,首先检查物理地址是否是主存地址范围,不在主存地址区间内的I/O请求都是MMIO请求,模拟器将调用总线设备的I/O接口,对内存映射的外设进行读写操作。
 
 模拟器根据物理地址划分为主存,和内存映射的IO设备,图~\ref{fig:mmap}是SiFive公司提供的内存映射参考。本模拟器的总线设备需要处理的内存映射空间就是0x00000000-0x80000000,提供这块内存区间上的IO模拟。总线设备可以挂载多种通过内存映射的IO设备,某些具有特殊用途的寄存器也能够挂载在总线,比如TIMECMP寄存器,IPI寄存器。
 \begin{figure}[H]
@@ -224,8 +233,7 @@ MMU接收到访存请求后,首先会检查地址对齐,然后通过页大小计
     \label{fig:mmap}
 \end{figure}
 
-
-总线设备的类图如图\ref{fig:bus_class}所示。所有设备都继承自抽象基类abstract\_device\_t,在总线类bus\_t中维护一个设备数组,统一管理挂载到总线的MMIO设备,比如图中的RTC设备，此类设备的IO均需要通过总线对象的MMIO接口与处理器进行通信。
+下面以实时时钟(Real-Time Clock, RTC)设备为例介绍总线设备类的实现方式,以及MMIO请求的流程。总线设备的类图如图\ref{fig:bus_class}所示。所有设备都继承自抽象基类abstract\_device\_t,在总线类bus\_t中维护一个设备数组,统一管理挂载到总线的MMIO设备,比如图中的RTC设备，此类设备的IO均需要通过总线对象的MMIO接口与处理器进行通信。可以看到外部设备类对象中会维护一些以内存映射方式寻址的寄存器,例如图中RTC设备的timer寄存器,通过宿主机的精确时钟,模拟器对象会异步地对timer寄存器进行写操作,用来模拟时钟的发生,并在条件满足时产生时钟中断,而处理器对象对timecmp寄存器的读写只能通过MMIO请求方式进行。类似的外部中断源设备也以同样的方式连接到总线,通过MMIO的方式和处理器对象通信。
 \begin{figure}[H]
     \centering
     \includegraphics[width=0.9\textwidth]{bus_class.png}
@@ -233,26 +241,26 @@ MMU接收到访存请求后,首先会检查地址对齐,然后通过页大小计
     \label{fig:bus_class}
 \end{figure}
 
-
-所有支持安全启动的CPU都会有一个Bootrom固件。CPU在通电之后执行的第一条指令就在Bootrom的入口,因此Bootrom拥有最高的执行权限，也就是机器模式M-mode。它将初始化Secure Boot安全机制，加载Secure Boot Key等密钥、从存储器加载并验证第一阶段加载程序(First Stage Bootloader, FSBL)，最后跳转进FSBL中。本次芯片设计项目也包含了该部分的设计,但是由于安全启动过程涉及到部分保密信息,本文将不涉及FSBL的加载和验证过程,Bootrom固件程序仅仅用来跳转至目标程序入口。具体的实现方式包括以下的步骤,首先在配置中读取Bootrom的地址,默认0x1000,然后初始化Bootrom设备,填写Bootrom固件内容,总线对象使用add\_device()接口将物理地址0x1000和Bootrom设备对象的映射保存在字典中。本模拟器的Bootrom程序内容如图所示,包含两条汇编指令:"auipc	t0, 0x7ffff"和"jr 	t0",模拟器启动后,PC初始化为Bootrom固件地址,即0x1000,MMU检测到该地址在MMIO区间内,将访存请求转移给总线,总线对象使用MMIO接口找到对应的设备对象Bootrom,读取到Bootrom的两条指令,处理器在机器模式执行上述两条指令,跳转到主存起始位置0x80000000,即目标程序的入口地址。接下来的一系列指令执行由目标程序决定,主要包括Bootloader的reset vector以及加载Linux内核的过程。
-
 mmio的通信流程如图~\ref{fig:mmio}所示。
 \begin{figure}[H]
     \centering
-    \includegraphics[width=1.0\textwidth]{mmio.png}
+    \includegraphics[width=0.8\textwidth]{mmio.png}
     \caption{MMIO请求序列图}
     \label{fig:mmio}
 \end{figure}
 
+所有支持安全启动的CPU都会有一个Bootrom固件,CPU在通电之后执行的第一条指令就在Bootrom的入口,因此Bootrom拥有最高的执行权限，也就是机器模式M-mode。它将初始化Secure Boot安全机制，加载Secure Boot Key等密钥、从存储器加载并验证第一阶段加载程序(First Stage Bootloader, FSBL)，最后跳转进FSBL中。本次芯片设计项目也包含了该部分的设计,但是由于安全启动过程涉及到部分保密信息,本文将不涉及FSBL的加载和验证过程,Bootrom固件程序仅仅用来跳转至目标程序入口。Bootrom设备具体的实现方式包括以下的步骤,首先在配置中读取Bootrom的地址,默认0x1000,然后初始化Bootrom设备,填写Bootrom固件内容,总线对象使用add\_device()接口将物理地址0x1000和Bootrom设备对象的映射保存在字典中。本模拟器的Bootrom程序内容如图所示,包含两条汇编指令:"auipc	t0, 0x7ffff"和"jr 	t0",模拟器启动后,PC初始化为Bootrom固件地址,即0x1000,MMU检测到该地址在MMIO区间内,将访存请求转移给总线,总线对象使用MMIO接口找到对应的设备对象Bootrom,读取到Bootrom的两条指令,处理器在机器模式执行上述两条指令,跳转到主存起始位置0x80000000,即目标程序的入口地址。接下来的一系列指令执行由目标程序决定,主要包括Bootloader的reset vector以及加载Linux内核的过程。
 
 \section{中断控制器模块的设计与实现}
 
-在CPU运行过程中,存在两种指令流程,一种是常规的逻辑控制流,包括顺序的指令流和分支跳转;另一种称为异常控制流,用来响应处理器状态的某些变化,表现为中断或异常。之前的章节已将介绍了CPU指令控制流程的模拟,其中包括了响应中断的逻辑,CPU在取值之前检查当前是否有中断信号,根据状态寄存器判断是否响应中断,进入异常控制流逻辑。本节将详细阐述模拟器中断系统的实现。包括平台级中断控制器PLIC以及部分中断源的模拟。
+之前的章节已将介绍了CPU指令控制流程的模拟,其中包括了响应中断的逻辑,CPU在取值之前检查当前是否有中断信号,根据控制与状态寄存器判断是否响应中断,进入异常控制流逻辑。本节将详细阐述模拟器中断系统的实现。包括平台级中断控制器PLIC以及部分中断源的模拟。
 
 
-RISC-V一共有两大类的中断类型：局部中断（Local Interrupts）以及全局中断（Global Inerrupts）。局部中断是指直接与硬件线程相连的中断，可以直接通过CSRs当中的xcause（mcause、scause、ucause）中的值获取中断的类型。在局部中断当中，只有两种标准的中断类型：计时中断（timer）以及软件中断（software）。全局中断实际上就是外部中断（External Interrupts）。它与平台级中断控制器PLIC相连。实际上全局中断在多个硬件线程的情况下最为常用，PLIC用于对外部中断进行仲裁，然后再将仲裁的结果送入核内的中断控制器。
-RISC-V 架构中规定了一些硬件行为来实现异常事件的响应和处理,这些行为通过控制状态寄存器来反应异常事件信息。涉及到如下几个寄存器，见表~\ref{tab:csr}。
-\begin{table}[h]
+RISC-V一共有两大类的中断类型：局部中断（Local Interrupts）以及全局中断（Global Inerrupts）。局部中断是指直接与硬件线程相连的中断，可以直接通过CSRs当中的xcause（mcause、scause、ucause）中的值获取中断的类型。在局部中断当中，只有两种标准的中断类型：计时中断（timer）以及软件中断（software）。全局中断实际上就是外部中断（External Interrupts）,与平台级中断控制器PLIC相连。实际上全局中断在多个硬件线程的情况下最为常用，PLIC用于对外部中断进行仲裁，然后再将仲裁的结果送入核内的中断控制器。
+
+
+RISC-V 架构中规定了一些硬件行为来实现异常事件的响应和处理,这些行为通过CSR寄存器来反应异常事件信息。涉及到如下几个寄存器，见表~\ref{tab:csr}。
+\begin{table}[H]
   \centering
   \caption{中断相关的寄存器列表}
   \label{tab:csr}
@@ -278,7 +286,7 @@ RISC-V 架构中规定了一些硬件行为来实现异常事件的响应和处�
     \centering
     \includegraphics[width=1.0\textwidth]{trap-code.png}
     % \caption{RISC-V虚拟化方案}
-    \label{fig:mmu-code}
+    \label{fig:trap-code}
 \end{figure}
 \vspace{-0.8cm} 
 % \clearpage
@@ -301,7 +309,7 @@ RISC-V 架构中规定了一些硬件行为来实现异常事件的响应和处�
 抛出异常后,处理器将根据状态寄存器以及异常信息决定是否响应中断,CPU异常处理的流程如图~\ref{fig:interrupt}所示。
 \begin{figure}[H]
     \centering
-    \includegraphics[width=0.6\textwidth]{interrupt.png}
+    \includegraphics[width=0.52\textwidth]{interrupt.png}
     \caption{处理器响应中断流程图}
     \label{fig:interrupt}
 \end{figure}
@@ -349,10 +357,7 @@ RISC-V架构还定义了硬件线程内的局部中断，局部中断控制器(C
 
 
 \section{调试和UI模块的设计与实现}
-调试模块能够提供断点设置,单步执行,寄存器/内存查询等功能。UI显示界面主要包含了断点设置窗口,查询窗口和执行交互窗口。本模块使用Qt的UI Designer工具进行开发,通过拖拽摆放各种窗口控件并进行属性设置,观察界面整体效果,可以方便地进行可视化界面的设计。另外QtWidget库还提供了信号(Signals)和槽(Slots)机制,用于对象间通信,只需要在对应窗口子类化widgets来添加自定义信号,然后实现自定义的槽函数,连接到该信号即可。在本模拟器的实现中,主要的对象间通信就是前端窗口对象和后端模拟器对象间的通信,因此只需要定义一组双向的信号和槽就能够满足通信需求。
-
-
-前端UI窗口和后端模拟器之间的信号定义如下:
+调试模块能够提供断点设置,单步执行,寄存器/内存查询等功能。UI显示界面主要包含了断点设置窗口,查询窗口和执行交互窗口。本模块使用Qt的UI Designer工具进行开发,通过拖拽摆放各种窗口控件并进行属性设置,观察界面整体效果,可以方便地进行可视化界面的设计。另外QtWidget库还提供了信号(Signals)和槽(Slots)机制,用于对象间通信,只需要在对应窗口子类化widgets来添加自定义信号,然后实现自定义的槽函数,连接到该信号即可。在本模拟器的实现中,主要的对象间通信就是前端窗口对象和后端模拟器对象间的通信,因此只需要定义一组双向的信号和槽就能够满足通信需求。前端UI窗口和后端模拟器之间的信号定义如下:
 \begin{figure}[H]
     \centering
     \includegraphics[width=1.0\textwidth]{enum-code.png}
@@ -360,6 +365,25 @@ RISC-V架构还定义了硬件线程内的局部中断，局部中断控制器(C
     \label{fig:enum-code}
 \end{figure}
 \vspace{-0.8cm} 
+
+
+其中sim\_cmd\_key\_input和sim\_cmd\_mailbox\_input信号分别用来模拟UART和mailbox外部中断源信号。其余信号用于断点和查询信息的交互,以及模拟器单步运行等流程的控制。
+
+
+通过UI Designer设计的模拟器前端整体界面如图~\ref{fig:zhenti}所示。
+\begin{figure}[h]
+    \centering
+    \includegraphics[width=1.0\textwidth]{zhenti.png}
+    \caption{模拟器前端整体界面}
+    \label{fig:zhenti}
+\end{figure}
+
+
+断点设置窗口下可以添加任意多个断点,断点匹配类型分为如下几种:PC、寄存器、内存、中断类型。当模拟器包含多核时需要指定相应的核心ID号。当模拟器处于调试模式时,中断指令流程,此时可以进行断点设置,内存查询等操作,点击运行按键,模拟器恢复至正常运行模式,在每一次指令执行周期完成后模拟器将对当前断点信息进行检查,一旦匹配上任意断点,将发送window\_cmd\_sim\_output信号用于告知触发断点信息,并接着发送window\_cmd\_pause\_sim信号,中断指令流程,模拟器进入调试模式。每发送一次单步执行信号,模拟器都需要将寄存器更新信号发送给UI前端,刷新寄存器窗口。
+
+
+
+
 % \begin{lstlisting}{}
 %     enum sim_cmd
 %     {
@@ -384,27 +408,16 @@ RISC-V架构还定义了硬件线程内的局部中断，局部中断控制器(C
 %         window_cmd_update_mailbox
 %     };          
 % \end{lstlisting}
-其中sim\_cmd\_key\_input和sim\_cmd\_mailbox\_input信号分别用来模拟UART和mailbox外部中断源信号。其余信号用于断点和查询信息的交互,以及模拟器单步运行等流程的控制。
         
         
-通过UI Designer设计的模拟器前端整体界面如图~\ref{fig:zhenti}所示。
-\begin{figure}[h]
-    \centering
-    \includegraphics[width=1.0\textwidth]{zhenti.png}
-    \caption{模拟器前端整体界面}
-    \label{fig:zhenti}
-\end{figure}
 
 
-断点设置窗口如图所示,可以添加任意多个断点,断点匹配类型分为如下几种:PC,寄存器,内存,中断类型。当模拟器包含多核时需要指定相应的核心ID号。当模拟器处于调试模式时,中断指令流程,此时可以进行断点设置,内存查询等操作,点击运行按键,模拟器恢复至正常运行模式,在每一次指令执行周期完成后模拟器将对当前断点信息进行检查,一旦匹配上任意断点,将发送window\_cmd\_sim\_output信号用于告知触发断点信息,并接着发送window\_cmd\_pause\_sim信号,中断指令流程,模拟器进入调试模式。每发送一次单步执行信号,模拟器都需要将寄存器更新信号发送给UI前端,刷新寄存器窗口。
-
-
-模拟器单步执行的流程如图~\ref{fig:step}所示。
+调试模式下,模拟器正常工作的界面如图~\ref{fig:work}所示。
 \begin{figure}[H]
     \centering
-    \includegraphics[width=0.6\textwidth]{step.png}
-    \caption{调试模式下单步执行流程图}
-    \label{fig:step}
+    \includegraphics[width=1.0\textwidth]{work.png}
+    \caption{调试模式下的模拟器运行界面}
+    \label{fig:work}
 \end{figure}
 
 

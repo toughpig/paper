@@ -30,7 +30,42 @@ IBM在处理器开发的不同时期，使用不同类型的体系结构模拟�
 \end{figure}  
 
 
-目前RISC-V开源社区的体系结构模拟器有Spike, Gem5, Qemu\cite{bellard2005qemu}等,这一类模拟器能够对部分RISC-V开源架构如BOOM\cite{celio2016berkeley}进行模拟,对于新手熟悉RISC-V有很大的帮助。Spike是一款基于解释型的RISC-V指令集模拟器,能够提供指令级别的仿真,跟开源社区Riscv-Tools里的pk(proxy kernel)和fesrv(front-end server)结合能够完成全系统的模拟,并且能够提供命令行的单步调试。Qemu是一款基于编译型的模拟器\cite{varga2010omnet++},直接对RISC-V二进制流进行翻译,模拟速度接近宿主机。在此类RISC-V模拟器上也能够进行软件移植工作,主要是基于Linux内核的应用软件移植。
+目前RISC-V开源社区的体系结构模拟器有Spike, Gem5, Qemu\cite{bellard2005qemu}等,这一类模拟器能够对部分RISC-V开源架构如BOOM\cite{celio2016berkeley}进行模拟,对于新手熟悉RISC-V有很大的帮助。Spike是一款基于解释型的RISC-V指令集模拟器,能够提供指令级别的仿真,跟开源社区Riscv-Tools里的pk(proxy kernel)和fesrv(front-end server)结合能够完成全系统的模拟,并且能够提供命令行的调试模块。Qemu是一款基于编译型的模拟器\cite{varga2010omnet++},直接对RISC-V二进制流进行翻译,模拟速度接近宿主机。在此类RISC-V模拟器上也能够进行软件移植工作,主要是基于Linux内核的应用软件移植,下面重点介绍下指令集模拟器Spike。
+
+
+Spike模拟器属于非时钟精确模型,使用C++实现，在Spike模拟器上可以运行以下三种类型的RISC-V目标代码: (1) bare metal;(2) 使用newlib;(3) 使用glibc。
+
+\begin{figure}[H]
+  \centering
+  \includegraphics[width=0.5\textwidth]{stack.png}
+  \caption{RISC-V支持的软件栈}
+  \label{fig:stack}
+\end{figure}
+
+裸机代码可以直接在RISC-V硬件上执行,Spike运行裸机程序无需加载pk,如图\ref{fig:stack},根据RISC-V软件栈的定义,此时并不存在应用程序执行环境(Application Execution Environment, AEE),目标程序也不能够直接和宿主机进行I/O交互。pk是一个轻量级内核,预定义了主存的基地址等信息,并且绑定了一些基本的库(newlib),是软件栈中AEE的位置,通过pk和fesvr可以进行I/O系统调用,与宿主机交互。glibc提供了OS的接口,此时应用程序二进制接口(Application Binary Interface, ABI)访问的是OS。
+
+
+
+Spike模拟器配合pk、fesrv完成系统模拟的原理图如图\ref{fig:spike}所示。
+\begin{figure}[H]
+  \centering
+  \includegraphics[width=0.7\textwidth]{spike.png}
+  \caption{spike系统模拟原理图}
+  \label{fig:spike}
+\end{figure}
+
+
+RISC-V目标程序通过pk提供的接口在模拟器程序上运行,对应的RISC-V系统调用经过fesvr转换成宿主机上的X86系统调用,以此来实现目标机与宿主机的交互。
+
+
+Spike模拟器由RISC-V官方进行维护,能够提供最新的指令集版本模拟,基于Spike能够方便地进行RISC-V应用程序的移植和开发,但是也存在以下瓶颈:
+
+1) 不提供平台级中断控制器模拟,因此也不能够方便地进行外设驱动程序的适配工作。
+
+2) 不提供可视化的调试模块,对于实际的RISC-V芯片开发团队来说,易用性不够。
+
+
+
 % 为了加速M1模拟器的执行速度，需要对所抓取的踪迹进行取样，同时为了方便调试，M1支持微结构性能数据可视化功能。在处理器验证阶段，IBM使用Mambo作为处理器验证参考模型辅助进行验证，此阶段Mambo可以为处理器功能正确性提供参考结果。Mambo模拟了所有处理器的功能特征，把某些性能相关的微结构维护操作（例如cache维护类指令）翻译成空（nop）操作，对于计算类指令产生准确的结果，并精准追踪处理器寄存器的状态变化，同时支持指令撤销操作，为处理器验证提供参考。IBM基于Mambo模拟器曾发现PowerPC CPU的一个控制寄存器存在竞争条件，使得该设计错误在流片之前就被发现并修改。在该阶段，IBM还使用自研的由多个FPGA(field programmable gate array)组成的VHDL(very-high-speed integrated circuithardware description language)仿真加速器Twinstar\cite{asaad2012cycle}进行处理器综合验证。Twinstar是时钟精准的仿真加速器，其推进方式是事件驱动模式，可以对整个处理器芯片进行仿真，以二进制程序作为输入，还支持详细的指令踪迹和处理器状态的实时追踪。该平台运行速度可以达到4MHz并可以运行未经修改的系统软件。类似Twinstar的验证平台还有帕拉丁\cite{chaix2019implementation}等。
 % 在系统软件开发方面，IBM基于Mambo（加速模式），Simics\cite{magnusson2002simics}，BGLsim\cite{ceze2003full}等多种平台，在流片之前就开始进行固件、操作系统、虚拟机管理器等软件的早期开发。IBM基于Mambo模拟器曾开发了K42操作系统，在芯片可用之后１周内就启动了操作系统\cite{boh}。IBM基于BGLsim-multi\cite{ceze2003full}平台和基于OMNeT++\cite{varga2010omnet++}开发的MARS(message passing interface application replay simulation)模拟平台还可以对机群网络相关的功能进行模拟，模拟器由可执行程序或者踪迹驱动\cite{许鹏2006一种应用于嵌入式系统中断控制}，其中MARS平台还可以对MPI(message passing interface)类应用进行调优。
 
@@ -40,7 +75,7 @@ IBM在处理器开发的不同时期，使用不同类型的体系结构模拟�
 为了加快芯片开发项目中的系统软件开发过程,以及辅助进行处理器验证,本文从RISC-V芯片开发项目工作流程入手,设计并实现了一款针对RISC-V体系结构的指令集功能模拟器,可以使得芯片开发团队脱离硬件平台并行地进行系统软件移植,开发和测试工作,本模拟器提供对真实硬件的功能模拟,以及丰富的调试手段,缩短软件开发周期,辅助处理器验证。主要完成的工作如下:
 
 
-(1)参照RISC-V用户手册,特权级架构文档,以及实际的硬件设计方案,对RISC-V架构处理器进行功能建模，参照硬件设计团队的Chisel代码对RISC-V标准拓展指令集共196条指令进行C++功能函数模拟，结合系统软件开发人员的需求,确定指令集模拟器的模拟策略,规划具体功能模块的边界，采用面向对象的方法进行模块设计。
+(1)参照RISC-V用户手册,特权级架构文档,以及实际的硬件配置方案,对RISC-V架构处理器进行功能建模，对RISC-V标准拓展指令集共196条指令进行C++功能函数模拟，结合系统软件开发人员的需求,确定指令集模拟器的模拟策略,规划具体功能模块的边界，采用面向对象的方法进行模块设计。
 
 
 (2)实现RISC-V指令集模拟器前后端模块,包括预加载模块，CPU和总线模块，中断控制器模块，调试和UI模块。设计并实现平台级中断控制器和部分外设模拟,可以直接在模拟器平台上进行外设驱动的适配；结合实际项目需求,实现UI可视化界面进行交互调试,进一步加强模拟器的易用性。在实际的芯片开发项目中帮助团队进行系统软件开发工作,并对处理器进行辅助验证。
