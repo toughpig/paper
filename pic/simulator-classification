@@ -1,1 +1,62 @@
-<mxfile host="app.diagrams.net" modified="2022-05-20T08:54:31.613Z" agent="5.0 (Windows)" version="18.0.7" etag="C0MbGT3lIY6hZ-953yMq" type="github"><diagram id="_83HQFqka5qPYS6AsVnS">UzV2zq1wL0osyPDNT0nNUTV2VTV2LsrPL4GwciucU3NyVI0MMlNUjV1UjYwMgFjVyA2HrCFY1qAgsSg1rwSLBiADYTaQg2Y1AA==</diagram></mxfile>
+<mxfile host="app.diagrams.net" modified="2022-05-20T08:58:30.434Z" agent="5.0 (Windows)" etag="yEuoDappFcqB1bh1u8Bc" version="18.0.7" type="github">
+  <diagram id="_83HQFqka5qPYS6AsVnS" name="Page-1">
+    <mxGraphModel dx="2249" dy="792" grid="1" gridSize="10" guides="1" tooltips="1" connect="1" arrows="1" fold="1" page="1" pageScale="1" pageWidth="827" pageHeight="1169" math="0" shadow="0">
+      <root>
+        <mxCell id="0" />
+        <mxCell id="1" parent="0" />
+        <mxCell id="XHYJwKYYwu3KuKxjJPFW-8" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;entryX=0.5;entryY=0;entryDx=0;entryDy=0;fontSize=21;strokeWidth=3;" edge="1" parent="1" source="XHYJwKYYwu3KuKxjJPFW-1" target="XHYJwKYYwu3KuKxjJPFW-2">
+          <mxGeometry relative="1" as="geometry">
+            <Array as="points">
+              <mxPoint x="345" y="250" />
+              <mxPoint x="105" y="250" />
+            </Array>
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="XHYJwKYYwu3KuKxjJPFW-9" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;entryX=0.5;entryY=0;entryDx=0;entryDy=0;fontSize=21;strokeWidth=3;" edge="1" parent="1" source="XHYJwKYYwu3KuKxjJPFW-1" target="XHYJwKYYwu3KuKxjJPFW-3">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="XHYJwKYYwu3KuKxjJPFW-10" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;entryX=0.5;entryY=0;entryDx=0;entryDy=0;fontSize=21;strokeWidth=3;" edge="1" parent="1" source="XHYJwKYYwu3KuKxjJPFW-1" target="XHYJwKYYwu3KuKxjJPFW-4">
+          <mxGeometry relative="1" as="geometry">
+            <Array as="points">
+              <mxPoint x="345" y="250" />
+              <mxPoint x="585" y="250" />
+            </Array>
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="XHYJwKYYwu3KuKxjJPFW-1" value="体系结构模拟器" style="rounded=1;whiteSpace=wrap;html=1;strokeWidth=3;fontSize=21;" vertex="1" parent="1">
+          <mxGeometry x="240" y="130" width="210" height="90" as="geometry" />
+        </mxCell>
+        <mxCell id="XHYJwKYYwu3KuKxjJPFW-11" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;entryX=0.5;entryY=0;entryDx=0;entryDy=0;fontSize=21;strokeWidth=3;" edge="1" parent="1" source="XHYJwKYYwu3KuKxjJPFW-2" target="XHYJwKYYwu3KuKxjJPFW-5">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="XHYJwKYYwu3KuKxjJPFW-12" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;entryX=0.5;entryY=0;entryDx=0;entryDy=0;fontSize=21;strokeWidth=3;" edge="1" parent="1" source="XHYJwKYYwu3KuKxjJPFW-2" target="XHYJwKYYwu3KuKxjJPFW-6">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="XHYJwKYYwu3KuKxjJPFW-2" value="&lt;div&gt;微结构探索和&lt;/div&gt;&lt;div&gt;性能优化&lt;br&gt;&lt;/div&gt;" style="rounded=1;whiteSpace=wrap;html=1;strokeWidth=3;fontSize=21;" vertex="1" parent="1">
+          <mxGeometry y="280" width="210" height="90" as="geometry" />
+        </mxCell>
+        <mxCell id="XHYJwKYYwu3KuKxjJPFW-13" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;fontSize=21;strokeWidth=3;" edge="1" parent="1" source="XHYJwKYYwu3KuKxjJPFW-3" target="XHYJwKYYwu3KuKxjJPFW-7">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="XHYJwKYYwu3KuKxjJPFW-3" value="系统软件开发" style="rounded=1;whiteSpace=wrap;html=1;strokeWidth=3;fontSize=21;" vertex="1" parent="1">
+          <mxGeometry x="240" y="280" width="210" height="90" as="geometry" />
+        </mxCell>
+        <mxCell id="XHYJwKYYwu3KuKxjJPFW-14" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;entryX=0.5;entryY=0;entryDx=0;entryDy=0;fontSize=21;strokeWidth=3;" edge="1" parent="1" source="XHYJwKYYwu3KuKxjJPFW-4" target="XHYJwKYYwu3KuKxjJPFW-7">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="XHYJwKYYwu3KuKxjJPFW-4" value="CPU辅助验证" style="rounded=1;whiteSpace=wrap;html=1;strokeWidth=3;fontSize=21;" vertex="1" parent="1">
+          <mxGeometry x="480" y="280" width="210" height="90" as="geometry" />
+        </mxCell>
+        <mxCell id="XHYJwKYYwu3KuKxjJPFW-5" value="单核性能模拟器" style="rounded=1;whiteSpace=wrap;html=1;strokeWidth=3;fontSize=21;fillColor=#ffe6cc;strokeColor=#d79b00;" vertex="1" parent="1">
+          <mxGeometry x="-80" y="430" width="210" height="90" as="geometry" />
+        </mxCell>
+        <mxCell id="XHYJwKYYwu3KuKxjJPFW-6" value="&lt;div&gt;多核互联&lt;/div&gt;&lt;div&gt;性能模拟器&lt;br&gt;&lt;/div&gt;" style="rounded=1;whiteSpace=wrap;html=1;strokeWidth=3;fontSize=21;fillColor=#ffe6cc;strokeColor=#d79b00;" vertex="1" parent="1">
+          <mxGeometry x="160" y="430" width="210" height="90" as="geometry" />
+        </mxCell>
+        <mxCell id="XHYJwKYYwu3KuKxjJPFW-7" value="指令集功能模拟器" style="rounded=1;whiteSpace=wrap;html=1;strokeWidth=3;fontSize=21;fillColor=#d5e8d4;strokeColor=#82b366;" vertex="1" parent="1">
+          <mxGeometry x="400" y="430" width="210" height="90" as="geometry" />
+        </mxCell>
+      </root>
+    </mxGraphModel>
+  </diagram>
+</mxfile>
