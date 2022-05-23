@@ -249,19 +249,19 @@ RISC-V指令集模拟器的测试环境分为软件模拟环境和硬件对照�
   \renewcommand\arraystretch{1.1}
   \begin{tabular}{cccc}
     \toprule
-    \multicolumn{1}{c}{软件调试流程} & \multicolumn{1}{l}{模拟器平台} & \multicolumn{1}{l}{FPGA平台} &\multicolumn{1}{l}{流片的S2C平台}\\
+    \multicolumn{1}{c}{软件调试流程} & \multicolumn{1}{l}{模拟器平台} & \multicolumn{1}{l}{FPGA平台(S2C)} &\multicolumn{1}{l}{流片的PCB板}\\
     \midrule
 目标程序交叉编译	& \multicolumn{1}{m{3cm}}{<1min} & \multicolumn{1}{m{3cm}}{<1min} & \multicolumn{1}{m{3cm}}{<1min}\\
 \hline
-粘贴fsbl	& \multicolumn{1}{m{3cm}}{-} & \multicolumn{1}{m{3cm}}{-} & \multicolumn{1}{m{3cm}}{5min}\\
+fsbl烧录	& \multicolumn{1}{m{3cm}}{-} & \multicolumn{1}{m{3cm}}{5min} & \multicolumn{1}{m{3cm}}{-}\\
 \hline
-vivado平台烧录	& \multicolumn{1}{m{3cm}}{-} & \multicolumn{1}{m{3cm}}{10min} & \multicolumn{1}{m{3cm}}{-}\\
+bitstream烧写	& \multicolumn{1}{m{3cm}}{-} & \multicolumn{1}{m{3cm}}{10min} & \multicolumn{1}{m{3cm}}{-}\\
 \hline
 flash烧录	& \multicolumn{1}{m{3cm}}{-} & \multicolumn{1}{m{3cm}}{-} & \multicolumn{1}{m{3cm}}{10min}\\
 \hline
 启动程序	& \multicolumn{1}{m{3cm}}{<1min} & \multicolumn{1}{m{3cm}}{5min} & \multicolumn{1}{m{3cm}}{5min}\\
 \hline
-调试手段	& \multicolumn{1}{m{3cm}}{断点/单步/查询} & \multicolumn{1}{m{3cm}}{Jtag单步调试} & \multicolumn{1}{m{3cm}}{硬件波形}\\
+调试手段	& \multicolumn{1}{m{3cm}}{UI可视化调试,断点/单步/查询} & \multicolumn{1}{m{3cm}}{Jtag单步调试/硬件波形} & \multicolumn{1}{m{3cm}}{Jtag单步调试}\\
     \bottomrule
   \end{tabular}
 \end{table}
