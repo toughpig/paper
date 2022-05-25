@@ -249,7 +249,7 @@ mmio的通信流程如图~\ref{fig:mmio}所示。
     \label{fig:mmio}
 \end{figure}
 
-所有支持安全启动的CPU都会有一个Bootrom固件,CPU在通电之后执行的第一条指令就在Bootrom的入口,因此Bootrom拥有最高的执行权限,也就是机器模式M-mode。它将初始化Secure Boot安全机制,加载Secure Boot Key等密钥、从存储器加载并验证第一阶段加载程序(First Stage Bootloader, FSBL),最后跳转进FSBL中。本次芯片设计项目也包含了该部分的设计,但是由于安全启动过程涉及到部分保密信息,本文将不涉及FSBL的加载和验证过程,Bootrom固件程序仅仅用来跳转至目标程序入口。Bootrom设备具体的实现方式包括以下的步骤,首先在配置中读取Bootrom的地址,默认0x1000,然后初始化Bootrom设备,填写Bootrom固件内容,总线对象使用add\_device()接口将物理地址0x1000和Bootrom设备对象的映射保存在字典中。本模拟器的Bootrom程序内容如图所示,包含两条汇编指令:"auipc	t0, 0x7ffff"和"jr 	t0",模拟器启动后,PC初始化为Bootrom固件地址,即0x1000,MMU检测到该地址在MMIO区间内,将访存请求转移给总线,总线对象使用MMIO接口找到对应的设备对象Bootrom,读取到Bootrom的两条指令,处理器在机器模式执行上述两条指令,跳转到主存起始位置0x80000000,即目标程序的入口地址。接下来的一系列指令执行由目标程序决定,主要包括Bootloader的reset vector以及加载Linux内核的过程。
+所有支持安全启动的CPU都会有一个Bootrom固件,CPU在通电之后执行的第一条指令就在Bootrom的入口,因此Bootrom拥有最高的执行权限,也就是机器模式M-mode。它将初始化Secure Boot安全机制,加载Secure Boot Key等密钥、从存储器加载并验证第一阶段加载程序(First Stage Bootloader, FSBL),最后跳转进FSBL中。本次芯片设计项目也包含了该部分的设计,但是由于安全启动过程涉及到部分保密信息,本文将不涉及FSBL的加载和验证过程,Bootrom固件程序仅仅用来跳转至目标程序入口。Bootrom设备具体的实现方式包括以下的步骤,首先在配置中读取Bootrom的地址,默认0x1000,然后初始化Bootrom设备,填写Bootrom固件内容,总线对象使用add\_device()接口将物理地址0x1000和Bootrom设备对象的映射保存在字典中。本模拟器的Bootrom程序包含两条汇编指令:"auipc	t0, 0x7ffff"和"jr 	t0",模拟器启动后,PC初始化为Bootrom固件地址,即0x1000,MMU检测到该地址在MMIO区间内,将访存请求转移给总线,总线对象使用MMIO接口找到对应的设备对象Bootrom,读取到Bootrom的两条指令,处理器在机器模式执行上述两条指令,跳转到主存起始位置0x80000000,即目标程序的入口地址。接下来的一系列指令执行由目标程序决定,主要包括Bootloader的reset vector以及加载Linux内核的过程。
 
 \section{中断控制器模块的设计与实现}
 
